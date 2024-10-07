@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import TableComponent from "./TableComponent";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -33,40 +30,8 @@ function App() {
       import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
     );
   }, []);
-  const data = React.useMemo(
-    () => [
-      { name: 'Alice', age: 25, city: 'New York' },
-      { name: 'Bob', age: 30, city: 'San Francisco' },
-      { name: 'Charlie', age: 35, city: 'Chicago' },
-      // More JSON data here
-    ],
-    []
-  );
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Name',
-        accessor: 'name', // Key in JSON data
-      },
-      {
-        Header: 'Age',
-        accessor: 'age', // Key in JSON data
-      },
-      {
-        Header: 'City',
-        accessor: 'city', // Key in JSON data
-      },
-    ],
-    []
-  );
-
-  return (
-    <div>
-            <TableComponent columns={columns} data={data} />
-
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
