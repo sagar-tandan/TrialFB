@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import DataTable from "./ADMIN/Table";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -31,7 +32,11 @@ function App() {
     );
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      <DataTable />
+    </div>
+  );
 }
 
 export default App;
