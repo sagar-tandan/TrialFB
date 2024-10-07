@@ -38,7 +38,7 @@ const AdminPage = () => {
       </div>
 
       <div className="w-full  h-[30px] ml-[250px]">
-        {activeTab == "product" ? <DataTable /> : "Hello"}
+        {activeTab == "product" ? <AddProducts /> : "Hello"}
       </div>
     </div>
   );

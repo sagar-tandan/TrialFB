@@ -18,7 +18,7 @@ import {
 // Global Filter Component
 const GlobalFilter = ({ filter, setFilter }) => {
   return (
-    <div className="relative">
+    <div className="relative max-w-sm">
       <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
       <input
         value={filter || ""}
@@ -30,97 +30,20 @@ const GlobalFilter = ({ filter, setFilter }) => {
   );
 };
 
-const DataTable = () => {
-  const [data, setData] = React.useState([
-    { id: 1, name: "John Doe", email: "john@example.com", role: "Developer" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Designer" },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      role: "Manager",
-      additional: "This is additional info",
-    },
-    {
-      id: 4,
-      name: "Alice Brown",
-      email: "alice@example.com",
-      role: "Developer",
-      additional: "This is additional info",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-      additional: "This is additional info",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-    },
-    // Add more data as needed
-  ]);
-
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Name",
-        accessor: "name",
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "Role",
-        accessor: "role",
-      },
-      {
-        Header: "Actions",
-        id: "actions",
-        Cell: ({ row }) => (
-          <div className="flex space-x-2">
-            <button
-              className="p-1 hover:bg-gray-100 rounded"
-              onClick={() => handleEdit(row)}
-            >
-              <Edit2 className="h-4 w-4" />
-            </button>
-            <button
-              className="p-1 hover:bg-gray-100 rounded"
-              onClick={() => handleDelete(row.original.id)}
-            >
-              <Trash2 className="h-4 w-4" />
-            </button>
-          </div>
-        ),
-      },
-    ],
-    []
-  );
-
+const DataTable = ({ data, columns }) => {
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     page,
     prepareRow,
-    state,
+    // state,
     setGlobalFilter,
     canPreviousPage,
     canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
+    // pageOptions,
+    // pageCount,
+    // gotoPage,
     nextPage,
     previousPage,
     setPageSize,
@@ -136,18 +59,8 @@ const DataTable = () => {
     usePagination
   );
 
-  const handleEdit = (id) => {
-    console.log(`Editing row with id: ${id}`);
-    console.log(id);
-    // Implement your edit logic here
-  };
-
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
-
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 space-y-4">
+    <div className="w-full  p-4 space-y-4">
       {/* Search Filter */}
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 
