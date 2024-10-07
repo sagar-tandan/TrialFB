@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "./ADMIN/Table";
+import AdminPage from "./ADMIN/AdminPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,7 +35,8 @@ function App() {
 
   return (
     <div>
-      <DataTable />
+      {/* <DataTable /> */}
+      <AdminPage />
     </div>
   );
 }
