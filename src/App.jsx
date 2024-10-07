@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
+import TableComponent from "./TableComponent";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -33,30 +33,39 @@ function App() {
       import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
     );
   }, []);
+  const data = React.useMemo(
+    () => [
+      { name: 'Alice', age: 25, city: 'New York' },
+      { name: 'Bob', age: 30, city: 'San Francisco' },
+      { name: 'Charlie', age: 35, city: 'Chicago' },
+      // More JSON data here
+    ],
+    []
+  );
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name', // Key in JSON data
+      },
+      {
+        Header: 'Age',
+        accessor: 'age', // Key in JSON data
+      },
+      {
+        Header: 'City',
+        accessor: 'city', // Key in JSON data
+      },
+    ],
+    []
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+            <TableComponent columns={columns} data={data} />
+
+    </div>
   );
 }
 
