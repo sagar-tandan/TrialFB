@@ -8,15 +8,23 @@ import {
   Trash2,
   X,
 } from "lucide-react";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { AllContext } from "../../context";
 import DataTable from "../Table";
 import { db, storage } from "../../Config.jsx";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  getDocs,
+  orderBy,
+  updateDoc,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddProducts = () => {
-  const { allData, setAllData } = useContext(AllContext);
+  // const { allData, setAllData } = useContext(AllContext);
   const [edit, setEdit] = useState(false);
   const [add, setAdd] = useState(false);
   const [formData, setFormData] = useState({
@@ -33,44 +41,7 @@ const AddProducts = () => {
   const [coverPreviews, setCoverPreviews] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [data, setData] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", role: "Developer" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Designer" },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      role: "Manager",
-      additional: "This is additional info",
-    },
-    {
-      id: 4,
-      name: "Alice Brown",
-      email: "alice@example.com",
-      role: "Developer",
-      additional: "This is additional info",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-      additional: "This is additional info",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-    },
-    // Add more data as needed
-  ]);
+  const [data, setData] = useState([]);
 
   const columns = useMemo(
     () => [
@@ -79,12 +50,12 @@ const AddProducts = () => {
         accessor: "name",
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "Description",
+        accessor: "description",
       },
       {
-        Header: "Role",
-        accessor: "role",
+        Header: "Price",
+        accessor: "price",
       },
       {
         Header: "Actions",
@@ -93,7 +64,7 @@ const AddProducts = () => {
           <div className="flex space-x-2">
             <button
               className="p-1 hover:bg-gray-100 rounded"
-              onClick={() => handleEdit(row)}
+              onClick={() => handleEdit(row.original)}
             >
               <Edit2 className="h-4 w-4" />
             </button>
@@ -110,9 +81,48 @@ const AddProducts = () => {
     []
   );
 
-  const handleEdit = (id) => {
-    console.log(`Editing row with id: ${id}`);
-    console.log(id);
+  const fetchData = async () => {
+    try {
+      const productsRef = collection(db, "products");
+      // const q = query(productsRef, orderBy("CreatedAt", "desc"));
+      const q = query(productsRef, orderBy("createdAt", "desc"));
+      const querySnapshot = await getDocs(q);
+
+      const productsData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        price: doc.data().price,
+        description: doc.data().description?.slice(0, 100) + "...", // Get the first 30 characters of the description
+        profileImg: doc.data().profileImg,
+        coverImg: doc.data().coverImages,
+        keyFeatures: doc.data().keyFeatures,
+        // Convert Firestore Timestamp to Date
+        createdAt: doc.data().createdAt?.toDate(),
+        updatedAt: doc.data().updatedAt?.toDate(),
+      }));
+      setData(productsData);
+      console.log(productsData);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleEdit = (data) => {
+    setAdd(false);
+    console.log(data);
+    setFormData({
+      productName: data.name,
+      description: data.description,
+      price: data.price,
+      keyFeatures: data.keyFeatures,
+      profileImg: data.profileImg,
+      coverImg: data.coverImg,
+    });
+    setEdit(true);
     // Implement your edit logic here
   };
 
@@ -190,36 +200,86 @@ const AddProducts = () => {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     let profileImgUrl = "";
+
+  //     if (formData.profileImg && formData.profileImg instanceof File) {
+  //       //upload profile picture
+  //       const profilePicturePath = `products/${Date.now()}-${
+  //         formData.profileImg.name
+  //       }`;
+  //       profileImgUrl = await uploadImage(
+  //         formData.profileImg,
+  //         profilePicturePath
+  //       );
+  //     }
+
+  //     // Upload cover images
+  //     async function uploadCoverImages(formData) {
+  //       const coverImageUrls = [];
+  //       if (formData && formData.length > 0) {
+  //         for (let index = 0; index < formData.length; index++) {
+  //           const file = formData[index];
+  //           const path = `products/${Date.now()}-${index}-${file.name}`;
+  //           const imageUrl = await uploadImage(file, path);
+  //           coverImageUrls.push(imageUrl);
+  //         }
+
+  //         return coverImageUrls;
+  //       }
+  //     }
+
+  //     const coverImageUrls = await uploadCoverImages(formData.coverImg);
+
+  //     // Create product document in Firestore
+  //     const productData = {
+  //       name: formData.productName,
+  //       description: formData.description,
+  //       price: parseFloat(formData.price),
+  //       keyFeatures: formData.keyFeatures.filter(
+  //         (feature) => feature.trim() !== ""
+  //       ),
+  //       profileImg: profileImgUrl,
+  //       coverImages: coverImageUrls,
+  //       createdAt: serverTimestamp(),
+  //       updatedAt: serverTimestamp(),
+  //     };
+
+  //     // Add to Firestore
+  //     const docRef = await addDoc(collection(db, "products"), productData);
+
+  //     console.log("Data added!!!");
+
+  //     // Reset form
+  //     setFormData({
+  //       productName: "",
+  //       description: "",
+  //       price: "",
+  //       keyFeatures: [""],
+  //       profileImg: null,
+  //       coverImg: [],
+  //     });
+  //     setProfilePreview("");
+  //     setCoverPreviews([]);
+  //     setLoading(false);
+  //     setAdd(false);
+  //   } catch (error) {
+  //     console.error("Error adding product:", error);
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      //upload profile picture
-      const profilePicturePath = `products/${Date.now()}-${
-        formData.profileImg.name
-      }`;
-      const profileImgUrl = await uploadImage(
-        formData.profileImg,
-        profilePicturePath
-      );
-
-      // Upload cover images
-      async function uploadCoverImages(formData) {
-        const coverImageUrls = [];
-
-        for (let index = 0; index < formData.length; index++) {
-          const file = formData[index];
-          const path = `products/${Date.now()}-${index}-${file.name}`;
-          const imageUrl = await uploadImage(file, path);
-          coverImageUrls.push(imageUrl);
-        }
-
-        return coverImageUrls;
-      }
-
+      let profileImgUrl = await uploadProfileImage(formData.profileImg);
       const coverImageUrls = await uploadCoverImages(formData.coverImg);
 
-      // Create product document in Firestore
       const productData = {
         name: formData.productName,
         description: formData.description,
@@ -233,34 +293,59 @@ const AddProducts = () => {
         updatedAt: serverTimestamp(),
       };
 
-      // Add to Firestore
       const docRef = await addDoc(collection(db, "products"), productData);
-
       console.log("Data added!!!");
 
-      // Reset form
-      setFormData({
-        productName: "",
-        description: "",
-        price: "",
-        keyFeatures: [""],
-        profileImg: null,
-        coverImg: [],
-      });
-      setProfilePreview("");
-      setCoverPreviews([]);
-      setLoading(false);
+      resetForm();
       setAdd(false);
     } catch (error) {
       console.error("Error adding product:", error);
+    } finally {
       setLoading(false);
     }
+  };
+
+  const uploadProfileImage = async (profileImg) => {
+    if (profileImg && profileImg instanceof File) {
+      const profilePicturePath = `products/${Date.now()}-${profileImg.name}`;
+      return await uploadImage(profileImg, profilePicturePath);
+    }
+    return "";
+  };
+
+  const uploadCoverImages = async (coverImages) => {
+    const coverImageUrls = [];
+    if (coverImages && coverImages.length > 0) {
+      for (let index = 0; index < coverImages.length; index++) {
+        const file = coverImages[index];
+        if (file instanceof File) {
+          const path = `products/${Date.now()}-${index}-${file.name}`;
+          const imageUrl = await uploadImage(file, path);
+          coverImageUrls.push(imageUrl);
+        }
+      }
+    }
+    return coverImageUrls;
+  };
+
+  const resetForm = () => {
+    setFormData({
+      productName: "",
+      description: "",
+      price: "",
+      keyFeatures: [""],
+      profileImg: null,
+      coverImg: [],
+    });
+    setProfilePreview("");
+    setCoverPreviews([]);
   };
 
   return (
     <div className="w-full flex flex-col relative">
       <div
         onClick={() => {
+          setEdit(false);
           setAdd(true);
           setFormData({
             productName: "",
@@ -278,16 +363,19 @@ const AddProducts = () => {
 
       <DataTable data={data} columns={columns} />
 
-      {add && (
+      {add | edit && (
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
           <div className="w-[600px] h-[600px] overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-10">
             <div className="w-full flex justify-between">
               <span className="font-semibold text-lg text-purple-700">
-                Add Product
+                {edit ? "Edit Product" : "Add Product"}
               </span>
               <X
-                onClick={() => setAdd(false)}
-                className="text-red-600 cursor-pointer active:scale-95"
+                onClick={() => {
+                  setAdd(false);
+                  setEdit(false);
+                }}
+                className="text-black cursor-pointer active:scale-95"
               />
             </div>
 
@@ -432,7 +520,11 @@ const AddProducts = () => {
 
               <input
                 type="submit"
-                value={loading ? "Uploading...." : "Add Product"}
+                value={
+                  loading
+                    ? "Uploading...."
+                    : `${edit ? "Update Product" : "Add Product"}`
+                }
                 className="w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium"
               />
             </form>
