@@ -110,7 +110,7 @@ const DataTable = ({ data, columns }) => {
                   {row.cells.map((cell) => (
                     <td
                       {...cell.getCellProps()}
-                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 "
                     >
                       {cell.render("Cell")}
                     </td>
