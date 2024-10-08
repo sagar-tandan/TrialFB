@@ -9,8 +9,6 @@ import {
   Search,
   ChevronUp,
   ChevronDown,
-  Edit2,
-  Trash2,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";

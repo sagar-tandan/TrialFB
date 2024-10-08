@@ -2,6 +2,7 @@ import {
   Cross,
   CrossIcon,
   Edit2,
+  Flag,
   ImageUp,
   Plus,
   Search,
@@ -9,7 +10,7 @@ import {
   X,
 } from "lucide-react";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { AllContext } from "../../context";
+// import { AllContext } from "../../context";
 import DataTable from "../Table";
 import { db, storage } from "../../Config.jsx";
 import {
@@ -20,8 +21,15 @@ import {
   getDocs,
   orderBy,
   updateDoc,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
 const AddProducts = () => {
   // const { allData, setAllData } = useContext(AllContext);
@@ -40,6 +48,8 @@ const AddProducts = () => {
   const [profilePreview, setProfilePreview] = useState("");
   const [coverPreviews, setCoverPreviews] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [toBeDeleted, setToBeDeleted] = useState();
+  const [deleteDialog, showDeleteDialog] = useState(false);
 
   const [data, setData] = useState([]);
 
@@ -70,7 +80,10 @@ const AddProducts = () => {
             </button>
             <button
               className="p-1 hover:bg-gray-100 rounded"
-              onClick={() => handleDelete(row.original.id)}
+              onClick={() => {
+                showDeleteDialog(true);
+                setToBeDeleted(row.original);
+              }}
             >
               <Trash2 className="h-4 w-4" />
             </button>
@@ -92,6 +105,7 @@ const AddProducts = () => {
         id: doc.id,
         name: doc.data().name,
         price: doc.data().price,
+        allDesc: doc.data().description,
         description: doc.data().description?.slice(0, 100) + "...", // Get the first 30 characters of the description
         profileImg: doc.data().profileImg,
         coverImg: doc.data().coverImages,
@@ -115,19 +129,40 @@ const AddProducts = () => {
     setAdd(false);
     console.log(data);
     setFormData({
+      id: data.id,
       productName: data.name,
-      description: data.description,
+      description: data.allDesc,
       price: data.price,
       keyFeatures: data.keyFeatures,
       profileImg: data.profileImg,
       coverImg: data.coverImg,
     });
     setEdit(true);
-    // Implement your edit logic here
+    fetchData();
   };
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = async (data) => {
+    try {
+      const productRef = doc(db, "products", data.id);
+      await deleteDoc(productRef);
+      console.log("Product deleted Successfully!!");
+
+      if (data.profileImg) {
+        const profileImgRef = ref(storage, data.profileImg);
+        await deleteObject(profileImgRef);
+        console.log("Profile image deleted successfully from Storage.");
+      }
+
+      for (const coverImageUrl of data.coverImg) {
+        const coverImgRef = ref(storage, coverImageUrl);
+        await deleteObject(coverImgRef);
+        console.log("Cover image deleted successfully from Storage.");
+      }
+      showDeleteDialog(false);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -200,77 +235,41 @@ const AddProducts = () => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   try {
-  //     let profileImgUrl = "";
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      // let profileImgUrl = await uploadProfileImage(formData.profileImg);
+      // const coverImageUrls = await uploadCoverImages(formData.coverImg);
 
-  //     if (formData.profileImg && formData.profileImg instanceof File) {
-  //       //upload profile picture
-  //       const profilePicturePath = `products/${Date.now()}-${
-  //         formData.profileImg.name
-  //       }`;
-  //       profileImgUrl = await uploadImage(
-  //         formData.profileImg,
-  //         profilePicturePath
-  //       );
-  //     }
+      const productData = {
+        name: formData.productName,
+        description: formData.description,
+        price: formData.price,
+        keyFeatures: formData.keyFeatures.filter(
+          (feature) => feature.trim() !== ""
+        ),
+        profileImg: formData.profileImg,
+        coverImages: formData.coverImg,
+        updatedAt: serverTimestamp(),
+      };
+      // Update product document
+      const productRef = doc(db, "products", id);
+      await updateDoc(productRef, productData);
 
-  //     // Upload cover images
-  //     async function uploadCoverImages(formData) {
-  //       const coverImageUrls = [];
-  //       if (formData && formData.length > 0) {
-  //         for (let index = 0; index < formData.length; index++) {
-  //           const file = formData[index];
-  //           const path = `products/${Date.now()}-${index}-${file.name}`;
-  //           const imageUrl = await uploadImage(file, path);
-  //           coverImageUrls.push(imageUrl);
-  //         }
+      console.log("Data Updated!!!");
 
-  //         return coverImageUrls;
-  //       }
-  //     }
-
-  //     const coverImageUrls = await uploadCoverImages(formData.coverImg);
-
-  //     // Create product document in Firestore
-  //     const productData = {
-  //       name: formData.productName,
-  //       description: formData.description,
-  //       price: parseFloat(formData.price),
-  //       keyFeatures: formData.keyFeatures.filter(
-  //         (feature) => feature.trim() !== ""
-  //       ),
-  //       profileImg: profileImgUrl,
-  //       coverImages: coverImageUrls,
-  //       createdAt: serverTimestamp(),
-  //       updatedAt: serverTimestamp(),
-  //     };
-
-  //     // Add to Firestore
-  //     const docRef = await addDoc(collection(db, "products"), productData);
-
-  //     console.log("Data added!!!");
-
-  //     // Reset form
-  //     setFormData({
-  //       productName: "",
-  //       description: "",
-  //       price: "",
-  //       keyFeatures: [""],
-  //       profileImg: null,
-  //       coverImg: [],
-  //     });
-  //     setProfilePreview("");
-  //     setCoverPreviews([]);
-  //     setLoading(false);
-  //     setAdd(false);
-  //   } catch (error) {
-  //     console.error("Error adding product:", error);
-  //     setLoading(false);
-  //   }
-  // };
+      resetForm();
+      setAdd(false);
+      fetchData();
+    } catch (error) {
+      console.error("Error Updating product:", error);
+    } finally {
+      setLoading(false);
+      setEdit(false);
+      setAdd(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -283,7 +282,7 @@ const AddProducts = () => {
       const productData = {
         name: formData.productName,
         description: formData.description,
-        price: parseFloat(formData.price),
+        price: formData.price,
         keyFeatures: formData.keyFeatures.filter(
           (feature) => feature.trim() !== ""
         ),
@@ -298,6 +297,7 @@ const AddProducts = () => {
 
       resetForm();
       setAdd(false);
+      fetchData();
     } catch (error) {
       console.error("Error adding product:", error);
     } finally {
@@ -363,9 +363,13 @@ const AddProducts = () => {
 
       <DataTable data={data} columns={columns} />
 
-      {add | edit && (
+      {(add || edit) && (
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
-          <div className="w-[600px] h-[600px] overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-10">
+          <div
+            className={`w-[500px] ${
+              edit ? "h-[520px]" : "h-[600px]"
+            } overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-10`}
+          >
             <div className="w-full flex justify-between">
               <span className="font-semibold text-lg text-purple-700">
                 {edit ? "Edit Product" : "Add Product"}
@@ -379,7 +383,12 @@ const AddProducts = () => {
               />
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-2">
+            <form
+              onSubmit={
+                edit ? (e) => handleUpdate(e, formData.id) : handleSubmit
+              }
+              className="mt-5 flex flex-col gap-2"
+            >
               <div className="w-full flex gap-4">
                 <div className="w-full flex flex-col gap-2">
                   <label htmlFor="productName" className="font-medium">
@@ -403,8 +412,7 @@ const AddProducts = () => {
                     className="outline-none border-[1px] border-gray-400 p-2 rounded-sm"
                     id="price"
                     name="price"
-                    step="0.01"
-                    type="number"
+                    type="text"
                     value={formData.price}
                     onChange={handleChange}
                     required
@@ -456,67 +464,68 @@ const AddProducts = () => {
                   <Plus className="h-4 w-4 mr-2" /> Add Feature
                 </div>
               </div>
-
-              <div className="w-full flex-col gap-2">
-                <div className="w-full flex flex-col gap-2">
-                  <label htmlFor="profileImg" className="font-medium">
-                    Profile Image
-                  </label>
-                  <input
-                    className="outline-none border-[1px] border-gray-400 p-1 rounded-sm w-full"
-                    id="profileImg"
-                    type="file"
-                    onChange={handleProfileImage}
-                    accept="image/*"
-                    required
-                  />
-                </div>
-
-                {profilePreview && (
-                  <div className="mt-2">
-                    <img
-                      src={profilePreview}
-                      alt="Profile preview"
-                      className="h-32 w-32 object-cover rounded-md"
+              {add && (
+                <div className="w-full flex-col gap-2">
+                  <div className="w-full flex flex-col gap-2">
+                    <label htmlFor="profileImg" className="font-medium">
+                      Profile Image
+                    </label>
+                    <input
+                      className="outline-none border-[1px] border-gray-400 p-1 rounded-sm w-full"
+                      id="profileImg"
+                      type="file"
+                      onChange={handleProfileImage}
+                      accept="image/*"
                     />
                   </div>
-                )}
-              </div>
 
-              <div className="w-full flex-col gap-2">
-                <div className="w-full flex flex-col gap-2">
-                  <label htmlFor="coverImages" className="font-medium">
-                    Cover Images
-                  </label>
-                  <input
-                    className="outline-none border-[1px] border-gray-400 p-1 rounded-sm w-full"
-                    id="coverImages"
-                    type="file"
-                    onChange={handleCoverImages}
-                    accept="image/*"
-                    multiple
-                  />
-                  {coverPreviews.length > 0 && (
-                    <div className="mt-2 grid grid-cols-3 gap-4">
-                      {coverPreviews.map((preview, index) => (
-                        <div key={index} className="relative">
-                          <img
-                            src={preview}
-                            alt={`Cover preview ${index + 1}`}
-                            className="h-32 w-full object-cover rounded-lg"
-                          />
-                          <span
-                            className="absolute top-2 right-2 bg-red-500 p-2 rounded-lg"
-                            onClick={() => removeCoverImage(index)}
-                          >
-                            <X className="h-4 w-4 text-white" />
-                          </span>
-                        </div>
-                      ))}
+                  {profilePreview && (
+                    <div className="mt-2">
+                      <img
+                        src={profilePreview}
+                        alt="Profile preview"
+                        className="h-32 w-32 object-cover rounded-md"
+                      />
                     </div>
                   )}
                 </div>
-              </div>
+              )}
+              {add && (
+                <div className="w-full flex-col gap-2">
+                  <div className="w-full flex flex-col gap-2">
+                    <label htmlFor="coverImages" className="font-medium">
+                      Cover Images
+                    </label>
+                    <input
+                      className="outline-none border-[1px] border-gray-400 p-1 rounded-sm w-full"
+                      id="coverImages"
+                      type="file"
+                      onChange={handleCoverImages}
+                      accept="image/*"
+                      multiple
+                    />
+                    {coverPreviews.length > 0 && (
+                      <div className="mt-2 grid grid-cols-3 gap-4">
+                        {coverPreviews.map((preview, index) => (
+                          <div key={index} className="relative">
+                            <img
+                              src={preview}
+                              alt={`Cover preview ${index + 1}`}
+                              className="h-32 w-full object-cover rounded-lg"
+                            />
+                            <span
+                              className="absolute top-2 right-2 bg-red-500 p-2 rounded-lg"
+                              onClick={() => removeCoverImage(index)}
+                            >
+                              <X className="h-4 w-4 text-white" />
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
 
               <input
                 type="submit"
@@ -528,6 +537,37 @@ const AddProducts = () => {
                 className="w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium"
               />
             </form>
+          </div>
+        </div>
+      )}
+
+      {deleteDialog && (
+        <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
+          <div
+            className={`w-[400px] h-[130px] p-3 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-[20%]`}
+          >
+            <div className="flex w-full justify-between">
+              <span className="font-semibold text-lg text-red-700">
+                Delete Product
+              </span>
+              <X
+                onClick={() => {
+                  showDeleteDialog(false);
+                }}
+                className="text-black cursor-pointer active:scale-95"
+              />
+            </div>
+            <div className="mt-2">
+              Are you sure you want to delete this product ?
+            </div>
+            <div className="w-full flex justify-end">
+              <h1
+                onClick={() => handleDelete(toBeDeleted)}
+                className="w-[200px] font-medium text-red-600 active:scale-95 cursor-pointer transition-all ease-in-out duration-200 p-2  mt-2 flex items-end justify-end"
+              >
+                Delete
+              </h1>
+            </div>
           </div>
         </div>
       )}
