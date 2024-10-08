@@ -11,12 +11,11 @@ import {
 import React, { useContext, useMemo, useState } from "react";
 import { AllContext } from "../../context";
 import DataTable from "../Table";
-import { prepareStackTrace } from "postcss/lib/css-syntax-error";
 
 const AddProducts = () => {
   const { allData, setAllData } = useContext(AllContext);
   const [edit, setEdit] = useState(false);
-  const [add, setAdd] = useState(true);
+  const [add, setAdd] = useState(false);
   const [formData, setFormData] = useState({
     productName: "",
     description: "",
@@ -185,7 +184,20 @@ const AddProducts = () => {
 
   return (
     <div className="w-full flex flex-col relative">
-      <div className="absolute w-[200px] bg-purple-700 text-white right-5 z-10 top-4 py-2 flex items-center justify-center font-medium rounded-sm cursor-pointer hover:bg-purple-800 transition-all duration-200 active:scale-95">
+      <div
+        onClick={() => {
+          setAdd(true);
+          setFormData({
+            productName: "",
+            description: "",
+            price: "",
+            keyFeatures: [""],
+            profileImg: "",
+            coverImg: [],
+          });
+        }}
+        className="absolute w-[200px] bg-purple-700 text-white right-5 z-10 top-4 py-2 flex items-center justify-center font-medium rounded-sm cursor-pointer hover:bg-purple-800 transition-all duration-200 active:scale-95"
+      >
         Add Product
       </div>
 
@@ -198,7 +210,10 @@ const AddProducts = () => {
               <span className="font-semibold text-lg text-purple-700">
                 Add Product
               </span>
-              <X className="text-red-600 cursor-pointer active:scale-95" />
+              <X
+                onClick={() => setAdd(false)}
+                className="text-red-600 cursor-pointer active:scale-95"
+              />
             </div>
 
             <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-2">
@@ -344,7 +359,6 @@ const AddProducts = () => {
                 value="Submit"
                 className="w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center"
               />
-                
             </form>
           </div>
         </div>
