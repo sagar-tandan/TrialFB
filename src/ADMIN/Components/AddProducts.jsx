@@ -357,7 +357,7 @@ const AddProducts = () => {
               <input
                 type="submit"
                 value="Submit"
-                className="w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center"
+                className="w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium"
               />
             </form>
           </div>
