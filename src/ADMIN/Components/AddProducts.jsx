@@ -11,6 +11,9 @@ import {
 import React, { useContext, useMemo, useState } from "react";
 import { AllContext } from "../../context";
 import DataTable from "../Table";
+import { db, storage } from "../../Config.jsx";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddProducts = () => {
   const { allData, setAllData } = useContext(AllContext);
@@ -28,6 +31,7 @@ const AddProducts = () => {
   // Preview states for images
   const [profilePreview, setProfilePreview] = useState("");
   const [coverPreviews, setCoverPreviews] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState([
     { id: 1, name: "John Doe", email: "john@example.com", role: "Developer" },
@@ -176,10 +180,81 @@ const AddProducts = () => {
     setCoverPreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = (e) => {
+  const uploadImage = async (file, path) => {
+    try {
+      const storageRef = ref(storage, path);
+      await uploadBytes(storageRef, file);
+      return await getDownloadURL(storageRef);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the formData to your backend
-    console.log("Form Data:", formData);
+    setLoading(true);
+    try {
+      //upload profile picture
+      const profilePicturePath = `products/${Date.now()}-${
+        formData.profileImg.name
+      }`;
+      const profileImgUrl = await uploadImage(
+        formData.profileImg,
+        profilePicturePath
+      );
+
+      // Upload cover images
+      async function uploadCoverImages(formData) {
+        const coverImageUrls = [];
+
+        for (let index = 0; index < formData.length; index++) {
+          const file = formData[index];
+          const path = `products/${Date.now()}-${index}-${file.name}`;
+          const imageUrl = await uploadImage(file, path);
+          coverImageUrls.push(imageUrl);
+        }
+
+        return coverImageUrls;
+      }
+
+      const coverImageUrls = await uploadCoverImages(formData.coverImg);
+
+      // Create product document in Firestore
+      const productData = {
+        name: formData.productName,
+        description: formData.description,
+        price: parseFloat(formData.price),
+        keyFeatures: formData.keyFeatures.filter(
+          (feature) => feature.trim() !== ""
+        ),
+        profileImg: profileImgUrl,
+        coverImages: coverImageUrls,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      };
+
+      // Add to Firestore
+      const docRef = await addDoc(collection(db, "products"), productData);
+
+      console.log("Data added!!!");
+
+      // Reset form
+      setFormData({
+        productName: "",
+        description: "",
+        price: "",
+        keyFeatures: [""],
+        profileImg: null,
+        coverImg: [],
+      });
+      setProfilePreview("");
+      setCoverPreviews([]);
+      setLoading(false);
+      setAdd(false);
+    } catch (error) {
+      console.error("Error adding product:", error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -240,6 +315,7 @@ const AddProducts = () => {
                     className="outline-none border-[1px] border-gray-400 p-2 rounded-sm"
                     id="price"
                     name="price"
+                    step="0.01"
                     type="number"
                     value={formData.price}
                     onChange={handleChange}
@@ -356,7 +432,7 @@ const AddProducts = () => {
 
               <input
                 type="submit"
-                value="Submit"
+                value={loading ? "Uploading...." : "Add Product"}
                 className="w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium"
               />
             </form>

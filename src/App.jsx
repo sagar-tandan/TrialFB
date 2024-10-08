@@ -27,10 +27,6 @@ function App() {
       import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID
     );
     console.log("VITE_FIREBASE_APP_ID:", import.meta.env.VITE_FIREBASE_APP_ID);
-    console.log(
-      "VITE_FIREBASE_MEASUREMENT_ID:",
-      import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
-    );
   }, []);
 
   return (
