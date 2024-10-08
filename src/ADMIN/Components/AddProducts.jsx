@@ -8,11 +8,18 @@ import {
   Trash2,
   X,
 } from "lucide-react";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { AllContext } from "../../context";
 import DataTable from "../Table";
 import { db, storage } from "../../Config.jsx";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  getDocs,
+  orderBy,
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddProducts = () => {
@@ -33,44 +40,7 @@ const AddProducts = () => {
   const [coverPreviews, setCoverPreviews] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [data, setData] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", role: "Developer" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Designer" },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      role: "Manager",
-      additional: "This is additional info",
-    },
-    {
-      id: 4,
-      name: "Alice Brown",
-      email: "alice@example.com",
-      role: "Developer",
-      additional: "This is additional info",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-      additional: "This is additional info",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-    },
-    {
-      id: 5,
-      name: "Charlie Wilson",
-      email: "charlie@example.com",
-      role: "Designer",
-    },
-    // Add more data as needed
-  ]);
+  const [data, setData] = useState([]);
 
   const columns = useMemo(
     () => [
@@ -79,12 +49,12 @@ const AddProducts = () => {
         accessor: "name",
       },
       {
-        Header: "Email",
-        accessor: "email",
+        Header: "Description",
+        accessor: "description",
       },
       {
-        Header: "Role",
-        accessor: "role",
+        Header: "Price",
+        accessor: "price",
       },
       {
         Header: "Actions",
@@ -109,6 +79,32 @@ const AddProducts = () => {
     ],
     []
   );
+
+  const fetchData = async () => {
+    try {
+      const productsRef = collection(db, "products");
+      // const q = query(productsRef, orderBy("CreatedAt", "desc"));
+      const q = query(productsRef);
+      const querySnapshot = await getDocs(q);
+
+      const productsData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+
+        // Convert Firestore Timestamp to Date
+        createdAt: doc.data().createdAt?.toDate(),
+        updatedAt: doc.data().updatedAt?.toDate(),
+      }));
+      setData(productsData);
+      console.log(productsData);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleEdit = (id) => {
     console.log(`Editing row with id: ${id}`);
