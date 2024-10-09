@@ -101,7 +101,7 @@ const DataTable = ({ data, columns, loading }) => {
             ))}
           </thead>
           {loading ? (
-            <div className="flex justify-center items-center h-60 absolute top-[30px] right-0 left-0 z-20">
+            <div className="flex justify-center items-center h-60 absolute top-[40px] right-0 left-0 z-20 border-none">
               <ClipLoader size={35} color={"#7e22ce"} loading={loading} />
             </div>
           ) : (
