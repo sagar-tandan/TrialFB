@@ -159,7 +159,6 @@ const AddProducts = () => {
       coverImg: data.coverImg,
     });
     setEdit(true);
-    fetchData();
   };
 
   const handleDelete = async (data) => {
@@ -384,9 +383,7 @@ const AddProducts = () => {
       {(add || edit) && (
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
           <div
-            className={`w-[500px] ${
-              edit ? "h-[520px]" : "h-[600px]"
-            } overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-10`}
+            className={`w-[500px] h-[600px] overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-10`}
           >
             <div className="w-full flex justify-between">
               <span className="font-semibold text-lg text-purple-700">
