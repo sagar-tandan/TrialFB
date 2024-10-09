@@ -9,7 +9,7 @@ import {
   Trash2,
   X,
 } from "lucide-react";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 // import { AllContext } from "../../context";
 import DataTable from "../Table";
 import { db, storage } from "../../Config.jsx";
@@ -360,7 +360,7 @@ const AddProducts = () => {
   };
 
   return (
-    <div className="w-full flex flex-col relative">
+    <div className="w-full flex flex-col relative pt-3">
       <div
         onClick={() => {
           setEdit(false);
@@ -374,7 +374,7 @@ const AddProducts = () => {
             coverImg: [],
           });
         }}
-        className="absolute w-[200px] bg-purple-700 text-white right-5 z-10 top-4 py-2 flex items-center justify-center font-medium rounded-sm cursor-pointer hover:bg-purple-800 transition-all duration-200 active:scale-95"
+        className="absolute w-[200px] bg-purple-700 text-white right-5 z-10 top-7 py-2 flex items-center justify-center font-medium rounded-sm cursor-pointer hover:bg-purple-800 transition-all duration-200 active:scale-95"
       >
         Add Product
       </div>
@@ -547,12 +547,13 @@ const AddProducts = () => {
 
               <input
                 type="submit"
+                disabled={loading}
                 value={
                   loading
-                    ? "Uploading...."
+                    ? `Uploading...`
                     : `${edit ? "Update Product" : "Add Product"}`
                 }
-                className="w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium"
+                className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium `}
               />
             </form>
           </div>
