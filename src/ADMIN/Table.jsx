@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { ClipLoader } from "react-spinners";
 
 // Global Filter Component
 const GlobalFilter = ({ filter, setFilter }) => {
@@ -28,7 +29,9 @@ const GlobalFilter = ({ filter, setFilter }) => {
   );
 };
 
-const DataTable = ({ data, columns }) => {
+const DataTable = ({ data, columns, loading }) => {
+  const Data = useMemo(() => data || [], [data]);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -49,7 +52,7 @@ const DataTable = ({ data, columns }) => {
   } = useTable(
     {
       columns,
-      data,
+      data: Data,
       initialState: { pageIndex: 0, pageSize: 5 },
     },
     useGlobalFilter,
@@ -58,12 +61,12 @@ const DataTable = ({ data, columns }) => {
   );
 
   return (
-    <div className="w-full  p-4 space-y-4">
+    <div className="w-full  p-4 space-y-4 relative">
       {/* Search Filter */}
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 
       {/* Table */}
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border rounded-lg overflow-hidden ">
         <table
           {...getTableProps()}
           className="min-w-full divide-y divide-gray-200"
@@ -97,26 +100,32 @@ const DataTable = ({ data, columns }) => {
               </tr>
             ))}
           </thead>
-          <tbody
-            {...getTableBodyProps()}
-            className="bg-white divide-y divide-gray-200"
-          >
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    <td
-                      {...cell.getCellProps()}
-                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
+          {loading ? (
+            <div className="flex justify-center items-center h-60 absolute top-[30px] right-0 left-0 z-20">
+              <ClipLoader size={35} color={"#7e22ce"} loading={loading} />
+            </div>
+          ) : (
+            <tbody
+              {...getTableBodyProps()}
+              className="bg-white divide-y divide-gray-200"
+            >
+              {page.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => (
+                      <td
+                        {...cell.getCellProps()}
+                        className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          )}
         </table>
       </div>
 

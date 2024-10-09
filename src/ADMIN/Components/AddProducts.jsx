@@ -50,6 +50,7 @@ const AddProducts = () => {
   const [loading, setLoading] = useState(false);
   const [toBeDeleted, setToBeDeleted] = useState();
   const [deleteDialog, showDeleteDialog] = useState(false);
+  const [dataLoading, setDataLoading] = useState(false);
 
   const [data, setData] = useState([]);
 
@@ -111,6 +112,7 @@ const AddProducts = () => {
   );
 
   const fetchData = async () => {
+    setDataLoading(true);
     try {
       const productsRef = collection(db, "products");
       // const q = query(productsRef, orderBy("CreatedAt", "desc"));
@@ -133,8 +135,10 @@ const AddProducts = () => {
       }));
       setData(productsData);
       console.log(productsData);
+      setDataLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
+      setDataLoading(false);
     }
   };
 
@@ -256,9 +260,6 @@ const AddProducts = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // let profileImgUrl = await uploadProfileImage(formData.profileImg);
-      // const coverImageUrls = await uploadCoverImages(formData.coverImg);
-
       const productData = {
         name: formData.productName,
         description: formData.description,
@@ -378,7 +379,7 @@ const AddProducts = () => {
         Add Product
       </div>
 
-      <DataTable data={data} columns={columns} />
+      <DataTable data={data} columns={columns} loading={dataLoading} />
 
       {(add || edit) && (
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
