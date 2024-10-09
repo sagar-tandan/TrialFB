@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { LayoutDashboard, Box, Table } from "lucide-react";
+import { LayoutDashboard, Box, Table, Star } from "lucide-react";
 import AddProducts from "./Components/AddProducts";
 import DataTable from "./Table";
+import AddReviews from "./Components/AddReviews";
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState(
@@ -35,10 +36,26 @@ const AdminPage = () => {
           <Box className="w-6 h-6 " />
           <span className="font-medium">Add Products</span>
         </div>
+
+        <div
+          onClick={() => setActiveFunction("review")}
+          className={`w-full flex py-3 px-6 gap-2 cursor-pointer hover:bg-purple-200 hover:text-purple-800 group transition-all duration-200 ease-in-out ${
+            activeTab == "review" ? "text-purple-800 bg-purple-200" : ""
+          }`}
+        >
+          <Star className="w-6 h-6 " />
+          <span className="font-medium">Add Testimonials</span>
+        </div>
       </div>
 
       <div className="w-full  h-[30px] ml-[250px]">
-        {activeTab == "product" ? <AddProducts /> : "Hello"}
+        {activeTab == "product" ? (
+          <AddProducts />
+        ) : activeTab == "review" ? (
+          <AddReviews />
+        ) : (
+          "Hellow"
+        )}
       </div>
     </div>
   );
