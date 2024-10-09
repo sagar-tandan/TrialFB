@@ -56,12 +56,28 @@ const AddProducts = () => {
   const columns = useMemo(
     () => [
       {
+        Header: "S.No.",
+        accessor: "sn",
+      },
+
+      {
         Header: "Name",
         accessor: "name",
+        Cell: ({ value }) => (
+          <div className="max-w-[200px] overflow-hidden whitespace-normal break-words font-medium">
+            {value}
+          </div>
+        ),
       },
+
       {
         Header: "Description",
         accessor: "description",
+        Cell: ({ value }) => (
+          <div className="max-w-[400px] overflow-hidden whitespace-normal break-words">
+            {value.slice(0, 150) + "..."}
+          </div>
+        ),
       },
       {
         Header: "Price",
@@ -101,12 +117,13 @@ const AddProducts = () => {
       const q = query(productsRef, orderBy("createdAt", "desc"));
       const querySnapshot = await getDocs(q);
 
-      const productsData = querySnapshot.docs.map((doc) => ({
+      const productsData = querySnapshot.docs.map((doc, index) => ({
+        sn: index,
         id: doc.id,
         name: doc.data().name,
         price: doc.data().price,
         allDesc: doc.data().description,
-        description: doc.data().description?.slice(0, 100) + "...", // Get the first 30 characters of the description
+        description: doc.data().description,
         profileImg: doc.data().profileImg,
         coverImg: doc.data().coverImages,
         keyFeatures: doc.data().keyFeatures,
