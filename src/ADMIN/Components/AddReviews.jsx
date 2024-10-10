@@ -17,6 +17,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import DataTable from "../Table";
 import { ClipLoader } from "react-spinners";
@@ -77,7 +78,7 @@ const AddReviews = () => {
           <div className="flex space-x-2">
             <button
               className="p-1 hover:bg-gray-100 rounded"
-              // onClick={() => handleEdit(row.original)}
+              onClick={() => handleEdit(row.original)}
             >
               <Edit2 className="h-4 w-4" />
             </button>
@@ -96,6 +97,18 @@ const AddReviews = () => {
     ],
     []
   );
+
+  const handleEdit = (data) => {
+    setAdd(false);
+    setFormData({
+      id: data.id,
+      clientName: data.clientName,
+      clientLoc: data.clientLoc,
+      review: data.review,
+      clientImg: data.clientImg,
+    });
+    setEdit(true);
+  };
 
   const handleDelete = async (data) => {
     try {
@@ -159,24 +172,56 @@ const AddReviews = () => {
     fetchData();
   };
 
+  const UpdateReviewToFireStore = async (data, id) => {
+    const reviewRef = doc(db, "Testimonials", id);
+    await updateDoc(reviewRef, data);
+    console.log("Data Updated Successfully!!!");
+    setEdit(false);
+    setLoading(false);
+    setFormData({
+      clientName: "",
+      review: "",
+      clientLoc: "",
+      clientImg: "",
+    });
+    fetchData();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const url = await uploadImage(formData.clientImg);
-    const finalData = {
-      clientName: formData.clientName,
-      clientLoc: formData.clientLoc,
-      review: formData.review,
-      clientImg: url,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    };
-    AddReviewToFireStore(finalData);
+    try {
+      const url = await uploadImage(formData.clientImg);
+      const finalData = {
+        clientName: formData.clientName,
+        clientLoc: formData.clientLoc,
+        review: formData.review,
+        clientImg: url,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      };
+      AddReviewToFireStore(finalData);
+      setProfilePreview("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleUpdate = async (e, id) => {
     e.preventDefault();
     setLoading(true);
+    try {
+      const updatedData = {
+        clientName: formData.clientName,
+        clientLoc: formData.clientLoc,
+        review: formData.review,
+        updatedAt: serverTimestamp(),
+      };
+      UpdateReviewToFireStore(updatedData, id);
+      setProfilePreview("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchData = async () => {
@@ -223,7 +268,9 @@ const AddReviews = () => {
       {(add || edit) && (
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
           <div
-            className={`w-[500px] h-[550px] overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-10`}
+            className={` ${
+              edit ? "h-[470px] mt-20 w-[450px]" : "w-[500px] h-[550px] mt-10"
+            }  overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto `}
           >
             <div className="w-full flex justify-between">
               <span className="font-semibold text-lg text-purple-700">
@@ -246,10 +293,9 @@ const AddReviews = () => {
             </div>
 
             <form
-              // onSubmit={
-              //   edit ? (e) => handleUpdate(e, formData.id) : handleSubmit
-              // }
-              onSubmit={handleSubmit}
+              onSubmit={
+                edit ? (e) => handleUpdate(e, formData.id) : handleSubmit
+              }
               className="mt-5 flex flex-col gap-2"
             >
               {add && (
