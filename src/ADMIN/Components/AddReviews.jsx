@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { uploadBytes, getDownloadURL, getStorage, ref } from "firebase/storage";
-import { X } from "lucide-react";
+import { Edit2, Trash2, X } from "lucide-react";
 import { db, storage } from "../../Config";
-import { addDoc, collection } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
+import DataTable from "../Table";
 
 const AddReviews = () => {
   const [add, setAdd] = useState(false);
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [dataLoading, setDataLoading] = useState(false);
   const [profilePreview, setProfilePreview] = useState();
   const [formData, setFormData] = useState({
     clientName: "",
@@ -15,6 +24,70 @@ const AddReviews = () => {
     clientLoc: "",
     review: "",
   });
+
+  const [data, setData] = useState([]);
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: "S.No.",
+        accessor: "sn",
+      },
+
+      {
+        Header: "Name",
+        accessor: "clientName",
+        Cell: ({ value }) => (
+          <div className="max-w-[200px] overflow-hidden whitespace-normal break-words font-medium">
+            {value}
+          </div>
+        ),
+      },
+
+      {
+        Header: "Review",
+        accessor: "review",
+        Cell: ({ value }) => (
+          <div className="max-w-[400px] overflow-hidden whitespace-normal break-words">
+            {value.slice(0, 150) + "..."}
+          </div>
+        ),
+      },
+      {
+        Header: "Location",
+        accessor: "clientLoc",
+      },
+
+      {
+        Header: "Actions",
+        id: "actions",
+        Cell: ({ row }) => (
+          <div className="flex space-x-2">
+            <button
+              className="p-1 hover:bg-gray-100 rounded"
+              // onClick={() => handleEdit(row.original)}
+            >
+              <Edit2 className="h-4 w-4" />
+            </button>
+            <button
+              className="p-1 hover:bg-gray-100 rounded"
+              // onClick={() => {
+              //   showDeleteDialog(true);
+              //   setToBeDeleted(row.original);
+              // }}
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          </div>
+        ),
+      },
+    ],
+    []
+  );
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,6 +124,7 @@ const AddReviews = () => {
       clientLoc: "",
       clientImg: "",
     });
+    fetchData();
   };
 
   const handleSubmit = async (e) => {
@@ -62,9 +136,44 @@ const AddReviews = () => {
       clientLoc: formData.clientLoc,
       review: formData.review,
       clientImg: url,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
     };
     AddReviewToFireStore(finalData);
   };
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    setLoading(true);
+  };
+
+  const fetchData = async () => {
+    setDataLoading(true);
+    try {
+      const reviewRef = collection(db, "Testimonials");
+      const q = query(reviewRef, orderBy("createdAt", "desc"));
+      const querySnapshot = await getDocs(q);
+
+      const ReviewData = querySnapshot.docs.map((doc, index) => ({
+        sn: index,
+        id: doc.id,
+        clientName: doc.data().clientName,
+        clientLoc: doc.data().clientLoc,
+        review: doc.data().review,
+        clientImg: doc.data().clientImg,
+        // Convert Firestore Timestamp to Date
+        createdAt: doc.data().createdAt?.toDate(),
+        updatedAt: doc.data().updatedAt?.toDate(),
+      }));
+      setData(ReviewData);
+      console.log(ReviewData);
+      setDataLoading(false);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      setDataLoading(false);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen flex flex-col relative pt-3">
       <div
@@ -76,6 +185,8 @@ const AddReviews = () => {
       >
         Add Reviews
       </div>
+
+      <DataTable data={data} columns={columns} loading={dataLoading} />
 
       {(add || edit) && (
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
@@ -196,8 +307,6 @@ const AddReviews = () => {
           </div>
         </div>
       )}
-
-      {/* <DataTable data={data} columns={columns} loading={dataLoading} /> */}
     </div>
   );
 };
