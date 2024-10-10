@@ -270,7 +270,7 @@ const AddReviews = () => {
           <div
             className={` ${
               edit ? "h-[470px] mt-20 w-[450px]" : "w-[500px] h-[550px] mt-10"
-            }  overflow-y-auto p-6 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto `}
+            }  overflow-y-auto p-6 bg-white border-[1px] shadow-md rounded-md flex flex-col mx-auto `}
           >
             <div className="w-full flex justify-between">
               <span className="font-semibold text-lg text-purple-700">
