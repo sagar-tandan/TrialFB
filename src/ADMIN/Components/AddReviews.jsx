@@ -1,22 +1,34 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { uploadBytes, getDownloadURL, getStorage, ref } from "firebase/storage";
+import {
+  uploadBytes,
+  getDownloadURL,
+  getStorage,
+  ref,
+  deleteObject,
+} from "firebase/storage";
 import { Edit2, Trash2, X } from "lucide-react";
 import { db, storage } from "../../Config";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   orderBy,
   query,
   serverTimestamp,
 } from "firebase/firestore";
 import DataTable from "../Table";
+import { ClipLoader } from "react-spinners";
 
 const AddReviews = () => {
   const [add, setAdd] = useState(false);
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
+  const [deleteDialog, showDeleteDialog] = useState(false);
+  const [toBeDeleted, setToBeDeleted] = useState();
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [profilePreview, setProfilePreview] = useState();
   const [formData, setFormData] = useState({
     clientName: "",
@@ -71,10 +83,10 @@ const AddReviews = () => {
             </button>
             <button
               className="p-1 hover:bg-gray-100 rounded"
-              // onClick={() => {
-              //   showDeleteDialog(true);
-              //   setToBeDeleted(row.original);
-              // }}
+              onClick={() => {
+                showDeleteDialog(true);
+                setToBeDeleted(row.original);
+              }}
             >
               <Trash2 className="h-4 w-4" />
             </button>
@@ -84,6 +96,26 @@ const AddReviews = () => {
     ],
     []
   );
+
+  const handleDelete = async (data) => {
+    try {
+      setDeleteLoading(true);
+      const reviewRef = doc(db, "Testimonials", data.id);
+      await deleteDoc(reviewRef);
+      console.log("Product deleted Successfully!!");
+
+      if (data.clientImg) {
+        const clientImgRef = ref(storage, data.clientImg);
+        await deleteObject(clientImgRef);
+        console.log("Profile image deleted successfully from Storage.");
+      }
+      setDeleteLoading(false);
+      showDeleteDialog(false);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -207,6 +239,7 @@ const AddReviews = () => {
                     clientLoc: "",
                     clientImg: "",
                   });
+                  setProfilePreview("");
                 }}
                 className="text-black cursor-pointer active:scale-95"
               />
@@ -304,6 +337,45 @@ const AddReviews = () => {
                 className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium `}
               />
             </form>
+          </div>
+        </div>
+      )}
+
+      {deleteDialog && (
+        <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
+          <div
+            className={`w-[400px] h-[135px] p-4 bg-white border-[1px] shadow-lg shadow-purple-100 rounded-md flex flex-col mx-auto mt-[20%]`}
+          >
+            <div className="flex w-full justify-between">
+              <span className="font-semibold text-lg text-red-700">
+                Delete Product
+              </span>
+              <X
+                onClick={() => {
+                  showDeleteDialog(false);
+                }}
+                className="text-black cursor-pointer active:scale-95"
+              />
+            </div>
+            <div className="mt-2">
+              Are you sure you want to delete this review ?
+            </div>
+            <div className="w-full flex justify-end">
+              <h1
+                onClick={() => handleDelete(toBeDeleted)}
+                className="w-[200px] font-medium text-red-600 active:scale-95 cursor-pointer transition-all ease-in-out duration-200 p-2  mt-2 flex items-end justify-end"
+              >
+                {deleteLoading ? (
+                  <ClipLoader
+                    size={26}
+                    loading={deleteLoading}
+                    color="#f50100"
+                  />
+                ) : (
+                  "Delete"
+                )}
+              </h1>
+            </div>
           </div>
         </div>
       )}

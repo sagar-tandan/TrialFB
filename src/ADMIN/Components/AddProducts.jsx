@@ -560,7 +560,7 @@ const AddProducts = () => {
       {deleteDialog && (
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 flex z-10 backdrop-blur-sm">
           <div
-            className={`w-[400px] h-[130px] p-3 bg-white border-[1px] border-gray-500 rounded-sm flex flex-col mx-auto mt-[20%]`}
+            className={`w-[400px] h-[135px] p-4 bg-white border-[1px] shadow-lg shadow-purple-100 rounded-md flex flex-col mx-auto mt-[20%]`}
           >
             <div className="flex w-full justify-between">
               <span className="font-semibold text-lg text-red-700">
