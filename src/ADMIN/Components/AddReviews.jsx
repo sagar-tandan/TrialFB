@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { uploadBytes, getDownloadURL, getStorage, ref } from "firebase/storage";
 import { X } from "lucide-react";
+import { db, storage } from "../../Config";
+import { addDoc, collection } from "firebase/firestore";
 
 const AddReviews = () => {
-  const [add, setAdd] = useState(true);
+  const [add, setAdd] = useState(false);
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [profilePreview, setProfilePreview] = useState();
-
   const [formData, setFormData] = useState({
     clientName: "",
     clientImg: "",
@@ -28,8 +29,41 @@ const AddReviews = () => {
     }
     setProfilePreview(URL.createObjectURL(image));
   };
+
   const uploadImage = async (file) => {
-    console.log(file);
+    const storageRef = ref(storage, "Client/" + Date.now() + file.name);
+    try {
+      await uploadBytes(storageRef, file);
+      return await getDownloadURL(storageRef);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const AddReviewToFireStore = async (data) => {
+    await addDoc(collection(db, "Testimonials"), data);
+    console.log("Data added Successfully!!!");
+    setAdd(false);
+    setLoading(false);
+    setFormData({
+      clientName: "",
+      review: "",
+      clientLoc: "",
+      clientImg: "",
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const url = await uploadImage(formData.clientImg);
+    const finalData = {
+      clientName: formData.clientName,
+      clientLoc: formData.clientLoc,
+      review: formData.review,
+      clientImg: url,
+    };
+    AddReviewToFireStore(finalData);
   };
   return (
     <div className="w-full min-h-screen flex flex-col relative pt-3">
@@ -71,6 +105,7 @@ const AddReviews = () => {
               // onSubmit={
               //   edit ? (e) => handleUpdate(e, formData.id) : handleSubmit
               // }
+              onSubmit={handleSubmit}
               className="mt-5 flex flex-col gap-2"
             >
               {add && (
@@ -152,7 +187,7 @@ const AddReviews = () => {
                 disabled={loading}
                 value={
                   loading
-                    ? `Uploading...`
+                    ? `Uploading data...`
                     : `${edit ? "Update Review" : "Add Review"}`
                 }
                 className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium `}
