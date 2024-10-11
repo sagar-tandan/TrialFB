@@ -11,6 +11,7 @@ import AddProducts from "./Components/AddProducts";
 import DataTable from "./Table";
 import AddReviews from "./Components/AddReviews";
 import AddFAQ from "./Components/AddFAQ";
+import Dashboard from "./Components/Dashboard";
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState(
@@ -74,7 +75,7 @@ const AdminPage = () => {
         ) : activeTab == "faq" ? (
           <AddFAQ />
         ) : (
-          "Hellow"
+          <Dashboard />
         )}
       </div>
     </div>
