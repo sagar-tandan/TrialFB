@@ -1,38 +1,47 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "./ADMIN/Table";
 import AdminPage from "./ADMIN/AdminPage";
+import LoginPage from "./ADMIN/LoginPage";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [user, setuser] = useState(false);
+
+  const verifyToken = () => {
+    const todayDate = new Date();
+    const userInfo = localStorage.getItem("adminCred");
+    if (userInfo) {
+      const { uid, expires } = JSON.parse(userInfo);
+      if (expires > todayDate.getTime()) {
+        setuser(true);
+      }
+    }
+  };
+
   useEffect(() => {
-    // Log the .env values
-    console.log(
-      "VITE_FIREBASE_API_KEY:",
-      import.meta.env.VITE_FIREBASE_API_KEY
-    );
-    console.log(
-      "VITE_FIREBASE_AUTH_DOMAIN:",
-      import.meta.env.VITE_FIREBASE_AUTH_DOMAIN
-    );
-    console.log(
-      "VITE_FIREBASE_PROJECT_ID:",
-      import.meta.env.VITE_FIREBASE_PROJECT_ID
-    );
-    console.log(
-      "VITE_FIREBASE_STORAGE_BUCKET:",
-      import.meta.env.VITE_FIREBASE_STORAGE_BUCKET
-    );
-    console.log(
-      "VITE_FIREBASE_MESSAGING_SENDER_ID:",
-      import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID
-    );
-    console.log("VITE_FIREBASE_APP_ID:", import.meta.env.VITE_FIREBASE_APP_ID);
+    verifyToken();
   }, []);
 
   return (
     <div>
-      {/* <DataTable /> */}
-      <AdminPage />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/api/adminLogin"
+            element={
+              user ? (
+                <Navigate to="/api/adminDashboard" />
+              ) : (
+                <LoginPage setUser={setuser} />
+              )
+            }
+          />
+          <Route
+            path="/api/adminDashboard"
+            element={user ? <AdminPage /> : <Navigate to="/api/adminLogin" />}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
