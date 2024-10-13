@@ -131,7 +131,12 @@ const AddReviews = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (localStorage.getItem("reviewData")) {
+      const reviewData = localStorage.getItem("reviewData");
+      setData(JSON.parse(reviewData));
+    } else {
+      fetchData();
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -243,7 +248,7 @@ const AddReviews = () => {
         updatedAt: doc.data().updatedAt?.toDate(),
       }));
       setData(ReviewData);
-      console.log(ReviewData);
+      localStorage.setItem("reviewData", JSON.stringify(ReviewData));
       setDataLoading(false);
     } catch (error) {
       console.error("Error fetching reviews:", error);

@@ -134,6 +134,7 @@ const AddProducts = () => {
         updatedAt: doc.data().updatedAt?.toDate(),
       }));
       setData(productsData);
+      localStorage.setItem("productData", JSON.stringify(productsData));
       setDataLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -142,7 +143,12 @@ const AddProducts = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (localStorage.getItem("productData")) {
+      const productData = localStorage.getItem("productData");
+      setData(JSON.parse(productData));
+    } else {
+      fetchData();
+    }
   }, []);
 
   const handleEdit = (data) => {

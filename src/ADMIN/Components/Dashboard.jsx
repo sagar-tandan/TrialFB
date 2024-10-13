@@ -11,22 +11,40 @@ const Dashboard = () => {
     faq: "0",
   });
 
+  const fetchProductCount = async () => {
+    if (localStorage.getItem("productData")) {
+      const productData = JSON.parse(localStorage.getItem("productData"));
+      setAllData((prev) => ({ ...prev, product: productData.length }));
+    } else {
+      const product = await getDocs(collection(db, "products"));
+      setAllData((prev) => ({ ...prev, product: product.size }));
+    }
+  };
+  const fetchReviewCount = async () => {
+    if (localStorage.getItem("reviewData")) {
+      const reviewData = JSON.parse(localStorage.getItem("reviewData"));
+      setAllData((prev) => ({ ...prev, review: reviewData.length }));
+    } else {
+      const review = await getDocs(collection(db, "Testimonials"));
+      setAllData((prev) => ({ ...prev, review: review.size }));
+    }
+  };
+  const fetchFaqCount = async () => {
+    if (localStorage.getItem("faqsData")) {
+      const faqsData = JSON.parse(localStorage.getItem("faqsData"));
+      setAllData((prev) => ({ ...prev, faq: faqsData.length }));
+    } else {
+      const faq = await getDocs(collection(db, "FAQ"));
+      setAllData((prev) => ({ ...prev, faq: faq.size }));
+    }
+  };
+
   // Function to fetch data from Firebase
   const fetchAllDataCount = async () => {
     try {
-      // Fetch data from Firebase
-      const product = await getDocs(collection(db, "products"));
-      const review = await getDocs(collection(db, "Testimonials"));
-      const faq = await getDocs(collection(db, "FAQ"));
-
-      const data = {
-        product: product.size,
-        review: review.size,
-        faq: faq.size,
-      };
-
-      // Update state and sessionStorage with new data
-      setAllData(data);
+      await fetchProductCount();
+      await fetchReviewCount();
+      await fetchFaqCount();
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
