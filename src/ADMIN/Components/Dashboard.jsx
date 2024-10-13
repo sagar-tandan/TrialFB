@@ -2,23 +2,34 @@ import { collection, getDocs } from "firebase/firestore";
 import { Box, Eye, ShieldQuestion, Star } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { db } from "../../Config";
-import dashboard from '../assets/dash.svg'
+import dashboard from "../assets/dash.svg";
 
 const Dashboard = () => {
   const [allData, setAllData] = useState({
-    product: "",
-    review: "",
-    faq: "",
+    product: "0",
+    review: "0",
+    faq: "0",
   });
+
+  // Function to fetch data from Firebase
   const fetchAllDataCount = async () => {
-    const product = await getDocs(collection(db, "products"));
-    const review = await getDocs(collection(db, "Testimonials"));
-    const faq = await getDocs(collection(db, "FAQ"));
-    setAllData({
-      product: product.size,
-      review: review.size,
-      faq: faq.size,
-    });
+    try {
+      // Fetch data from Firebase
+      const product = await getDocs(collection(db, "products"));
+      const review = await getDocs(collection(db, "Testimonials"));
+      const faq = await getDocs(collection(db, "FAQ"));
+
+      const data = {
+        product: product.size,
+        review: review.size,
+        faq: faq.size,
+      };
+
+      // Update state and sessionStorage with new data
+      setAllData(data);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
   };
 
   useEffect(() => {
@@ -34,7 +45,11 @@ const Dashboard = () => {
               Ready to start you day with something exciting!!
             </span>
           </div>
-          <img className="absolute top-[-50px] w-[250px] h-[250px] right-[-10px]" src={dashboard} alt="" />
+          <img
+            className="absolute top-[-50px] w-[250px] h-[250px] right-[-10px]"
+            src={dashboard}
+            alt=""
+          />
         </div>
       </div>
 
