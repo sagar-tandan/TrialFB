@@ -3,38 +3,19 @@ import { Mail, Lock, AlertCircle } from "lucide-react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config.jsx";
 import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 const LoginPage = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
-  //   const validateForm = () => {
-  //     const newErrors = {};
-
-  //     if (!email) {
-  //       newErrors.email = "Email is required";
-  //     } else if (!/\S+@\S+\.\S+/.test(email)) {
-  //       newErrors.email = "Email is invalid";
-  //     }
-
-  //     if (!password) {
-  //       newErrors.password = "Password is required";
-  //     } else if (password.length < 6) {
-  //       newErrors.password = "Password must be at least 6 characters";
-  //     } else if (!user) {
-  //       newErrors.password = "Incorrect Credentials";
-  //     }
-
-  //     setErrors(newErrors);
-  //     return Object.keys(newErrors).length === 0;
-  //   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const date = new Date();
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -44,14 +25,17 @@ const LoginPage = ({ setUser }) => {
       // setUser(userCredential.user);
       const adminCred = {
         uid: userCredential.user.uid,
-        expires: date.getTime() + 1000, // 7 days
+        expires: date.getTime() + 60 * 1000, // 7 days
       };
+
       localStorage.setItem("adminCred", JSON.stringify(adminCred));
       setUser(true);
+      setLoading(false);
       navigate("/api/adminDashboard");
     } catch (error) {
       // setErrors();
       console.error("Error registering user:", error);
+      setLoading(false);
     }
   };
 
@@ -113,9 +97,9 @@ const LoginPage = ({ setUser }) => {
           <div>
             <button
               type="submit"
-              className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex items-center justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Sign In
+              {loading ? <ClipLoader size={25} color="#fff" /> : "Sign In"}
             </button>
           </div>
         </form>
