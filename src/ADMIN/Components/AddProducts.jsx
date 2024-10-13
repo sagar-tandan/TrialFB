@@ -134,7 +134,6 @@ const AddProducts = () => {
         updatedAt: doc.data().updatedAt?.toDate(),
       }));
       setData(productsData);
-      console.log(productsData);
       setDataLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
