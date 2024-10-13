@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DataTable from "./ADMIN/Table";
 import AdminPage from "./ADMIN/AdminPage";
 import LoginPage from "./ADMIN/LoginPage";
+import ForgotPassword from "./ADMIN/ForgetPassword.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -39,6 +40,10 @@ function App() {
           <Route
             path="/api/adminDashboard"
             element={user ? <AdminPage /> : <Navigate to="/api/adminLogin" />}
+          />
+          <Route
+            path="/api/adminLogin/forgotPassword"
+            element={<ForgotPassword />}
           />
         </Routes>
       </BrowserRouter>
