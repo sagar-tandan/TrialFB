@@ -108,7 +108,12 @@ const AddFAQ = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (localStorage.getItem("faqsData")) {
+      const faqData = localStorage.getItem("faqsData");
+      setData(JSON.parse(faqData));
+    } else {
+      fetchData();
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -189,6 +194,7 @@ const AddFAQ = () => {
         updatedAt: doc.data().updatedAt?.toDate(),
       }));
       setData(faqData);
+      localStorage.setItem("faqsData", JSON.stringify(faqData));
       setDataLoading(false);
     } catch (error) {
       console.error("Error fetching faq:", error);
