@@ -4,12 +4,14 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config.jsx";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
+import { div } from "framer-motion/client";
 
 const LoginPage = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+  const [forgetPass, setForgotPass] = useState(false);
 
   const navigate = useNavigate();
 
@@ -41,7 +43,7 @@ const LoginPage = ({ setUser }) => {
   };
 
   return (
-    <div className="min-h-screen bg-purple-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-purple-100 flex items-center justify-center p-4 relative">
       <div className="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           Login
@@ -62,6 +64,7 @@ const LoginPage = ({ setUser }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 className={`pl-10 pr-3 py-2 w-full border rounded-sm`}
                 placeholder="Enter your email"
+                required
               />
               <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
             </div>
@@ -86,6 +89,7 @@ const LoginPage = ({ setUser }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 className={`pl-10 pr-3 py-2 w-full border rounded-sm`}
                 placeholder="Enter your password"
+                required
               />
               <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
             </div>
@@ -105,7 +109,12 @@ const LoginPage = ({ setUser }) => {
           </div>
         </form>
         <div className="mt-4 text-center">
-          <a href="#" className="text-sm text-purple-600 hover:text-purple-500">
+          <a
+            onClick={() => {
+              navigate("/api/adminLogin/forgotPassword");
+            }}
+            className="text-sm text-purple-600 hover:text-purple-500 cursor-pointer"
+          >
             Forgot your password?
           </a>
         </div>
