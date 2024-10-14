@@ -377,16 +377,17 @@ const AddReviews = () => {
                 />
               </div>
 
-              <input
+              <button
                 type="submit"
                 disabled={loading}
-                value={
-                  loading
-                    ? `Uploading data...`
-                    : `${edit ? "Update Review" : "Add Review"}`
-                }
-                className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium `}
-              />
+                className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium flex items-center justify-center`}
+              >
+                {loading ? (
+                  <ClipLoader size={20} color="#fff" />
+                ) : (
+                  `${edit ? "Update Review" : "Add Review"}`
+                )}
+              </button>
             </form>
           </div>
         </div>
