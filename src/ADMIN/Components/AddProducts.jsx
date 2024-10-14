@@ -30,6 +30,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
+import { ClipLoader } from "react-spinners";
 
 const AddProducts = () => {
   // const { allData, setAllData } = useContext(AllContext);
@@ -547,16 +548,17 @@ const AddProducts = () => {
                 </div>
               )}
 
-              <input
+              <button
                 type="submit"
                 disabled={loading}
-                value={
-                  loading
-                    ? `Uploading...`
-                    : `${edit ? "Update Product" : "Add Product"}`
-                }
-                className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium `}
-              />
+                className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium flex items-center justify-center`}
+              >
+                {loading ? (
+                  <ClipLoader size={20} color="#fff" />
+                ) : (
+                  `${edit ? "Update Product" : "Add Product"}`
+                )}
+              </button>
             </form>
           </div>
         </div>

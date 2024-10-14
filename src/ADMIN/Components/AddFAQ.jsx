@@ -276,16 +276,17 @@ const AddFAQ = () => {
                 />
               </div>
 
-              <input
+              <button
                 type="submit"
                 disabled={loading}
-                value={
-                  loading
-                    ? `Uploading data...`
-                    : `${edit ? "Update FAQ" : "Add FAQ"}`
-                }
-                className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium `}
-              />
+                className={`w-full p-2 mt-3 bg-purple-700 hover:bg-purple-800 text-white cursor-pointer rounded-sm text-center font-medium flex items-center justify-center`}
+              >
+                {loading ? (
+                  <ClipLoader size={20} color="#fff" />
+                ) : (
+                  `${edit ? "Update FAQ" : "Add FAQ"}`
+                )}
+              </button>
             </form>
           </div>
         </div>
