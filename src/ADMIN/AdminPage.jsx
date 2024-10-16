@@ -4,7 +4,6 @@ import {
   Box,
   Table,
   Star,
-  FileQuestion,
   ShieldQuestion,
 } from "lucide-react";
 import AddProducts from "./Components/AddProducts";
