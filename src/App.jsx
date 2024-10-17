@@ -4,6 +4,7 @@ import AdminPage from "./ADMIN/AdminPage";
 import LoginPage from "./ADMIN/LoginPage";
 import ForgotPassword from "./ADMIN/ForgetPassword.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import HomePage from "./USER/HomePage.jsx";
 
 function App() {
   const [user, setuser] = useState(false);
@@ -27,6 +28,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<HomePage />}></Route>
           <Route
             path="/api/adminLogin"
             element={
