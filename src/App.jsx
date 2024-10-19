@@ -29,7 +29,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
-          
           <Route
             path="/api/adminLogin"
             element={
