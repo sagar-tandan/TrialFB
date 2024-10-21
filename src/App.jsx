@@ -5,6 +5,10 @@ import LoginPage from "./ADMIN/LoginPage";
 import ForgotPassword from "./ADMIN/ForgetPassword.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./USER/HomePage.jsx";
+import ProductDetail from "./USER/ProductDetail.jsx";
+import ProductPage from "./USER/ProductPage.jsx";
+import { Contact } from "lucide-react";
+import ContactDetail from "./USER/ContactDetail.jsx";
 
 function App() {
   const [user, setuser] = useState(false);
@@ -29,6 +33,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
+          <Route path="/products" element={<ProductPage />}></Route>
+          <Route path="/products/:id" element={<ProductDetail />}></Route>
+          <Route path="/contact" element={<ContactDetail />}></Route>
           <Route
             path="/api/adminLogin"
             element={
