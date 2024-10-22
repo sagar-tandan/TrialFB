@@ -36,6 +36,7 @@ function App() {
           <Route path="/products" element={<ProductPage />}></Route>
           <Route path="/products/:id" element={<ProductDetail />}></Route>
           <Route path="/contact" element={<ContactDetail />}></Route>
+          
           <Route
             path="/api/adminLogin"
             element={
