@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import hero from "./UserAssets/hero.webp";
 
 const HomePage = () => {
   const text = "DESIGN • DEVELOP • DEPLOY • ";
@@ -61,11 +62,7 @@ const HomePage = () => {
 
           {/* Right Section */}
           <div className="w-1/2">
-            <img
-              className="w-full h-[600px] object-cover"
-              src="https://images.unsplash.com/photo-1662943523548-373718f22124?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
+            <img className="w-full h-[600px] object-fill rounded-t-md" src={hero} alt="hero logo" />
           </div>
 
           <div className="w-[150px] h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute top-12 m-6 rounded-full flex items-center justify-center">
