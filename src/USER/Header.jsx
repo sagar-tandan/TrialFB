@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Header = () => {
   const [activetab, setActiveTab] = useState("home");
   return (
-    <div className="w-full h-[60px] flex bg-[#1E1E1E] text-white px-14 items-center justify-center">
+    <div className="w-full h-[60px] flex bg-[#1E1E1E] text-white px-14 items-center justify-center fixed z-50">
       <div className="w-full max-w-screen-2xl mx-auto flex justify-between">
         {/* LOGO  */}
         <div className="flex py-2">
