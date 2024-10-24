@@ -2,11 +2,14 @@ import React from "react";
 import Header from "./Header";
 
 const HomePage = () => {
+  const text = "DESIGN • DEVELOP • DEPLOY • ";
+  const characters = text.split("");
+  const totalChars = characters.length;
   return (
     <div className="w-full flex flex-col gap-10 text-white bg-[#141414] font-urbanist">
       <Header />
-      <div className="w-full max-w-screen-2xl flex flex-col gap-10 pl-16 pt-6 ">
-        <div className="w-full flex gap-5 justify-center items-center relative">
+      <div className="w-full max-w-screen-2xl flex flex-col gap-10 pl-16 pt-6 mx-auto mt-[90px]">
+        <div className="w-full flex gap-5 justify-center items-center relative ">
           {/* Left section */}
           <div className="w-1/2">
             <p className="font-semibold text-[40px] leading-none uppercase">
@@ -65,11 +68,28 @@ const HomePage = () => {
             />
           </div>
 
-          {/* CIRCULAR LOGO */}
+          <div className="w-[150px] h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute top-12 m-6 rounded-full flex items-center justify-center">
+            <div className="w-[75px] h-[75px] rounded-full bg-none border-[1px] border-[#717171]"></div>
 
-          <div className="w-[150px] h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute top-0 m-6 rounded-full flex items-center justify-center">
-            <div className="w-[75px] h-[75px] rounded-full bg-[#1a1a1a] border-[1px] border-[#717171]"></div>
-            <p className="absolute">Lorem ipsum dolor sit</p>
+            {/* Rotating text container */}
+            <div className="absolute w-[85%] h-[85%] animate-[spin_10s_linear_infinite]">
+              {characters.map((char, i) => {
+                const rotation = (i * 360) / totalChars;
+                return (
+                  <div
+                    key={i}
+                    className="absolute w-full h-full p-4"
+                    style={{
+                      transform: `rotate(${rotation}deg)`,
+                    }}
+                  >
+                    <span className="absolute left-1/2 -translate-x-1/2 -top-1 text-xs font-medium text-gray-200">
+                      {char}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
