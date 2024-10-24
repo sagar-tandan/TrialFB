@@ -6,7 +6,7 @@ const HomePage = () => {
     <div className="w-full flex flex-col gap-10 text-white bg-[#141414] font-urbanist">
       <Header />
       <div className="w-full max-w-screen-2xl flex flex-col gap-10 pl-16 pt-6 ">
-        <div className="w-full flex gap-5 justify-center items-center">
+        <div className="w-full flex gap-5 justify-center items-center relative">
           {/* Left section */}
           <div className="w-1/2">
             <p className="font-semibold text-[40px] leading-none uppercase">
@@ -63,6 +63,13 @@ const HomePage = () => {
               src="https://images.unsplash.com/photo-1662943523548-373718f22124?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />
+          </div>
+
+          {/* CIRCULAR LOGO */}
+
+          <div className="w-[150px] h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute top-0 m-6 rounded-full flex items-center justify-center">
+            <div className="w-[75px] h-[75px] rounded-full bg-[#1a1a1a] border-[1px] border-[#717171]"></div>
+            <p className="absolute">Lorem ipsum dolor sit</p>
           </div>
         </div>
       </div>
