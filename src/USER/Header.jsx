@@ -10,13 +10,13 @@ const Header = () => {
           <img src="" alt="" />
           <span>LOGO</span>
         </div>
-        <div className="flex gap-14 font-semibold py-2">
+        <div className="flex gap-14 py-2 px-6">
           <span className={`cursor-pointer`}>Home</span>
           <span className="cursor-pointer">Products</span>
           <span className="cursor-pointer">About Us</span>
         </div>
 
-        <div className="bg-[#141414] px-6 py-2 rounded-md border-[1px] border-gray-800 font-semibold cursor-pointer hover:bg-purple-600 transition-all duration-200 ease-in-out">
+        <div className="bg-[#141414] px-6 py-2 rounded-md border-[1px] border-gray-800 cursor-pointer hover:bg-purple-600 transition-all duration-200 ease-in-out">
           Contact Us
         </div>
       </div>
