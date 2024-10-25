@@ -181,15 +181,42 @@ const HeroSection = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
+        <div className="w-full lg:w-1/2 mt-8 lg:mt-0 relative">
           <img
             className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover lg:object-fill rounded-md lg:rounded-tl-md lg:rounded-bl-sm"
             src={hero}
             alt="hero logo"
           />
+          <div className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute -bottom-[72px] sm:-bottom-24  m-6 rounded-full items-center justify-center lg:hidden flex">
+            <div className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[75px] md:h-[75px] rounded-full bg-none border-[1px] border-[#717171]"></div>
+            <div className="absolute w-[85%] h-[85%] animate-[spin_10s_linear_infinite]">
+              {characters.map((char, i) => {
+                const rotation = (i * 360) / totalChars;
+                const isPurple = i < "CONSULT".length;
+
+                return (
+                  <div
+                    key={i}
+                    className="absolute w-full h-full p-4"
+                    style={{
+                      transform: `rotate(${rotation}deg)`,
+                    }}
+                  >
+                    <span
+                      className={`absolute left-1/2 -translate-x-1/2 -top-1 text-[8px] md:text-xs md:font-medium font-light ${
+                        isPurple ? "text-purple-500" : "text-gray-200"
+                      }`}
+                    >
+                      {char}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
-        <div className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute bottom-[55%]  sm:bottom-[50%] md:bottom-[45%] left-0 lg:top-12 lg:left-[44%] m-6 rounded-full flex items-center justify-center">
+        <div className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute bottom-[55%]  sm:bottom-[50%] md:bottom-[45%] left-0 lg:top-12 lg:left-[44%] m-6 rounded-full  items-center justify-center lg:flex hidden">
           <div className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[75px] md:h-[75px] rounded-full bg-none border-[1px] border-[#717171]"></div>
           <div className="absolute w-[85%] h-[85%] animate-[spin_10s_linear_infinite]">
             {characters.map((char, i) => {
