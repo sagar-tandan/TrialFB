@@ -2,7 +2,7 @@ import React from "react";
 import hero from "../UserAssets/hero.webp";
 
 const HeroSection = () => {
-  const text = "DESIGN • DEVELOP • DEPLOY • ";
+  const text = "CONSULT• DESIGN • PROTOTYPE • REFINE • DEVELOP • ";
   const characters = text.split("");
   const totalChars = characters.length;
   return (
@@ -67,8 +67,7 @@ const HeroSection = () => {
 
         <div className="w-[150px] h-[150px] border-[1px] border-[#717171] bg-[#141414] absolute top-12 m-6 rounded-full flex items-center justify-center">
           <div className="w-[75px] h-[75px] rounded-full bg-none border-[1px] border-[#717171]"></div>
-
-          {/* Rotating text container */}
+          {/* Rotating text container
           <div className="absolute w-[85%] h-[85%] animate-[spin_10s_linear_infinite]">
             {characters.map((char, i) => {
               const rotation = (i * 360) / totalChars;
@@ -80,7 +79,35 @@ const HeroSection = () => {
                     transform: `rotate(${rotation}deg)`,
                   }}
                 >
-                  <span className="absolute left-1/2 -translate-x-1/2 -top-1 text-xs font-medium text-gray-200">
+                  <span
+                    className={`absolute left-1/2 -translate-x-1/2 -top-1 text-xs font-medium ${
+                      i === 0 ? "text-purple-600 " : ""
+                    }text-gray-200`}
+                  >
+                    {char}
+                  </span>
+                </div>
+              );
+            })} */}
+          {/* </div> */}
+          <div className="absolute w-[85%] h-[85%] animate-[spin_10s_linear_infinite]">
+            {characters.map((char, i) => {
+              const rotation = (i * 360) / totalChars;
+              const isPurple = i < "CONSULT".length;
+
+              return (
+                <div
+                  key={i}
+                  className="absolute w-full h-full p-4"
+                  style={{
+                    transform: `rotate(${rotation}deg)`,
+                  }}
+                >
+                  <span
+                    className={`absolute left-1/2 -translate-x-1/2 -top-1 text-xs font-medium ${
+                      isPurple ? "text-purple-500" : "text-gray-200"
+                    }`}
+                  >
                     {char}
                   </span>
                 </div>

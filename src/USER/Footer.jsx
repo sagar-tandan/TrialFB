@@ -9,7 +9,7 @@ const Footer = () => {
     nav("/api/adminLogin");
   };
   return (
-    <footer className="w-full text-gray-400 pt-10">
+    <footer className="w-full text-[#737373] pt-10">
       <div className="w-full flex flex-col gap-10">
         <div className="w-full container mx-auto flex justify-between gap-20 items-start">
           {/* Logo Section */}
