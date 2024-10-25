@@ -107,7 +107,7 @@ const FeaturedProducts = () => {
           facere magni odio dicta possimus. Lorem ipsum dolor sit amet
           consectetur adipisicing elit. Aliquid, reiciendis?
         </p>
-        <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] active:bg-[#1d1d1d] duration-100 transition-all ease-in-out whitespace-nowrap">
+        <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 whitespace-nowrap">
           View All Products
         </button>
       </div>
@@ -136,7 +136,7 @@ const FeaturedProducts = () => {
                     </h2>
                   </span>
 
-                  <span className="text-[14px] bg-purple-700 px-4 md:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-800 transition-all duration-200 ease-in-out text-center w-full sm:w-auto">
+                  <span className="text-[14px] bg-purple-700 px-4 md:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-700 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 text-center w-full sm:w-auto">
                     View Products Details
                   </span>
                 </div>
@@ -159,14 +159,14 @@ const FeaturedProducts = () => {
         <div className="flex gap-4 select-none">
           <span
             onClick={goToPrev}
-            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center hover:bg-[#1a1a1a] cursor-pointer transition-all ease-in-out duration-300"
+            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
           >
             <MoveLeft strokeWidth="1px" />
           </span>
 
           <span
             onClick={goToNext}
-            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center hover:bg-[#1a1a1a] cursor-pointer transition-all ease-in-out duration-300"
+            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
           >
             <MoveRight strokeWidth="1px" />
           </span>

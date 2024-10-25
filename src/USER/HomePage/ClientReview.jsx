@@ -34,7 +34,6 @@ const products = [
     header: "Exceptional Service",
     rating: 5,
   },
-
 ];
 
 const ClientReview = () => {
@@ -100,7 +99,7 @@ const ClientReview = () => {
           facere magni odio dicta possimus. Lorem ipsum dolor sit amet
           consectetur adipisicing elit. Aliquid, reiciendis?
         </p>
-        <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] active:bg-[#1d1d1d] duration-100 transition-all ease-in-out whitespace-nowrap">
+        <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 whitespace-nowrap">
           View All Testimonials
         </button>
       </div>
@@ -161,14 +160,14 @@ const ClientReview = () => {
         <div className="flex gap-4">
           <span
             onClick={goToPrev}
-            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center hover:bg-[#1a1a1a] cursor-pointer transition-all ease-in-out duration-300"
+            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
           >
             <MoveLeft strokeWidth="1px" />
           </span>
 
           <span
             onClick={goToNext}
-            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center hover:bg-[#1a1a1a] cursor-pointer transition-all ease-in-out duration-300"
+            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
           >
             <MoveRight strokeWidth="1px" />
           </span>

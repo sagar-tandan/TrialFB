@@ -73,7 +73,7 @@ const FrequentlyAskedQuestion = () => {
           you're looking for? Feel free to contact our support team for more
           assistance.
         </p>
-        <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] active:bg-[#1d1d1d] duration-100 transition-all ease-in-out whitespace-nowrap">
+        <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 whitespace-nowrap">
           View All FAQs
         </button>
       </div>
@@ -107,29 +107,29 @@ const FrequentlyAskedQuestion = () => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="flex justify-between items-center border-t border-gray-800 pt-6">
+      <div className="flex justify-between items-center border-t-[2px] border-[#202020] pt-6">
         <span className="text-lg font-medium">
           {formatSlideNumber(currentSlide + 1)}
           <span className="text-gray-500">
             {" "}
-            / {formatSlideNumber(faqs.length)}
+            of {formatSlideNumber(faqs.length)}
           </span>
         </span>
 
         <div className="flex gap-4">
           <button
             onClick={() => sliderRef.current?.slickPrev()}
-            className="w-10 h-10 rounded-full border-2 border-[#202020] flex items-center justify-center hover:bg-[#1a1a1a] cursor-pointer transition-all ease-in-out duration-300"
+            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
             aria-label="Previous slide"
           >
-            <MoveLeft className="w-5 h-5" />
+            <MoveLeft strokeWidth="1px" />
           </button>
           <button
             onClick={() => sliderRef.current?.slickNext()}
-            className="w-10 h-10 rounded-full border-2  border-[#202020] flex items-center justify-center hover:bg-[#1a1a1a] cursor-pointer transition-all ease-in-out duration-300"
+            className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
             aria-label="Next slide"
           >
-            <MoveRight className="w-5 h-5" />
+            <MoveRight strokeWidth="1px" />
           </button>
         </div>
       </div>
