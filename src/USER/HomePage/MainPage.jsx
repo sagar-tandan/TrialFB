@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Header";
 import HeroSection from "./HeroSection";
 import CLients from "./CLients";
+import FeaturedProducts from "./FeaturedProducts";
 
 const MainPage = () => {
   return (
@@ -9,6 +10,7 @@ const MainPage = () => {
       <Header />
       <HeroSection />
       <CLients />
+      <FeaturedProducts />
     </div>
   );
 };
