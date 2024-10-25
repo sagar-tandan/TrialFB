@@ -5,6 +5,7 @@ import CLients from "./CLients";
 import FeaturedProducts from "./FeaturedProducts";
 import ClientReview from "./ClientReview";
 import FrequentlyAskedQuestion from "./FrequentlyAskedQuestion";
+import Footer from "../Footer";
 
 const MainPage = () => {
   return (
@@ -15,6 +16,8 @@ const MainPage = () => {
       <FeaturedProducts />
       <ClientReview />
       <FrequentlyAskedQuestion />
+      <hr className="border-[#202020] border-[1px]"/>
+      <Footer />
     </div>
   );
 };
