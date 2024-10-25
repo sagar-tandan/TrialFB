@@ -52,6 +52,7 @@ const AddProducts = () => {
   const [toBeDeleted, setToBeDeleted] = useState();
   const [deleteDialog, showDeleteDialog] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const [data, setData] = useState([]);
 
@@ -169,6 +170,8 @@ const AddProducts = () => {
 
   const handleDelete = async (data) => {
     try {
+      setDeleteLoading(true);
+
       const productRef = doc(db, "products", data.id);
       await deleteDoc(productRef);
       console.log("Product deleted Successfully!!");
@@ -184,6 +187,7 @@ const AddProducts = () => {
         await deleteObject(coverImgRef);
         console.log("Cover image deleted successfully from Storage.");
       }
+      setDeleteLoading(true);
       showDeleteDialog(false);
       fetchData();
     } catch (error) {
@@ -586,9 +590,17 @@ const AddProducts = () => {
             <div className="w-full flex justify-end">
               <h1
                 onClick={() => handleDelete(toBeDeleted)}
-                className="w-[200px] font-medium text-red-600 active:scale-95 cursor-pointer transition-all ease-in-out duration-200 p-2  mt-2 flex items-end justify-end"
+                className="w-[200px] font-medium text-red-600 cursor-pointer p-2  mt-2 flex items-end justify-end"
               >
-                Delete
+                {deleteLoading ? (
+                  <ClipLoader
+                    size={26}
+                    loading={deleteLoading}
+                    color="#f50100"
+                  />
+                ) : (
+                  "Delete"
+                )}
               </h1>
             </div>
           </div>
