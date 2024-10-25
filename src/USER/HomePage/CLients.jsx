@@ -33,7 +33,7 @@ const CLients = () => {
     console.log(link);
   };
   return (
-    <div className="w-full flex bg-[#191919] py-[6px] z-10">
+    <div className="w-full flex bg-[#191919] py-[6px] z-10 max-w-screen-2xl mx-auto">
       <div className="w-full bg-[#141414] border-t-[2px] border-b-[2px] border-[#242424] p-3 flex gap-3">
         {clientsCollection.map((clients, index) => (
           <div
