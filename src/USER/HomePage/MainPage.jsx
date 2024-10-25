@@ -4,6 +4,7 @@ import HeroSection from "./HeroSection";
 import CLients from "./CLients";
 import FeaturedProducts from "./FeaturedProducts";
 import ClientReview from "./ClientReview";
+import FrequentlyAskedQuestion from "./FrequentlyAskedQuestion";
 
 const MainPage = () => {
   return (
@@ -13,6 +14,7 @@ const MainPage = () => {
       <CLients />
       <FeaturedProducts />
       <ClientReview />
+      <FrequentlyAskedQuestion />
     </div>
   );
 };
