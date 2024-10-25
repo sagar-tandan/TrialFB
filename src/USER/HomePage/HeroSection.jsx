@@ -59,7 +59,7 @@ const HeroSection = () => {
         {/* Right Section */}
         <div className="w-1/2">
           <img
-            className="w-full h-[600px] object-fill rounded-t-md"
+            className="w-full h-[600px] object-fill rounded-tl-md rounded-bl-sm"
             src={hero}
             alt="hero logo"
           />
