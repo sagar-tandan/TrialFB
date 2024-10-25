@@ -1,30 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import spark from "../UserAssets/spark.png";
-import { MoveLeft, MoveRight } from "lucide-react";
+import { MoveLeft, MoveRight, Star } from "lucide-react";
 
 const products = [
   {
-    image: "https://dummyimage.com/200x200/000/fff&text=Product+1",
-    name: "Wireless Headphones",
+    image: "https://dummyimage.com/200x200/000/fff&text=Client+1",
+    name: "Sagar Tandan",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
-    price: 99.99,
+    location: "Bargachhi, Dharan",
+    header: "Exceptional Service",
+    rating: 5,
   },
   {
-    image: "https://dummyimage.com/200x200/000/fff&text=Product+2",
-    name: "Smartphone",
+    image: "https://dummyimage.com/200x200/000/fff&text=Client+1",
+    name: "Sagar Tandan",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
-    price: 699.99,
+    location: "Bargachhi, Dharan",
+    header: "Exceptional Service",
+    rating: 5,
   },
   {
-    image: "https://dummyimage.com/200x200/000/fff&text=Product+3",
-    name: "Gaming Mouse",
+    image: "https://dummyimage.com/200x200/000/fff&text=Client+1",
+    name: "Sagar Tandan",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
-    price: 49.99,
+
+    location: "Bargachhi, Dharan",
+    header: "Exceptional Service",
+    rating: 5,
   },
   //   {
   //     image: "https://dummyimage.com/200x200/000/fff&text=Product+4",
@@ -71,7 +78,7 @@ const products = [
   //   },
 ];
 
-const FeaturedProducts = () => {
+const ClientReview = () => {
   return (
     <div className="w-full py-6 px-16 flex flex-col gap-5 my-10">
       <div className="w-full flex items-center gap-1">
@@ -80,7 +87,7 @@ const FeaturedProducts = () => {
         <img className="w-2 h-2 opacity-30" src={spark} alt="" />
       </div>
       <h1 className="w-full text-[32px] font-semibold leading-none">
-        Featured Products
+        What Our Clients Say
       </h1>
 
       {/* Complementay section */}
@@ -92,7 +99,7 @@ const FeaturedProducts = () => {
           consectetur adipisicing elit. Aliquid, reiciendis?
         </p>
         <button className="border-[2px] border-[#202020] rounded-md py-3 px-6 bg-[#1a1a1a] active:bg-[#1d1d1d] duration-100 transition-all ease-in-out">
-          View All Products
+          View All Testimonials
         </button>
       </div>
 
@@ -102,30 +109,35 @@ const FeaturedProducts = () => {
         {products?.map((product, index) => (
           <div
             key={index}
-            className="w-full p-5 flex flex-col gap-1 border-[2px] border-[#202020] rounded-md"
+            className="w-full p-8 flex flex-col gap-1 border-[2px] border-[#202020] rounded-md"
           >
-            <img
-              className="w-full h-[250px] rounded-md object-cover"
-              src={product.image}
-              alt=""
-            />
-            <h1 className="w-full text-[18px] font-semibold mt-3">
-              {product.name}
+            <div className="w-full flex gap-2">
+              {Array.from({ length: product.rating }, (_, i) => (
+                <span
+                  key={i}
+                  className="w-[35px] h-[35px] rounded-full border-[1px] border-[#262626] bg-[#1a1a1a] flex justify-center items-center p-1 text-yellow-600"
+                >
+                  <Star />
+                </span>
+              ))}
+            </div>
+            <h1 className="w-full text-[20px] font-semibold mt-5">
+              {product.header}
             </h1>
-            <p className="font-medium text-[#737373] w-full">
+            <p className="font-medium w-full text-[16px]">
               {product.description}
             </p>
-            <div className="w-full flex justify-between mt-4 items-center">
-              <span className="flex flex-col gap-1">
-                <h1 className="text-[#737373]">Price</h1>
-                <h2 className="font-semibold text-[18px]">
-                  Rs. {product.price}{" "}
-                </h2>
-              </span>
+            <div className="w-full flex gap-3 mt-4 items-center">
+              <img
+                className="w-[50px] h-[50px] rounded-full object-cover "
+                src={product.image}
+                alt=""
+              />
 
-              <span className="text-[14px] bg-purple-700 px-8 py-3 rounded-md cursor-pointer hover:bg-purple-800 transition-all duration-200 ease-in-out">
-                View Products Details
-              </span>
+              <div className="flex flex-col">
+                <h1 className=" font-medium leading-none">{product.name}</h1>
+                <h2 className="text-[#737373]">{product.location}</h2>
+              </div>
             </div>
           </div>
         ))}
@@ -134,7 +146,9 @@ const FeaturedProducts = () => {
       <hr className="border-[1px] border-[#202020] mt-5" />
 
       <div className="w-full flex justify-between items-center">
-        <span className="text-[18px] font-medium">01 <span className="text-[#737373]">of 60</span></span>
+        <span className="text-[18px] font-medium">
+          01 <span className="text-[#737373]">of 10</span>
+        </span>
 
         <div className="flex gap-4">
           <span className="w-[40px] h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center hover:bg-[#1a1a1a] cursor-pointer transition-all ease-in-out duration-300">
@@ -150,4 +164,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default ClientReview;
