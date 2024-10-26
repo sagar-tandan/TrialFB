@@ -120,7 +120,7 @@ const Header = () => {
                   : "hover:text-purple-400"
               }`}
               onClick={() => {
-                setActiveTab(item.id);
+                gotoTab(item.id);
                 setIsMenuOpen(false);
               }}
             >
