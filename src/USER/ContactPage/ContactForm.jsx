@@ -133,9 +133,8 @@ const ContactForm = () => {
             onChange={handleChange}
             placeholder="Your message here..."
             rows={5}
-            className="w-full px-4 py-3 rounded-lg bg-[#191919] border border-[#232323] placeholder-[#4c4c4c]
-                   focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent
-                   transition-all duration-200 resize-none"
+            className="w-full px-4 py-3 rounded-md bg-[#191919] border border-[#232323] placeholder-[#4c4c4c]
+                   focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent resize-none"
             required
           />
         </div>

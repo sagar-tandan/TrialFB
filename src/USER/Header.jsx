@@ -24,9 +24,9 @@ const Header = () => {
   };
 
   const gotoContact = () => {
-    navigate("/contact");
-    localStorage.setItem("activeTabUser", "contact");
     setActiveTab("contact");
+    localStorage.setItem("activeTabUser", "contact");
+    navigate("/contact");
   };
 
   const gotoTab = (path) => {
