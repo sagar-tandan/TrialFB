@@ -3,23 +3,25 @@ import React from "react";
 
 const IntroComp = () => {
   return (
-    <div className="w-full max-w-screen-2xl mx-auto flex flex-col items-center justify-center mt-[60px] ">
-      <div className="w-full flex flex-col p-20 bg-gradient-to-r from-[#1f1f1f] via-[#141414] to-[#141414]">
-        <h1 className="font-semibold md:text-[38px] text-[28px]">
-          Get in Touch with AaraTech
-        </h1>
-        <p className="text-[14px] md:text-[16px] font-medium text-[#737373] max-w-6xl">
-          Welcome to AaraTech’s Contact Us page. We're here to assist you with
-          any inquiries, requests, or feedback you may have. Whether you're
-          looking to buy a product, or simply want to connect, we're just a
-          message away. Reach out to us, and let's start a conversation.
-        </p>
+    <div className="w-full flex flex-col items-center justify-center mt-[60px] ">
+      <div className="w-full flex flex-col py-10 px-4 lg:px-16 lg:py-20 md:px-8 bg-gradient-to-r from-[#1f1f1f] via-[#141414] to-[#141414]">
+        <div className="w-full flex flex-col max-w-screen-2xl mx-auto ">
+          <h1 className="font-semibold md:text-[38px] text-[28px]">
+            Get in Touch with AaraTech
+          </h1>
+          <p className="text-[14px] md:text-[16px] font-medium text-[#737373] max-w-6xl">
+            Welcome to AaraTech’s Contact Us page. We're here to assist you with
+            any inquiries, requests, or feedback you may have. Whether you're
+            looking to buy a product, or simply want to connect, we're just a
+            message away. Reach out to us, and let's start a conversation.
+          </p>
+        </div>
       </div>
 
-      <div className="w-full max-w-screen-2xl mx-auto py-[6px] bg-[#191919]">
+      <div className="w-full py-[6px] bg-[#191919]">
         <div className="w-full bg-[#141414] border-t-[2px] border-b-[2px] border-[#242424] p-3 sm:p-4">
           {/* Grid container */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-screen-2xl mx-auto">
             {/* Email */}
             <div className="relative group border-[2px] border-[#202020] flex flex-col items-center justify-center px-3 py-6 gap-4 rounded-md bg-[#1a1a1a] ">
               <div className="relative m-4">
