@@ -1,18 +1,9 @@
-import {
-  Facebook,
-  Globe,
-  Instagram,
-  Mail,
-  MapPin,
-  MoveUpRight,
-  Phone,
-  Pin,
-} from "lucide-react";
+import { Instagram, Mail, MapPin, MoveUpRight, Phone } from "lucide-react";
 import React from "react";
 
 const IntroComp = () => {
   return (
-    <div className="w-full max-w-screen-2xl mx-auto flex flex-col items-center justify-center mt-[60px]">
+    <div className="w-full max-w-screen-2xl mx-auto flex flex-col items-center justify-center mt-[60px] ">
       <div className="w-full flex flex-col p-20 bg-gradient-to-r from-[#1f1f1f] via-[#141414] to-[#141414]">
         <h1 className="font-semibold md:text-[38px] text-[28px]">
           Get in Touch with AaraTech
