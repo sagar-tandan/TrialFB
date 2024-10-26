@@ -6,7 +6,7 @@ const HeroSection = () => {
   const characters = text.split("");
   const totalChars = characters.length;
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:pl-16 pt-6 mx-auto mt-[90px]">
+    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-[90px]">
       <div className="w-full flex flex-col-reverse lg:flex-row gap-5 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
@@ -59,7 +59,7 @@ const HeroSection = () => {
         {/* Right Section */}
         <div className="w-full lg:w-1/2 mt-8 lg:mt-0 relative">
           <img
-            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover lg:object-fill rounded-md lg:rounded-tl-md lg:rounded-bl-sm"
+            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover lg:object-fill rounded-md lg:rounded-b-none "
             src={hero}
             alt="hero logo"
           />
