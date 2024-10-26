@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { path } from "framer-motion/client";
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setActiveTab(localStorage.getItem("activeTabUser"));
+  }, [activeTab]);
 
   const menuItems = [
     { id: "home", label: "Home" },
@@ -15,8 +23,29 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const gotoContact = () => {
+    setActiveTab("contact");
+    localStorage.setItem("activeTabUser", "contact");
+    navigate("/contact");
+  };
+
+  const gotoTab = (path) => {
+    setActiveTab(path);
+
+    if (path === "home") {
+      navigate("/");
+      localStorage.setItem("activeTabUser", "home");
+    } else if (path === "products") {
+      navigate("/products");
+      localStorage.setItem("activeTabUser", "products");
+    } else {
+      navigate("/aboutus");
+      localStorage.setItem("activeTabUser", "about");
+    }
+  };
+
   return (
-    <header className="w-full h-16 bg-[#1E1E1E] text-white fixed z-50 transition-colors duration-300">
+    <header className="w-full h-16 bg-[#191919] text-white fixed z-50 transition-colors duration-300">
       <div className="w-full h-full max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-14 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center transform transition-transform duration-300 hover:scale-105">
@@ -32,7 +61,7 @@ const Header = () => {
               className={`cursor-pointer relative group transition-colors duration-300 ${
                 activeTab === item.id ? "text-purple-500" : ""
               }`}
-              onClick={() => setActiveTab(item.id)}
+              onClick={() => gotoTab(item.id)}
             >
               {item.label}
               {/* Animated underline */}
@@ -43,7 +72,12 @@ const Header = () => {
 
         {/* Contact Button */}
         <div className="hidden md:block">
-          <button className="bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20">
+          <button
+            onClick={() => gotoContact()}
+            className={`bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 ${
+              activeTab === "contact" ? "bg-purple-600" : ""
+            }`}
+          >
             Contact Us
           </button>
         </div>
@@ -86,14 +120,19 @@ const Header = () => {
                   : "hover:text-purple-400"
               }`}
               onClick={() => {
-                setActiveTab(item.id);
+                gotoTab(item.id);
                 setIsMenuOpen(false);
               }}
             >
               {item.label}
             </span>
           ))}
-          <button className="bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+          <button
+            onClick={() => gotoContact()}
+            className={`bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 ${
+              activeTab === "contact" ? "bg-purple-600" : ""
+            }`}
+          >
             Contact Us
           </button>
         </div>

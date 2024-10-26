@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import DataTable from "./ADMIN/Table";
 import AdminPage from "./ADMIN/AdminPage";
 import LoginPage from "./ADMIN/LoginPage";
 import ForgotPassword from "./ADMIN/ForgetPassword.jsx";
@@ -7,8 +6,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MainPage from "./USER/HomePage/MainPage.jsx";
 import ProductDetail from "./USER/ProductDetail.jsx";
 import ProductPage from "./USER/ProductPage.jsx";
-import { Contact } from "lucide-react";
-import ContactDetail from "./USER/ContactDetail.jsx";
+import ContactParent from "./USER/ContactPage/ContactParent.jsx";
 
 function App() {
   const [user, setuser] = useState(false);
@@ -35,7 +33,8 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/products" element={<ProductPage />}></Route>
           <Route path="/products/:id" element={<ProductDetail />}></Route>
-          <Route path="/contact" element={<ContactDetail />}></Route>
+          <Route path="/contact" element={<ContactParent />}></Route>
+          <Route path="/aboutus" element={<MainPage />}></Route>
 
           <Route
             path="/api/adminLogin"
@@ -57,8 +56,6 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-
-      
     </div>
   );
 }
