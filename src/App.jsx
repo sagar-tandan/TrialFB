@@ -34,6 +34,7 @@ function App() {
           <Route path="/products" element={<ProductPage />}></Route>
           <Route path="/products/:id" element={<ProductDetail />}></Route>
           <Route path="/contact" element={<ContactParent />}></Route>
+          <Route path="/aboutus" element={<MainPage />}></Route>
 
           <Route
             path="/api/adminLogin"

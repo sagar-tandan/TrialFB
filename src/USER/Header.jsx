@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { path } from "framer-motion/client";
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setActiveTab(localStorage.getItem("activeTabUser"));
+  }, [activeTab]);
 
   const menuItems = [
     { id: "home", label: "Home" },
@@ -20,6 +25,23 @@ const Header = () => {
 
   const gotoContact = () => {
     navigate("/contact");
+    localStorage.setItem("activeTabUser", "contact");
+    setActiveTab("contact");
+  };
+
+  const gotoTab = (path) => {
+    setActiveTab(path);
+
+    if (path === "home") {
+      navigate("/");
+      localStorage.setItem("activeTabUser", "home");
+    } else if (path === "products") {
+      navigate("/products");
+      localStorage.setItem("activeTabUser", "products");
+    } else {
+      navigate("/aboutus");
+      localStorage.setItem("activeTabUser", "about");
+    }
   };
 
   return (
@@ -39,7 +61,7 @@ const Header = () => {
               className={`cursor-pointer relative group transition-colors duration-300 ${
                 activeTab === item.id ? "text-purple-500" : ""
               }`}
-              onClick={() => setActiveTab(item.id)}
+              onClick={() => gotoTab(item.id)}
             >
               {item.label}
               {/* Animated underline */}
@@ -52,7 +74,9 @@ const Header = () => {
         <div className="hidden md:block">
           <button
             onClick={() => gotoContact()}
-            className="bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+            className={`bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 ${
+              activeTab === "contact" ? "bg-purple-600" : ""
+            }`}
           >
             Contact Us
           </button>
@@ -105,7 +129,9 @@ const Header = () => {
           ))}
           <button
             onClick={() => gotoContact()}
-            className="bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20"
+            className={`bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 ${
+              activeTab === "contact" ? "bg-purple-600" : ""
+            }`}
           >
             Contact Us
           </button>
