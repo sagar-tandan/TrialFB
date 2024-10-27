@@ -111,7 +111,7 @@ const ValuedClientComp = () => {
                     {/* second */}
                     <div className="w-full flex flex-col border-[1px] border-[#242424] font-medium rounded-lg p-3">
                       <p className="w-full text-[#999999]">What They Said 🤗</p>
-                      <p>{client.review}</p>
+                      <p className="mt-3 font-medium">{client.review}</p>
                     </div>
                   </div>
                 </div>
@@ -122,8 +122,6 @@ const ValuedClientComp = () => {
 
         {/* <hr className="border-[1px] border-[#202020] mt-5" /> */}
         <div className="w-full bg-red-50 border-t-[1px] mt-5 border-[#202020]"></div>
-
-
 
         <div className="w-full flex justify-between items-center mb-16">
           <span className="text-base md:text-[18px] font-medium ">

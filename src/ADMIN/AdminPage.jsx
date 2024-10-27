@@ -66,7 +66,7 @@ const AdminPage = () => {
         </div>
       </div>
 
-      <div className="w-full  h-[30px] ml-[250px]">
+      <div className="w-full  h-[30px] ml-[250px] bg-white">
         {activeTab == "product" ? (
           <AddProducts />
         ) : activeTab == "review" ? (
