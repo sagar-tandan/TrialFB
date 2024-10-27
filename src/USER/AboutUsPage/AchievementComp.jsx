@@ -13,9 +13,9 @@ const AchievementComp = () => {
             <img className="w-2 h-2 opacity-30" src={spark} alt="" />
           </div>
 
-          <p className=" text-left font-semibold text-[28px] sm:text-[32px] md:text-[36px] leading-none uppercase lg:mt-0">
+          <h1 className="w-full text-2xl md:text-[32px] font-semibold leading-none">
             Our Achievements{" "}
-          </p>
+          </h1>
           <p className="w-full font-medium text-[14px] sm:text-[15px] md:text-[16px] text-[#737373] my-4 lg:mx-0 text-left max-w-6xl">
             Our story is one of continuous growth and evolution. We started as a
             small team with big dreams, determined to create a great platform
@@ -26,7 +26,7 @@ const AchievementComp = () => {
         {/* Right Section */}
         <div className="w-full flex gap-4 lg:gap-8 lg:flex-row flex-col">
           <div className="w-full flex bg-[#191919] p-1 rounded-[6px]">
-            <div className="w-full flex flex-col gap-3 bg-[#141414] p-8 rounded-[5px]">
+            <div className="w-full flex flex-col gap-3 border-[1px] bg-[#141414] p-8 rounded-[6px] border-[#242424]">
               <h1 className="text-[24px] font-semibold">
                 5+ Years of Excellence
               </h1>
@@ -38,7 +38,7 @@ const AchievementComp = () => {
           </div>
 
           <div className="w-full flex bg-[#191919] p-1 rounded-[6px]">
-            <div className="w-full flex flex-col gap-3 bg-[#141414] p-8 rounded-[5px]">
+            <div className="w-full flex flex-col gap-3 border-[1px] bg-[#141414] p-8 rounded-[6px] border-[#242424]">
               <h1 className="text-[24px] font-semibold">Happy Clients </h1>
               <p className="font-medium text-[16px] text-[#999999]">
                 Our greatest achievement is the satisfaction of our clients.
@@ -48,7 +48,7 @@ const AchievementComp = () => {
           </div>
 
           <div className="w-full flex bg-[#191919] p-1 rounded-[6px]">
-            <div className="w-full flex flex-col gap-3 bg-[#141414] p-8 rounded-[5px]">
+            <div className="w-full flex flex-col gap-3 border-[1px] bg-[#141414] p-8 rounded-[6px] border-[#242424]">
               <h1 className="text-[24px] font-semibold">
                 Industry Recognition
               </h1>

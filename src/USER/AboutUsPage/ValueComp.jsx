@@ -21,9 +21,9 @@ const ValueComp = () => {
             <img className="w-2 h-2 opacity-30" src={spark} alt="" />
           </div>
 
-          <p className=" text-left font-semibold text-[28px] sm:text-[32px] md:text-[36px] leading-none uppercase lg:mt-0">
+          <h1 className="w-full text-2xl md:text-[32px] font-semibold leading-none">
             Our Values
-          </p>
+          </h1>
           <p className="w-full font-medium text-[14px] sm:text-[15px] md:text-[16px] text-[#737373] my-4 lg:max-w-xl lg:mx-0 text-left">
             Our story is one of continuous growth and evolution. We started as a
             small team with big dreams, determined to create a great platform
@@ -33,7 +33,7 @@ const ValueComp = () => {
 
         {/* Right Section */}
         <div className="w-full lg:w-[65%] mt-8 lg:mt-0 flex rounded-xl bg-[#191919] p-2">
-          <div className="w-full bg-[#141414] border-[#242424] flex flex-col rounded-lg p-4 sm:p-12">
+          <div className="w-full bg-[#141414] border-[1px] border-[#242424] flex flex-col rounded-lg p-4 sm:p-12">
             <div className="w-full gap-4 sm:gap-8 flex sm:flex-row flex-col">
               <div className="w-full flex flex-col gap-3 border-[#262626] sm:border-r-[1px]">
                 <div className="w-full flex items-center gap-3">
