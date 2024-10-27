@@ -79,7 +79,7 @@ const WorkFlowComp = () => {
 
           <div className="w-full flex gap-4 lg:gap-8 lg:flex-row flex-col">
             <div className="w-full flex flex-col">
-              <div className="w-full border-l-[1px] border-[#703bf7] px-3 py-2 font-medium">
+              <div className="w-full border-l-[1px] border-[#703bf7] px-3 py-2 font-medium ">
                 Step 04
               </div>
               <div className="w-full bg-gradient-to-br from-[#703bf7] via-[#242424] to-[#242424] via-20% to-20% p-[1px] flex rounded-bl-lg rounded-br-lg rounded-tr-lg">
