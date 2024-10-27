@@ -3,7 +3,6 @@ import spark from "../UserAssets/spark.png";
 import {
   GraduationCap,
   HeartHandshake,
-  Mail,
   Sparkles,
   Users,
 } from "lucide-react";
