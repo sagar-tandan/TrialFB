@@ -6,31 +6,31 @@ import { MoveLeft, MoveRight, Star } from "lucide-react";
 const products = [
   {
     image: "https://dummyimage.com/200x200/000/fff&text=Client+1",
-    name: "Sagar Tandan",
+    name: "Ram Chaudhary",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
-    location: "Bargachhi, Dharan",
+    location: "Random, Nepal",
     header: "Exceptional Service",
     rating: 5,
   },
   {
     image: "https://dummyimage.com/200x200/000/fff&text=Client+1",
-    name: "Sagar Tandan",
+    name: "Balram Chaudhary",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
-    location: "Bargachhi, Dharan",
+    location: "Random, Nepal",
     header: "Exceptional Service",
     rating: 5,
   },
   {
     image: "https://dummyimage.com/200x200/000/fff&text=Client+1",
-    name: "Sagar Tandan",
+    name: "Krishna Chaudhary",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
-    location: "Bargachhi, Dharan",
+    location: "Random, Nepal",
     header: "Exceptional Service",
     rating: 5,
   },

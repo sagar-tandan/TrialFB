@@ -4,7 +4,7 @@ import { Send, Twitter } from "lucide-react";
 
 const teams = [
   {
-    name: "Sagar Tandan",
+    name: "Dummy Name",
     position: "Founder",
     social: "",
     twitter: "",
@@ -12,7 +12,7 @@ const teams = [
       "https://th.bing.com/th/id/OIP.iOJ3d7QnoKo7X0GrBQf97gHaHa?rs=1&pid=ImgDetMain",
   },
   {
-    name: "Sagar Tandan",
+    name: "Dummy Name",
     position: "Founder",
     social: "",
     twitter: "",
@@ -20,7 +20,7 @@ const teams = [
       "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
   },
   {
-    name: "Sagar Tandan",
+    name: "Dummy Name",
     position: "Founder",
     social: "",
     twitter: "",
@@ -28,7 +28,7 @@ const teams = [
       "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
   },
   {
-    name: "Sagar Tandan",
+    name: "Dummy Name",
     position: "Founder",
     social: "",
     twitter: "",

@@ -54,7 +54,7 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                +977- 9860788076
+                +977- 9865453221
               </h2>
 
               <button
@@ -80,7 +80,7 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                Dharan-8
+                Random-8
               </h2>
 
               <button
