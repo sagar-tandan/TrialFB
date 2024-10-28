@@ -99,9 +99,9 @@ const ClientReview = () => {
           facere magni odio dicta possimus. Lorem ipsum dolor sit amet
           consectetur adipisicing elit. Aliquid, reiciendis?
         </p>
-        <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 whitespace-nowrap">
+        {/* <button className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 whitespace-nowrap">
           View All Testimonials
-        </button>
+        </button> */}
       </div>
 
       <div className="w-full mt-6">

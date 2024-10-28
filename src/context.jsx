@@ -4,12 +4,21 @@ import { useTable } from "react-table/dist/react-table.development";
 const AllContext = createContext();
 
 const ContextProvider = ({ children }) => {
-  const [allData, setAllData] = useState({
-    filter: "",
-  });
+  const [activeTab, setActiveTab] = useState("home");
+  const [query, setQuery] = useState("");
+  const [allProducts, setAllProducts] = useState();
 
   return (
-    <AllContext.Provider value={{ allData, setAllData }}>
+    <AllContext.Provider
+      value={{
+        activeTab,
+        setActiveTab,
+        query,
+        setQuery,
+        allProducts,
+        setAllProducts,
+      }}
+    >
       {children}
     </AllContext.Provider>
   );
