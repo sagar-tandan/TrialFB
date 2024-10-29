@@ -2,51 +2,84 @@ import React, { useContext, useEffect, useState } from "react";
 import spark from "../UserAssets/spark.png";
 import { AllContext } from "../../context";
 import { Box } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
+    id: 1,
     image: "https://dummyimage.com/200x200/000/fff&text=Product+1",
     name: "Wireless Headphones",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
     price: 99.99,
+    cover: [
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+    ],
   },
   {
+    id: 2,
     image: "https://dummyimage.com/200x200/000/fff&text=Product+2",
     name: "Smartphone",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
     price: 699.99,
+    cover: [
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+    ],
   },
   {
+    id: 3,
     image: "https://dummyimage.com/200x200/000/fff&text=Product+3",
     name: "Gaming Mouse",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
     price: 49.99,
+    cover: [
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+    ],
   },
   {
+    id: 4,
     image: "https://dummyimage.com/200x200/000/fff&text=Product+3",
     name: "Gaming Mouse",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
     price: 49.99,
+    cover: [
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+    ],
   },
   {
+    id: 5,
     image: "https://dummyimage.com/200x200/000/fff&text=Product+1",
     name: "Wireless Headphones",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
 
     price: 99.99,
+    cover: [
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+      "https://dummyimage.com/200x200/000/fff&text=Product+1",
+    ],
   },
 ];
 
 const AllProducts = () => {
   const { allProducts, setAllProducts } = useContext(AllContext);
   const { query } = useContext(AllContext);
+  const { productDetails, setProductDetails } = useContext(AllContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setAllProducts(products);
@@ -63,6 +96,12 @@ const AllProducts = () => {
       setAllProducts(products);
     }
   }, [query]);
+
+  const showProductDetails = (productD) => {
+    // setProductDetails(productD);
+    // navigate(`${productD.id}`);
+    navigate(`${productD.id}`);
+  };
 
   return (
     <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 mt-24 mb-10 max-w-screen-2xl mx-auto">
@@ -113,7 +152,10 @@ const AllProducts = () => {
                       Rs. {product.price}
                     </h2>
                   </span>
-                  <span className="text-[14px] bg-purple-700 px-4 lg:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-700 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 text-center w-full sm:w-auto">
+                  <span
+                    onClick={(e) => showProductDetails(product)}
+                    className="text-[14px] bg-purple-700 px-4 lg:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-700 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 text-center w-full sm:w-auto"
+                  >
                     View Product Details
                   </span>
                 </div>
