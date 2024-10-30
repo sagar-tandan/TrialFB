@@ -21,6 +21,7 @@ import {
 } from "firebase/firestore";
 import DataTable from "../Table";
 import { ClipLoader } from "react-spinners";
+import imageCompression from "browser-image-compression";
 
 const AddReviews = () => {
   const [add, setAdd] = useState(false);
@@ -166,7 +167,9 @@ const AddReviews = () => {
   const uploadImage = async (file) => {
     const storageRef = ref(storage, "Client/" + Date.now() + file.name);
     try {
-      await uploadBytes(storageRef, file);
+      const compressedFile = await imageCompression(file, options);
+
+      await uploadBytes(storageRef, compressedFile);
       return await getDownloadURL(storageRef);
     } catch (error) {
       console.log(error);

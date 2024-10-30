@@ -1,14 +1,4 @@
-import {
-  Cross,
-  CrossIcon,
-  Edit2,
-  Flag,
-  ImageUp,
-  Plus,
-  Search,
-  Trash2,
-  X,
-} from "lucide-react";
+import { Edit2, Plus, Trash2, X } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 // import { AllContext } from "../../context";
 import DataTable from "../Table";
@@ -31,9 +21,9 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { ClipLoader } from "react-spinners";
+import imageCompression from "browser-image-compression";
 
 const AddProducts = () => {
-  // const { allData, setAllData } = useContext(AllContext);
   const [edit, setEdit] = useState(false);
   const [add, setAdd] = useState(false);
   const [formData, setFormData] = useState({
@@ -55,6 +45,13 @@ const AddProducts = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const [data, setData] = useState([]);
+
+  // Compression options
+  const options = {
+    maxSizeMB: 1, // Target maximum size in MB
+    maxWidthOrHeight: 800, // Target max width/height (px)
+    useWebWorker: true, // Optional, for faster compression
+  };
 
   const columns = useMemo(
     () => [
@@ -257,8 +254,9 @@ const AddProducts = () => {
 
   const uploadImage = async (file, path) => {
     try {
+      const compressedFile = await imageCompression(file, options);
       const storageRef = ref(storage, path);
-      await uploadBytes(storageRef, file);
+      await uploadBytes(storageRef, compressedFile);
       return await getDownloadURL(storageRef);
     } catch (error) {
       console.log(error);
