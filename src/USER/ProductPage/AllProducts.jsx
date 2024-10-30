@@ -98,9 +98,7 @@ const AllProducts = () => {
   }, [query]);
 
   const showProductDetails = (productD) => {
-    // setProductDetails(productD);
-    // navigate(`${productD.id}`);
-    navigate(`${productD.id}`);
+    navigate(`/products/${productD.id}`);
   };
 
   return (

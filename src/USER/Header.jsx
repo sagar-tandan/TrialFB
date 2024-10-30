@@ -22,7 +22,7 @@ const Header = () => {
       navigate("/products");
     } else if (latestActiveTab === "contact") {
       navigate("/contact");
-    } else {
+    } else if (latestActiveTab === "home") {
       navigate("/");
     }
   }, []);
