@@ -1,10 +1,14 @@
 import React from "react";
 import hero from "../UserAssets/hero.webp";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const text = "CONSULT• DESIGN • PROTOTYPE • REFINE • DEVELOP • ";
   const characters = text.split("");
   const totalChars = characters.length;
+
+  const navigate = useNavigate();
+
   return (
     <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-[90px]">
       <div className="w-full flex flex-col-reverse lg:flex-row gap-5 justify-center items-center relative">
@@ -24,11 +28,23 @@ const HeroSection = () => {
 
           {/* section for buttons */}
           <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-5 my-8 sm:my-12 justify-center lg:justify-start">
-            <button className="px-5 border-[1px] rounded-md py-3 font-medium text-[14px] border-[#737373] w-full lg:w-auto">
+            <button
+              onClick={() => {
+                localStorage.setItem("activeTabUser", "about");
+                navigate("/aboutus");
+              }}
+              className="px-5 border-[1px] rounded-md py-3 font-medium text-[14px] border-[#737373] w-full lg:w-auto hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+            >
               Learn more
             </button>
 
-            <button className="px-5 rounded-md py-3 font-medium text-[14px] bg-purple-700 hover:bg-purple-700 ease-in-out w-full lg:w-auto hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20">
+            <button
+              onClick={() => {
+                localStorage.setItem("activeTabUser", "products");
+                navigate("/products");
+              }}
+              className="px-5 rounded-md py-3 font-medium text-[14px] bg-purple-700 hover:bg-purple-700 ease-in-out w-full lg:w-auto hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+            >
               Browse products
             </button>
           </div>

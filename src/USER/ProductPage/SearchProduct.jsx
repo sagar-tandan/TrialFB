@@ -3,7 +3,6 @@ import { AllContext } from "../../context";
 import { Search } from "lucide-react";
 
 const SearchProduct = () => {
-  
   const { query, setQuery } = useContext(AllContext);
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -36,7 +35,7 @@ const SearchProduct = () => {
             id="Product"
             onChange={handleChange}
           />
-          <span className="w-[17%] flex gap-2 justify-center items-center bg-[#703bf7] px-4 py-[8px] sm:py-[10px] rounded-md cursor-pointer">
+          <span className="w-[17%] flex gap-2 justify-center items-center bg-purple-700 select-none px-4 py-[8px] sm:py-[10px] rounded-md cursor-pointer">
             <Search className="w-4 h-4" />
             <h1 className="font-medium text-[14px] hidden sm:flex">
               Find Product

@@ -5,7 +5,7 @@ const AllContext = createContext();
 
 const ContextProvider = ({ children }) => {
   const [activeTab, setActiveTab] = useState("home");
-  const [query, setQuery] = useState("");
+  const [search, setQuery] = useState("");
   const [allProducts, setAllProducts] = useState();
   const [productDetails, setProductDetails] = useState([]);
 
@@ -16,7 +16,7 @@ const ContextProvider = ({ children }) => {
       value={{
         activeTab,
         setActiveTab,
-        query,
+        search,
         setQuery,
         allProducts,
         setAllProducts,

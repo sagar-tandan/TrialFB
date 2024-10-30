@@ -13,19 +13,6 @@ const ProductHeader = () => {
     setActiveTab(localStorage.getItem("activeTabUser"));
   }, [activeTab]);
 
-  //   useEffect(() => {
-  //     const latestActiveTab = localStorage.getItem("activeTabUser");
-  //     if (latestActiveTab === "about") {
-  //       navigate("/aboutus");
-  //     } else if (latestActiveTab === "products") {
-  //       navigate("/products");
-  //     } else if (latestActiveTab === "contact") {
-  //       navigate("/contact");
-  //     } else if (latestActiveTab === "home") {
-  //       navigate("/");
-  //     }
-  //   }, []);
-
   const menuItems = [
     { id: "home", label: "Home" },
     { id: "products", label: "Products" },
