@@ -1,5 +1,5 @@
 import { div, img, span } from "framer-motion/client";
-import { MoveLeft, MoveRight } from "lucide-react";
+import { MoveLeft, MoveRight, Zap } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
@@ -18,6 +18,13 @@ const products = {
     "https://dummyimage.com/200x200/000/fff&text=Product+1",
     "https://dummyimage.com/200x200/000/fff&text=Product+1",
     "https://dummyimage.com/200x200/000/fff&text=Product+1",
+  ],
+  keyFeatures: [
+    "Wireless Headphones",
+    "Wireless HeadphonesWireless Headphones",
+    "Wireless HeadphonesWireless Headphones",
+    "Master suite with a spa-inspired bathroom and ocean-facing balcony",
+    "Master suite with a spa-inspired bathroom and ocean-facing balcony",
   ],
 };
 
@@ -66,11 +73,11 @@ const ProductDetailChild = () => {
   return (
     <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
       {/* TITLE */}
-      <div className="w-full flex justify-between">
-        <h1 className="font-semibold text-[30px]">{products.name}</h1>
-        <span className="flex flex-col">
-          <h1 className="font-medium text-[18px] text-[#999999]">Price</h1>
-          <p className="font-semibold text-[24px]">Rs. {products.price}</p>
+      <div className="w-full flex flex-col sm:justify-between sm:flex-row">
+        <h1 className="font-semibold text-[24px]">{products.name}</h1>
+        <span className="flex md:flex-col justify-start sm:justify-center items-center gap-3 md:gap-0">
+          <h1 className="font-medium text-[16px] text-[#999999]">Price</h1>
+          <p className="font-semibold text-[20px]">Rs. {products.price}</p>
         </span>
       </div>
 
@@ -118,9 +125,28 @@ const ProductDetailChild = () => {
         </div>
       </div>
 
+      <div className="w-full flex flex-col md:flex-row gap-4">
+        <div className="w-full md:w-1/2 border-2 border-[#242424] rounded-md p-4 md:p-8 flex flex-col gap-2 md:h-fit">
+          <h1 className="w-full font-semibold text-[20px]">Description</h1>
+          <p className="text-[16px] font-medium text-[#999999]">
+            {products.description}
+          </p>
+        </div>
 
-      {/* Description and Key Features */}
-      <div className="w-full flex gap-3"></div>
+        <div className="w-full md:w-1/2 border-2 border-[#242424] rounded-md p-4 md:p-8 flex flex-col gap-2">
+          <h1 className="w-full font-semibold text-[20px]">Key Features</h1>
+
+          {products.keyFeatures?.map((feature, index) => (
+            <span
+              key={index}
+              className="text-[16px] font-medium text-[#999999] my-1 w-full border-l-2 py-2 px-3 bg-gradient-to-r from-[#191919] to-[#141414] border-[#5931bc] flex items-center gap-3"
+            >
+              <Zap className="text-white flex-shrink-0" />
+              <p className="break-words">{feature}</p>
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
