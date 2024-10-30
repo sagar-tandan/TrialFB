@@ -1,31 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { path } from "framer-motion/client";
-import { AllContext } from "../context";
+import { AllContext } from "../../context";
 
-const Header = () => {
+const ProductHeader = () => {
   const { activeTab, setActiveTab } = useContext(AllContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setActiveTab(localStorage.getItem("activeTabUser"));
-  }, [activeTab]);
+  //   useEffect(() => {
+  //     setActiveTab(localStorage.getItem("activeTabUser"));
+  //   }, [activeTab]);
 
-  useEffect(() => {
-    const latestActiveTab = localStorage.getItem("activeTabUser");
-    if (latestActiveTab === "about") {
-      navigate("/aboutus");
-    } else if (latestActiveTab === "products") {
-      navigate("/products");
-    } else if (latestActiveTab === "contact") {
-      navigate("/contact");
-    } else if (latestActiveTab === "home") {
-      navigate("/");
-    }
-  }, []);
+  //   useEffect(() => {
+  //     const latestActiveTab = localStorage.getItem("activeTabUser");
+  //     if (latestActiveTab === "about") {
+  //       navigate("/aboutus");
+  //     } else if (latestActiveTab === "products") {
+  //       navigate("/products");
+  //     } else if (latestActiveTab === "contact") {
+  //       navigate("/contact");
+  //     } else if (latestActiveTab === "home") {
+  //       navigate("/");
+  //     }
+  //   }, []);
 
   const menuItems = [
     { id: "home", label: "Home" },
@@ -155,4 +154,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default ProductHeader;

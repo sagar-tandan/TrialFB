@@ -4,10 +4,10 @@ import LoginPage from "./ADMIN/LoginPage";
 import ForgotPassword from "./ADMIN/ForgetPassword.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MainPage from "./USER/HomePage/MainPage.jsx";
-import ProductDetail from "./USER/ProductDetail.jsx";
 import ContactParent from "./USER/ContactPage/ContactParent.jsx";
 import AboutUsParent from "./USER/AboutUsPage/AboutUsParent.jsx";
 import ParentProduct from "./USER/ProductPage/ParentProduct.jsx";
+import ParentProductDetail from "./USER/ProductDetails/ParentProductDetail.jsx";
 
 function App() {
   const [user, setuser] = useState(false);
@@ -33,7 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/products" element={<ParentProduct />}></Route>
-          <Route path="/products/:id" element={<ProductDetail />}></Route>
+          <Route path="/products/:id" element={<ParentProductDetail />}></Route>
           <Route path="/contact" element={<ContactParent />}></Route>
           <Route path="/aboutus" element={<AboutUsParent />}></Route>
 

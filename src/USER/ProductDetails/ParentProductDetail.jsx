@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
-import Header from "../Header";
+import FrequentlyAskedQuestion from "../HomePage/FrequentlyAskedQuestion";
 import Footer from "../Footer";
-import SearchProduct from "./SearchProduct";
-import AllProducts from "./AllProducts";
+import ProductDetailChild from "./ProductDetailChild.jsx";
+import ProductHeader from "./ProductHeader.jsx";
 
-const ParentProduct = () => {
+const ParentProductDetail = () => {
   // Add useEffect to scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <div className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
-      <Header />
-      <SearchProduct />
-      <AllProducts />
+      <ProductHeader />
+      <ProductDetailChild />
+      <FrequentlyAskedQuestion />
       <hr className="border-[#202020] border-[1px]" />
       <Footer />
     </div>
   );
 };
 
-export default ParentProduct;
+export default ParentProductDetail;
