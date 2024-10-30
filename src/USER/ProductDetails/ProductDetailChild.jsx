@@ -1,8 +1,8 @@
-import { div, img, span } from "framer-motion/client";
 import { MoveLeft, MoveRight, Zap } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
+import spark from "../UserAssets/spark.png";
 
 const products = {
   id: 1,
@@ -30,17 +30,9 @@ const products = {
 
 const ProductDetailChild = () => {
   const { id } = useParams(); // Get the id from URL
-
-  console.log(id);
-
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalProducts = products.length;
 
-  // Format the current slide number to always have 2 digits
-  const formatSlideNumber = (number) => {
-    return number.toString().padStart(2, "0");
-  };
 
   const settings = {
     dots: false,
@@ -71,7 +63,7 @@ const ProductDetailChild = () => {
   };
 
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
+    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto mt-20">
       {/* TITLE */}
       <div className="w-full flex flex-col sm:justify-between sm:flex-row">
         <h1 className="font-semibold text-[24px]">{products.name}</h1>
@@ -97,7 +89,7 @@ const ProductDetailChild = () => {
         </div>
 
         <div className="w-full p-2 flex items-center justify-center">
-          <div className="w-[250px] p-[6px] bg-[#141414] rounded-full flex justify-between items-center">
+          <div className="p-[6px] bg-[#141414] rounded-full flex justify-between items-center gap-2">
             <span
               onClick={() => goToPrev()}
               className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
@@ -109,7 +101,7 @@ const ProductDetailChild = () => {
               .map((_, index) => (
                 <span
                   key={index}
-                  className={`w-[20px] h-[5px] rounded-full ${
+                  className={`w-[20px] h-[4px] rounded-full ${
                     currentSlide === index ? "bg-purple-500" : "bg-[#242424]"
                   } mx-1`}
                 ></span>
@@ -117,7 +109,7 @@ const ProductDetailChild = () => {
 
             <span
               onClick={() => goToNext()}
-              className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
+              className="w-[36px]  h-[36px] md:w-[40px] md:h-[40px] select-none rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
             >
               <MoveRight />
             </span>
@@ -139,13 +131,124 @@ const ProductDetailChild = () => {
           {products.keyFeatures?.map((feature, index) => (
             <span
               key={index}
-              className="text-[16px] font-medium text-[#999999] my-1 w-full border-l-2 py-2 px-3 bg-gradient-to-r from-[#191919] to-[#141414] border-[#5931bc] flex items-center gap-3"
+              className="text-[16px]  font-medium text-[#999999] my-1 w-full border-l-2 py-2 px-3 bg-gradient-to-r from-[#191919] to-[#141414] border-[#5931bc] flex items-center gap-3"
             >
               <Zap className="text-white flex-shrink-0" />
               <p className="break-words">{feature}</p>
             </span>
           ))}
         </div>
+      </div>
+
+      {/* Form */}
+      <div className="w-full flex lg:flex-row flex-col gap-4 ">
+        <div className="flex flex-col w-full md:max-w-lg">
+          <div className="w-full flex items-center gap-1">
+            <img className="w-7 h-7" src={spark} alt="" />
+            <img className="w-4 h-4 opacity-60" src={spark} alt="" />
+            <img className="w-2 h-2 opacity-30" src={spark} alt="" />
+          </div>
+          <h1 className="text-[24px] font-semibold">
+            Inquire About {products.name}
+          </h1>
+          <p className="text-[16px] font-medium text-[#999999]">
+            Interested in this property? Fill out the form below, and our real
+            estate experts will get back to you with more details, including
+            scheduling a viewing and answering any questions you may have.
+          </p>
+        </div>
+
+        <form className="mt-6 p-6 w-full flex flex-col gap-2 border-[#242424] border-[2px] rounded-md">
+          <div className="w-full flex justify-between gap-3 flex-col sm:flex-row ">
+            <div className="w-full flex flex-col gap-2">
+              <label className="font-semibold" htmlFor="fName">
+                First Name
+              </label>
+              <input
+                className="w-full px-4 py-3 rounded-md bg-[#191919] border border-[#232323] placeholder-[#4c4c4c] 
+ focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent"
+                type="text"
+                placeholder="Enter First Name"
+                name="fName"
+                id="fName"
+                required
+              />
+            </div>
+
+            <div className="w-full flex flex-col gap-2">
+              <label className="font-semibold" htmlFor="lName">
+                Last Name
+              </label>
+              <input
+                className="w-full px-4 py-3 rounded-md bg-[#191919] border border-[#232323] placeholder-[#4c4c4c] 
+ focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent"
+                type="text"
+                placeholder="Enter Last Name"
+                name="lName"
+                id="lName"
+                required
+              />
+            </div>
+          </div>
+          <div className="w-full flex justify-between gap-3 flex-col sm:flex-row ">
+            <div className="w-full flex flex-col gap-2">
+              <label className="font-semibold" htmlFor="email">
+                Email
+              </label>
+              <input
+                className="w-full px-4 py-3 rounded-md bg-[#191919] border border-[#232323] placeholder-[#4c4c4c] 
+ focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent"
+                type="email"
+                placeholder="Enter your Email"
+                name="email"
+                id="email"
+                required
+              />
+            </div>
+
+            <div className="w-full flex flex-col gap-2">
+              <label className="font-semibold" htmlFor="phone">
+                Phone
+              </label>
+              <input
+                className="w-full px-4 py-3 rounded-md bg-[#191919] border border-[#232323] placeholder-[#4c4c4c] 
+ focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent"
+                type="tel"
+                placeholder="Enter Phone Number"
+                name="phone"
+                id="phone"
+                required
+              />
+            </div>
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <label className="font-semibold" htmlFor="phone">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              //   value={formData.message}
+              //   onChange={handleChange}
+              placeholder="Your message here..."
+              rows={5}
+              className="w-full px-4 py-3 rounded-md bg-[#191919] border border-[#232323] placeholder-[#4c4c4c]
+              focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent resize-none"
+              required
+            />
+          </div>
+          <div className="flex justify-end mt-4">
+            <button
+              type="submit"
+              className="px-8 py-3 bg-purple-500 hover:bg-purple-600 w-full sm:w-auto 
+                   text-white font-medium rounded-lg transition-colors duration-200
+                   focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 
+                   focus:ring-offset-[#191919]"
+            >
+              Send Your Message
+            </button>
+          </div>{" "}
+        </form>
       </div>
     </div>
   );
