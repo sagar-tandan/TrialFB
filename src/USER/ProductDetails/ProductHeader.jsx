@@ -9,9 +9,9 @@ const ProductHeader = () => {
 
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     setActiveTab(localStorage.getItem("activeTabUser"));
-  //   }, [activeTab]);
+  useEffect(() => {
+    setActiveTab(localStorage.getItem("activeTabUser"));
+  }, [activeTab]);
 
   //   useEffect(() => {
   //     const latestActiveTab = localStorage.getItem("activeTabUser");

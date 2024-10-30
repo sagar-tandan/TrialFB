@@ -33,6 +33,13 @@ const ProductDetailChild = () => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const [formData, setFormData] = useState({
+    fName: "",
+    lName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
   const settings = {
     dots: false,
@@ -60,6 +67,12 @@ const ProductDetailChild = () => {
 
   const goToNext = () => {
     sliderRef.current?.slickNext();
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    console.log(formData);
   };
 
   return (
@@ -143,7 +156,7 @@ const ProductDetailChild = () => {
       {/* Form */}
       <div className="w-full flex lg:flex-row flex-col gap-4 ">
         <div className="flex flex-col w-full md:max-w-lg">
-          <div className="w-full flex items-center gap-1">
+          <div className="w-full flex items-center gap-1 mb-2">
             <img className="w-7 h-7" src={spark} alt="" />
             <img className="w-4 h-4 opacity-60" src={spark} alt="" />
             <img className="w-2 h-2 opacity-30" src={spark} alt="" />
@@ -171,6 +184,8 @@ const ProductDetailChild = () => {
                 placeholder="Enter First Name"
                 name="fName"
                 id="fName"
+                value={formData.fName}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -186,6 +201,8 @@ const ProductDetailChild = () => {
                 placeholder="Enter Last Name"
                 name="lName"
                 id="lName"
+                value={formData.lName}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -202,6 +219,8 @@ const ProductDetailChild = () => {
                 placeholder="Enter your Email"
                 name="email"
                 id="email"
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -217,6 +236,8 @@ const ProductDetailChild = () => {
                 placeholder="Enter Phone Number"
                 name="phone"
                 id="phone"
+                value={formData.phone}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -228,8 +249,8 @@ const ProductDetailChild = () => {
             <textarea
               id="message"
               name="message"
-              //   value={formData.message}
-              //   onChange={handleChange}
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Your message here..."
               rows={5}
               className="w-full px-4 py-3 rounded-md bg-[#191919] border border-[#232323] placeholder-[#4c4c4c]
