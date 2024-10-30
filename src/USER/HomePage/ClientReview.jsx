@@ -97,7 +97,9 @@ const ClientReview = () => {
         clientName: doc.data().clientName,
         clientLoc: doc.data().clientLoc,
         review: doc.data().review,
+        reviewHeading: doc.data().reviewHeading,
         clientImg: doc.data().clientImg,
+
         // Convert Firestore Timestamp to Date
         createdAt: doc.data().createdAt?.toDate(),
         updatedAt: doc.data().updatedAt?.toDate(),
@@ -160,7 +162,7 @@ const ClientReview = () => {
                       ))}
                     </div>
                     <h1 className="w-full text-lg md:text-[20px] font-semibold mt-5">
-                      {review.id}
+                      {review.reviewHeading}
                     </h1>
                     <p className="font-medium w-full text-sm md:text-[16px] line-clamp-4 text-[#737373]">
                       {review.review}

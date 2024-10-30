@@ -56,6 +56,15 @@ const AddReviews = () => {
           </div>
         ),
       },
+      {
+        Header: "heading",
+        accessor: "reviewHeading",
+        Cell: ({ value }) => (
+          <div className="max-w-[200px] overflow-hidden whitespace-normal break-words font-medium">
+            {value}
+          </div>
+        ),
+      },
 
       {
         Header: "Review",
@@ -106,6 +115,7 @@ const AddReviews = () => {
       clientLoc: data.clientLoc,
       review: data.review,
       clientImg: data.clientImg,
+      reviewHeading: data.reviewHeading,
     });
     setEdit(true);
   };
@@ -173,6 +183,7 @@ const AddReviews = () => {
       review: "",
       clientLoc: "",
       clientImg: "",
+      reviewHeading: "",
     });
     fetchData();
   };
@@ -188,6 +199,7 @@ const AddReviews = () => {
       review: "",
       clientLoc: "",
       clientImg: "",
+      reviewHeading: "",
     });
     fetchData();
   };
@@ -201,6 +213,7 @@ const AddReviews = () => {
         clientName: formData.clientName,
         clientLoc: formData.clientLoc,
         review: formData.review,
+        reviewHeading: formData.reviewHeading,
         clientImg: url,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
@@ -220,6 +233,7 @@ const AddReviews = () => {
         clientName: formData.clientName,
         clientLoc: formData.clientLoc,
         review: formData.review,
+        reviewHeading: formData.reviewHeading,
         updatedAt: serverTimestamp(),
       };
       UpdateReviewToFireStore(updatedData, id);
@@ -242,6 +256,7 @@ const AddReviews = () => {
         clientName: doc.data().clientName,
         clientLoc: doc.data().clientLoc,
         review: doc.data().review,
+        reviewHeading: doc.data().reviewHeading,
         clientImg: doc.data().clientImg,
         // Convert Firestore Timestamp to Date
         createdAt: doc.data().createdAt?.toDate(),
@@ -290,6 +305,7 @@ const AddReviews = () => {
                     review: "",
                     clientLoc: "",
                     clientImg: "",
+                    reviewHeading: "",
                   });
                   setProfilePreview("");
                 }}
@@ -357,6 +373,21 @@ const AddReviews = () => {
                   placeholder="Location of Client"
                   onChange={handleChange}
                   value={formData.clientLoc}
+                  required
+                />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <label htmlFor="reviewHeading" className="font-medium">
+                  Testimonial Heading
+                </label>
+                <input
+                  className="outline-none border-[1px] border-gray-400 p-2 rounded-sm"
+                  type="text"
+                  id="reviewHeading"
+                  name="reviewHeading"
+                  placeholder="Exceptional Service"
+                  onChange={handleChange}
+                  value={formData.reviewHeading}
                   required
                 />
               </div>
