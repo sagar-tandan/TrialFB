@@ -209,7 +209,7 @@ const ClientReview = () => {
 
               <span
                 onClick={goToNext}
-                className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
+                className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] select-none border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
               >
                 <MoveRight strokeWidth="1px" />
               </span>

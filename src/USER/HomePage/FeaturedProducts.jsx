@@ -11,7 +11,6 @@ import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { db } from "../../Config";
-import { AllContext } from "../../context";
 import { ClipLoader } from "react-spinners";
 
 const FeaturedProducts = () => {
