@@ -28,28 +28,23 @@ const Footer = () => {
               <h3 className="text-gray-200 text-lg font-semibold mb-4">Home</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#hero" className="hover:text-white">
                     Hero Section
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#client" className="hover:text-white">
                     Clients
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#FeaturedProducts" className="hover:text-white">
                     Products
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#review" className="hover:text-white">
                     Testimonials
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    FAQ's
                   </a>
                 </li>
               </ul>
@@ -62,27 +57,23 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#journey" className="hover:text-white">
                     Our Story
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
-                    Our Works
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#workflow" className="hover:text-white">
                     How It Works
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#team" className="hover:text-white">
                     Our Team
                   </a>
                 </li>
+
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#OurClients" className="hover:text-white">
                     Our Clients
                   </a>
                 </li>
@@ -92,17 +83,17 @@ const Footer = () => {
             {/* Column 3 */}
             <div>
               <h3 className="text-gray-200 text-lg font-semibold mb-4">
-                Properties
+                Products
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="hover:text-white">
-                    Portfolio
+                  <a href="#searchProduct" className="hover:text-white">
+                    Find Product
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
-                    Categories
+                  <a href="#discover" className="hover:text-white">
+                    Discover Product
                   </a>
                 </li>
               </ul>
@@ -115,13 +106,13 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="hover:text-white">
-                    Contact Form
+                  <a href="#info" className="hover:text-white">
+                    Contact Information
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
-                    Our Offices
+                  <a href="#form" className="hover:text-white">
+                    Contact Form
                   </a>
                 </li>
               </ul>

@@ -72,7 +72,7 @@ const ValuedClientComp = () => {
   };
 
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-10 lg:mt-[90px] mb-5">
+    <div id="OurClients" className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 mx-auto pt-16 lg:pt-[90px] mb-5">
       <div className="w-full flex flex-col gap-5 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full text-left">

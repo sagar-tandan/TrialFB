@@ -5,7 +5,7 @@ import PulseIcon from "./PulseIcon";
 
 const ValueComp = () => {
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-5 lg:mt-[90px]">
+    <div id="values" className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-5 lg:mt-[90px]">
       <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-16 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full lg:w-[35%] text-left">

@@ -24,7 +24,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
+    <div id="form" className="w-full px-4 md:px-8 lg:px-16 flex flex-col gap-5 py-20 max-w-screen-2xl mx-auto">
       <div className="w-full flex items-center gap-1">
         <img className="w-7 h-7" src={spark} alt="" />
         <img className="w-4 h-4 opacity-60" src={spark} alt="" />

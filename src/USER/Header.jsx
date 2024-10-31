@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { path } from "framer-motion/client";
+import { div, path } from "framer-motion/client";
 import { AllContext } from "../context";
 
 const Header = () => {
@@ -59,7 +59,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full h-16 bg-[#191919] text-white fixed z-50 transition-colors duration-300">
+    <header className="w-full h-16 bg-[#191919] text-white fixed z-50  transition-colors duration-300 mb-20">
       <div className="w-full h-full max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-14 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center transform transition-transform duration-300 hover:scale-105">

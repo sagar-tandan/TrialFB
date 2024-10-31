@@ -10,7 +10,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-[90px]">
+    <div id="hero" className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 mx-auto pt-[100px] lg:pt-[120px]">
       <div className="w-full flex flex-col-reverse lg:flex-row gap-5 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">

@@ -66,14 +66,13 @@ const AllProducts = () => {
 
   useEffect(() => {
     fetchData();
-    // }
   }, []);
 
   const showProductDetails = (productD) => {
     navigate(`/products/${productD.id}`);
   };
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 mt-10 lg:mt-24 mb-20 max-w-screen-2xl mx-auto">
+    <div id="discover" className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 mt-10 lg:pt-24 mb-20 max-w-screen-2xl mx-auto">
       <div className="w-full flex items-center gap-1">
         <img className="w-7 h-7" src={spark} alt="" />
         <img className="w-4 h-4 opacity-60" src={spark} alt="" />
