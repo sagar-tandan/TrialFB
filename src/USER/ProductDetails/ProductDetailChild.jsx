@@ -369,10 +369,12 @@ const ProductDetailChild = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-8 py-3 bg-purple-500 hover:bg-purple-600 w-full sm:w-auto 
-                   text-white font-medium rounded-lg transition-colors duration-200
-                   focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 
-                   focus:ring-offset-[#191919]"
+                  className={`px-8 py-3 bg-purple-500 hover:bg-purple-600 w-full sm:w-auto 
+                    text-white font-medium rounded-lg transition-colors duration-200
+                    focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 
+                    focus:ring-offset-[#191919] ${
+                      loading ? "cursor-not-allowed" : ""
+                    }`}
                 >
                   Send Your Message
                 </button>

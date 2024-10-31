@@ -24,7 +24,7 @@ const ContactForm = () => {
     try {
       const response = await emailjs.send(
         import.meta.env.VITE_SERVICE_ID_EMAILJS,
-        import.meta.env.VITE_TEMPLATE_ID_EMAILJS,
+        import.meta.env.VITE_TEMPLATE_ID_CONTACT_EMAILJS,
         templateParams,
         import.meta.env.VITE_PUBLIC_KEY_EMAILJS
       );
@@ -37,12 +37,10 @@ const ContactForm = () => {
 
   const sendContactForm = async (data) => {
     const templateParams = {
-      from_name: data.firstName + " " + data.lastName,
+      from_name: `${data.firstName} ${data.lastName}`,
       from_email: data.email,
-      message:
-        data.message +
-        `\n\n` + // Double line break here
-        `Forwarding the customer contact number ${data.phoneNumber} for your follow-up and further assistance.`,
+      from_phone: data.phoneNumber,
+      message: data.message,
     };
 
     return await sendEmailWithEmailJS(templateParams);
@@ -203,7 +201,9 @@ const ContactForm = () => {
             className={`px-8 py-3 bg-purple-500 hover:bg-purple-600 w-full sm:w-auto 
                    text-white font-medium rounded-lg transition-colors duration-200
                    focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 
-                   focus:ring-offset-[#191919] `}
+                   focus:ring-offset-[#191919] ${
+                     loading ? "cursor-not-allowed" : ""
+                   }`}
           >
             Send Message
           </button>
