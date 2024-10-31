@@ -39,27 +39,32 @@ const FrequentlyAskedQuestion = () => {
   const formatSlideNumber = (number) => number.toString().padStart(2, "0");
 
   const fetchData = useCallback(async () => {
-    if (allFAQs.length > 0) return;
-    setDataLoading(true);
-    try {
-      const faqRef = collection(db, "FAQ");
-      const q = query(faqRef, orderBy("createdAt", "desc"), limit(10));
-      const querySnapshot = await getDocs(q);
+    const FAQData = sessionStorage.getItem("faqData");
+    if (FAQData?.length > 0) {
+      setAllFAQs(JSON.parse(FAQData));
+    } else {
+      try {
+        setDataLoading(true);
+        const faqRef = collection(db, "FAQ");
+        const q = query(faqRef, orderBy("createdAt", "desc"), limit(10));
+        const querySnapshot = await getDocs(q);
 
-      const faqData = querySnapshot.docs.map((doc, index) => ({
-        sn: index,
-        id: doc.id,
-        question: doc.data().question,
-        answer: doc.data().answer,
-        // Convert Firestore Timestamp to Date
-        createdAt: doc.data().createdAt?.toDate(),
-        updatedAt: doc.data().updatedAt?.toDate(),
-      }));
-      setAllFAQs(faqData);
-      setDataLoading(false);
-    } catch (error) {
-      console.error("Error fetching FAQs:", error);
-      setDataLoading(false);
+        const faqData = querySnapshot.docs.map((doc, index) => ({
+          sn: index,
+          id: doc.id,
+          question: doc.data().question,
+          answer: doc.data().answer,
+          // Convert Firestore Timestamp to Date
+          createdAt: doc.data().createdAt?.toDate(),
+          updatedAt: doc.data().updatedAt?.toDate(),
+        }));
+        setAllFAQs(faqData);
+        sessionStorage.setItem("faqData", JSON.stringify(faqData));
+        setDataLoading(false);
+      } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        setDataLoading(false);
+      }
     }
   });
 

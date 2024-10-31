@@ -8,10 +8,11 @@ import { db } from "../../Config";
 import { ClipLoader } from "react-spinners";
 
 const AllProducts = () => {
-  const { allProducts, setAllProducts } = useContext(AllContext);
   const { search } = useContext(AllContext);
   const [allData, setAllData] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
+  const { allProducts, setAllProducts } = useContext(AllContext);
+  const [count, setCount] = useState(allProducts.length);
 
   const navigate = useNavigate();
 
@@ -28,36 +29,44 @@ const AllProducts = () => {
   }, [search]);
 
   const fetchData = useCallback(async () => {
-    setDataLoading(true);
-    try {
-      const productsRef = collection(db, "products");
-      const q = query(productsRef, orderBy("createdAt", "desc"));
-      const querySnapshot = await getDocs(q);
+    const allProductsData = sessionStorage.getItem("allProductData");
+    if (allProductsData?.length > 0) {
+      setAllProducts(JSON.parse(allProductsData));
+      setAllData(JSON.parse(allProductsData));
+    } else {
+      try {
+        setDataLoading(true);
+        const productsRef = collection(db, "products");
+        const q = query(productsRef, orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
 
-      const productsData = querySnapshot.docs.map((doc, index) => ({
-        sn: index,
-        id: doc.id,
-        name: doc.data().name,
-        price: doc.data().price,
-        allDesc: doc.data().description,
-        description: doc.data().description,
-        profileImg: doc.data().profileImg,
-        coverImg: doc.data().coverImages,
-        keyFeatures: doc.data().keyFeatures,
-        createdAt: doc.data().createdAt?.toDate(),
-        updatedAt: doc.data().updatedAt?.toDate(),
-      }));
-      setAllProducts(productsData);
-      setAllData(productsData);
-      setDataLoading(false);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      setDataLoading(false);
+        const productsData = querySnapshot.docs.map((doc, index) => ({
+          sn: index,
+          id: doc.id,
+          name: doc.data().name,
+          price: doc.data().price,
+          allDesc: doc.data().description,
+          description: doc.data().description,
+          profileImg: doc.data().profileImg,
+          coverImg: doc.data().coverImages,
+          keyFeatures: doc.data().keyFeatures,
+          createdAt: doc.data().createdAt?.toDate(),
+          updatedAt: doc.data().updatedAt?.toDate(),
+        }));
+        setAllProducts(productsData);
+        setAllData(productsData);
+        sessionStorage.setItem("allProductData", JSON.stringify(productsData));
+        setDataLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setDataLoading(false);
+      }
     }
   }, []);
 
   useEffect(() => {
     fetchData();
+    // }
   }, []);
 
   const showProductDetails = (productD) => {

@@ -12,12 +12,14 @@ import { useNavigate } from "react-router-dom";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { db } from "../../Config";
 import { ClipLoader } from "react-spinners";
+import { AllContext } from "../../context";
 
 const FeaturedProducts = () => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dataLoading, setDataLoading] = useState(false);
-  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const { featuredProductData, setFeaturedProductData } =
+    useContext(AllContext);
 
   const navigate = useNavigate();
 
@@ -61,31 +63,36 @@ const FeaturedProducts = () => {
   };
 
   const fetchData = useCallback(async () => {
-    if (featuredProducts.length > 0) return;
-    setDataLoading(true);
-    try {
-      const productsRef = collection(db, "products");
-      const q = query(productsRef, orderBy("createdAt", "desc"), limit(10));
-      const querySnapshot = await getDocs(q);
+    const fProductsData = sessionStorage.getItem("fProductData");
+    if (fProductsData?.length > 0) {
+      setFeaturedProductData(JSON.parse(fProductsData));
+    } else {
+      try {
+        setDataLoading(true);
+        const productsRef = collection(db, "products");
+        const q = query(productsRef, orderBy("createdAt", "desc"), limit(10));
+        const querySnapshot = await getDocs(q);
 
-      const productsData = querySnapshot.docs.map((doc, index) => ({
-        sn: index,
-        id: doc.id,
-        name: doc.data().name,
-        price: doc.data().price,
-        allDesc: doc.data().description,
-        description: doc.data().description,
-        profileImg: doc.data().profileImg,
-        coverImg: doc.data().coverImages,
-        keyFeatures: doc.data().keyFeatures,
-        createdAt: doc.data().createdAt?.toDate(),
-        updatedAt: doc.data().updatedAt?.toDate(),
-      }));
-      setFeaturedProducts(productsData);
-      setDataLoading(false);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      setDataLoading(false);
+        const productsData = querySnapshot.docs.map((doc, index) => ({
+          sn: index,
+          id: doc.id,
+          name: doc.data().name,
+          price: doc.data().price,
+          allDesc: doc.data().description,
+          description: doc.data().description,
+          profileImg: doc.data().profileImg,
+          coverImg: doc.data().coverImages,
+          keyFeatures: doc.data().keyFeatures,
+          createdAt: doc.data().createdAt?.toDate(),
+          updatedAt: doc.data().updatedAt?.toDate(),
+        }));
+        setFeaturedProductData(productsData);
+        sessionStorage.setItem("fProductData", JSON.stringify(productsData));
+        setDataLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setDataLoading(false);
+      }
     }
   });
 
@@ -131,7 +138,7 @@ const FeaturedProducts = () => {
         <>
           <div className="w-full mt-6">
             <Slider ref={sliderRef} {...settings}>
-              {featuredProducts.map((product, index) => (
+              {featuredProductData?.map((product, index) => (
                 <div key={product.id} className="px-2">
                   <div className="w-full p-3 md:p-5 flex flex-col gap-1 border-[2px] border-[#202020] rounded-md">
                     <img
@@ -169,7 +176,7 @@ const FeaturedProducts = () => {
             <span className="text-base md:text-[18px] font-medium ">
               {formatSlideNumber(currentSlide + 1)}{" "}
               <span className="text-[#737373]">
-                of {formatSlideNumber(featuredProducts.length)}
+                of {formatSlideNumber(featuredProductData.length)}
               </span>
             </span>
 
