@@ -11,7 +11,7 @@ const ParentProduct = () => {
   }, []);
   return (
     <div id="searchProduct" className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
-      <Header />
+      {/* <Header /> */}
       <SearchProduct />
       <AllProducts />
       <hr className="border-[#202020] border-[1px]" />

@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../ADMIN/assets/logo.svg";
 
 const Footer = () => {
   const nav = useNavigate();
@@ -15,10 +16,9 @@ const Footer = () => {
           {/* Logo Section */}
           <div className="flex flex-col max-w-sm">
             <div className="flex gap-2">
-              <img src="" alt="" />
-              <h1>Logo</h1>
+              <img src={logo} alt="" />
             </div>
-            <h1>where innovation meets execution</h1>
+            <h1 className="mt-3">where innovation meets execution</h1>
           </div>
 
           {/* Links Sections */}

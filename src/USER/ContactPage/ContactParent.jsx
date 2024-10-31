@@ -12,7 +12,7 @@ const ContactParent = () => {
   }, []);
   return (
     <div id="info" className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
-      <Header />
+      {/* <Header /> */}
       <IntroComp />
       <ContactForm />
       <LastComp />
