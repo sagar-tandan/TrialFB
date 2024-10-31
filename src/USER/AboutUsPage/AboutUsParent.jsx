@@ -15,8 +15,11 @@ const AboutUsParent = () => {
   }, []);
 
   return (
-    <div id="journey" className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
-      <Header />
+    <div
+      id="journey"
+      className="w-full flex flex-col text-white bg-[#141414] font-urbanist"
+    >
+      {/* <Header /> */}
       <JourneyComp />
       <ValueComp />
       <AchievementComp />

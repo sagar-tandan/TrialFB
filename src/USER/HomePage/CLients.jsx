@@ -1,30 +1,79 @@
 import React from "react";
 import { MoveUpRight } from "lucide-react";
 
+import img12 from "../UserAssets/Clients/13.png";
+import img11 from "../UserAssets/Clients/12.png";
+import img10 from "../UserAssets/Clients/10.png";
+import img9 from "../UserAssets/Clients/9.png";
+import img8 from "../UserAssets/Clients/8.png";
+import img7 from "../UserAssets/Clients/7.png";
+import img6 from "../UserAssets/Clients/6.png";
+import img5 from "../UserAssets/Clients/5.png";
+import img4 from "../UserAssets/Clients/4.png";
+import img3 from "../UserAssets/Clients/3.png";
+import img2 from "../UserAssets/Clients/2.png";
+import img1 from "../UserAssets/Clients/1.png";
+
 const clientsCollection = [
   {
-    name: "Client 1",
-    image:
-      "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "JCI Nepal",
+    image: img1,
+    link: "https://jcinepal.org.np/",
   },
   {
-    name: "Client 1",
-    image:
-      "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Techno Nepal",
+    image: img2,
+    link: "https://technonepal.com.np/",
   },
   {
-    name: "Client 1",
-    image:
-      "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "GRIT Engineering",
+    image: img3,
+    link: "https://gritengineering.com.np/",
   },
   {
-    name: "Client 1",
-    image:
-      "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://images.unsplash.com/photo-1719937051124-91c677bc58fc?q=80&w=1772&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Voice of Nepal",
+    image: img4,
+    link: "https://www.facebook.com/TheVoiceofNepal.official/",
+  },
+  {
+    name: "Agrobotics Nepal",
+    image: img5,
+    link: "https://www.linkedin.com/company/agrobotics-nepal/?originalSubdomain=np",
+  },
+  {
+    name: "IOE Pulchowk Campus",
+    image: img6,
+    link: "https://pcampus.edu.np/",
+  },
+  {
+    name: "Ime Life",
+    image: img7,
+    link: "https://imelifeinsurance.com/",
+  },
+  {
+    name: "CAN Info Tech",
+    image: img8,
+    link: "https://can.org.np/",
+  },
+  {
+    name: "Nepal Life",
+    image: img9,
+    link: "https://nepallife.com.np//",
+  },
+  {
+    name: "Recent Air",
+    image: img10,
+    link: "https://www.recentair.com/",
+  },
+  {
+    name: "Biratnagar Metropolitian",
+    image: img11,
+    link: "https://biratnagarmun.gov.np/en",
+  },
+  {
+    name: "Dharan Banker Club",
+    image: img12,
+    link: "https://www.facebook.com/dharanbankersclub/",
   },
 ];
 
@@ -34,41 +83,29 @@ const Clients = () => {
   };
 
   return (
-    <div id="client" className="w-full max-w-screen-2xl mx-auto py-[6px] bg-[#191919]">
+    <div
+      id="client"
+      className="w-full max-w-screen-2xl mx-auto py-[6px] bg-[#191919]"
+    >
       <div className="w-full bg-[#141414] border-t-[2px] border-b-[2px] border-[#242424] p-3 sm:p-4">
         {/* Grid container */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {clientsCollection.map((client, index) => (
             <div
-              key={index}
-              className="relative group border-[2px] border-[#202020] flex flex-col items-center justify-center px-3 py-3 sm:py-6 gap-2 sm:gap-4 rounded-md bg-[#1a1a1a] transition-all duration-300 hover:border-purple-500/30 hover:bg-zinc-800"
+              onClick={() => {
+                handleClick(client.link);
+              }}
+              className="relative flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group cursor-pointer"
             >
-              {/* Image container with hover effect */}
-              <div className="relative overflow-hidden rounded-full transition-transform duration-300 group-hover:scale-110">
-                <img
-                  className=" w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  src={client.image}
-                  alt={client.name}
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Client name */}
-              <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 group-hover:text-purple-400">
+              <img
+                className="w-[150px] h-[100px] object-cover transition-transform duration-300 group-hover:scale-105"
+                src={client.image}
+                alt={client.name}
+                loading="lazy"
+              />
+              <span className="sm:group-hover:flex hidden bg-[#999999] font-medium px-3 py-1 rounded-[6px] text-white absolute -bottom-[14px] z-50 select-none">
                 {client.name}
-              </h2>
-
-              {/* Arrow icon with hover animation */}
-              <button
-                onClick={() => handleClick(client.link)}
-                className="absolute top-0 right-0 m-1 sm:m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
-                aria-label={`Visit ${client.name}'s website`}
-              >
-                <MoveUpRight
-                  size={24}
-                  className="transition-transform duration-300 group-hover:rotate-12"
-                />
-              </button>
+              </span>
             </div>
           ))}
         </div>

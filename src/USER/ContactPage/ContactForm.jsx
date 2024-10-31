@@ -102,7 +102,7 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           {/* First Name */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="firstName" className="text-sm font-medium">
+            <label htmlFor="firstName" className="font-semibold">
               First Name
             </label>
             <input
@@ -120,7 +120,7 @@ const ContactForm = () => {
 
           {/* Last Name */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="lastName" className="text-sm font-medium">
+            <label htmlFor="lastName" className="font-semibold">
               Last Name
             </label>
             <input
@@ -140,7 +140,7 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           {/* Email */}
           <div className="flex flex-col gap-2 ">
-            <label htmlFor="email" className="text-sm font-medium">
+            <label htmlFor="email" className="font-semibold">
               Email
             </label>
             <input
@@ -158,7 +158,7 @@ const ContactForm = () => {
 
           {/* Phone Number */}
           <div className="flex flex-col gap-2 ">
-            <label htmlFor="phoneNumber" className="text-sm font-medium">
+            <label htmlFor="phoneNumber" className="font-semibold">
               Phone Number
             </label>
             <input
@@ -177,7 +177,7 @@ const ContactForm = () => {
 
         {/* Message */}
         <div className="flex flex-col gap-2 mb-6">
-          <label htmlFor="message" className="text-sm font-medium">
+          <label htmlFor="message" className="font-semibold">
             Message
           </label>
           <textarea

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { div, path } from "framer-motion/client";
 import { AllContext } from "../context";
+import logo from "../ADMIN/assets/logo.svg";
 
 const Header = () => {
   const { activeTab, setActiveTab } = useContext(AllContext);
@@ -62,9 +62,16 @@ const Header = () => {
     <header className="w-full font-medium text-[17px] h-16 bg-[#191919] text-white fixed z-50  transition-colors duration-300 mb-20">
       <div className="w-full h-full max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-14 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center transform transition-transform duration-300 hover:scale-105">
-          <img src="" alt="" />
-          <span>LOGO</span>
+        <div className="flex items-center transform transition-transform duration-300 hover:scale-[102%]">
+          <img
+            onClick={() => {
+              localStorage.setItem("activeTabUser", "home");
+              navigate("/");
+            }}
+            className="cursor-pointer"
+            src={logo}
+            alt="aaratech"
+          />
         </div>
 
         {/* Desktop Navigation */}
