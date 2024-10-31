@@ -10,33 +10,11 @@ import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import spark from "../UserAssets/spark.png";
 import { AllContext } from "../../context";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { ClipLoader } from "react-spinners";
 import { db } from "../../Config";
-
-// const products = {
-//   id: 1,
-//   image: "https://dummyimage.com/200x200/000/fff&text=Product+1",
-//   name: "Wireless Headphones",
-//   description:
-//     "Lorem ipsum dolor sit amet consectetur adipisicing elit.Beatae laboriosam dolor vel nostrum, rerum vitae quaerat consectetur porro facere magni odio dicta possimus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Aliquid, reiciendis? ",
-
-//   price: 99.99,
-//   cover: [
-//     "https://dummyimage.com/200x200/000/fff&text=Product+1",
-//     "https://dummyimage.com/200x200/000/fff&text=Product+1",
-//     "https://dummyimage.com/200x200/000/fff&text=Product+1",
-//     "https://dummyimage.com/200x200/000/fff&text=Product+1",
-//     "https://dummyimage.com/200x200/000/fff&text=Product+1",
-//   ],
-//   keyFeatures: [
-//     "Wireless Headphones",
-//     "Wireless HeadphonesWireless Headphones",
-//     "Wireless HeadphonesWireless Headphones",
-//     "Master suite with a spa-inspired bathroom and ocean-facing balcony",
-//     "Master suite with a spa-inspired bathroom and ocean-facing balcony",
-//   ],
-// };
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 
 const ProductDetailChild = () => {
   const { id } = useParams();
@@ -53,7 +31,9 @@ const ProductDetailChild = () => {
     email: "",
     phone: "",
     message: "",
+    topic: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const settings = {
     dots: false,
@@ -120,6 +100,73 @@ const ProductDetailChild = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const sendEmailWithEmailJS = async (templateParams) => {
+    try {
+      const response = await emailjs.send(
+        import.meta.env.VITE_SERVICE_ID_EMAILJS,
+        import.meta.env.VITE_TEMPLATE_ID_EMAILJS,
+        templateParams,
+        import.meta.env.VITE_PUBLIC_KEY_EMAILJS
+      );
+      return { success: true, response };
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      return { success: false, error };
+    }
+  };
+
+  const sendContactForm = async (data) => {
+    const templateParams = {
+      from_name: `${data.fName} ${data.lName}`,
+      from_email: data.email,
+      message:
+        `This message is regarding the product: ${data.topic} ` +
+        `\n\n` +
+        data.message +
+        `\n\n` + // Double line break here
+        `Forwarding the customer contact number <b>${data.phoneNumber}</b> for your follow-up and further assistance.`,
+    };
+   
+
+    return await sendEmailWithEmailJS(templateParams);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const myPromise = sendContactForm({
+      fName: formData.fName,
+      lName: formData.lName,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      topic: productDetails.name,
+    }); // Get the promise
+
+    toast
+      .promise(myPromise, {
+        loading: "Sending message...",
+        success: "Message sent successfully!",
+        error: "Failed to send message. Please try again.",
+      })
+      .then(() => {
+        setLoading(false);
+        // Reset form if the message was sent successfully
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
+          message: "",
+          topic: "",
+        });
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto mt-20">
@@ -232,7 +279,10 @@ const ProductDetailChild = () => {
               </p>
             </div>
 
-            <form className="mt-6 p-6 w-full flex flex-col gap-2 border-[#242424] border-[2px] rounded-md">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-6 p-6 w-full flex flex-col gap-2 border-[#242424] border-[2px] rounded-md"
+            >
               <div className="w-full flex justify-between gap-3 flex-col sm:flex-row ">
                 <div className="w-full flex flex-col gap-2">
                   <label className="font-semibold" htmlFor="fName">
@@ -322,6 +372,7 @@ const ProductDetailChild = () => {
               <div className="flex justify-end mt-4">
                 <button
                   type="submit"
+                  disabled={loading}
                   className="px-8 py-3 bg-purple-500 hover:bg-purple-600 w-full sm:w-auto 
                    text-white font-medium rounded-lg transition-colors duration-200
                    focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 
