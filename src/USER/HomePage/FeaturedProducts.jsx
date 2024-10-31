@@ -101,7 +101,7 @@ const FeaturedProducts = () => {
   }, []);
 
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
+    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 mt-4 sm:mt-10 max-w-screen-2xl mx-auto">
       <div className="w-full flex items-center gap-1">
         <img className="w-7 h-7" src={spark} alt="" />
         <img className="w-4 h-4 opacity-60" src={spark} alt="" />
@@ -160,7 +160,12 @@ const FeaturedProducts = () => {
                         </h2>
                       </span>
 
-                      <span className="text-[14px] bg-purple-700 px-4 md:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-700 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 text-center w-full sm:w-auto">
+                      <span
+                        onClick={() => {
+                          navigate(`/products/${product.id}`);
+                        }}
+                        className="text-[14px] bg-purple-700 px-4 md:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-700 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 text-center w-full sm:w-auto"
+                      >
                         View Products Details
                       </span>
                     </div>

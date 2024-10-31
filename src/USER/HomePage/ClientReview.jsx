@@ -108,7 +108,7 @@ const ClientReview = () => {
           updatedAt: doc.data().updatedAt?.toDate(),
         }));
         setAllReviews(ReviewData);
-        sessionStorage.setItem("cReview", JSON.stringify(clientReview));
+        sessionStorage.setItem("cReview", JSON.stringify(ReviewData));
         setDataLoading(false);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -122,7 +122,7 @@ const ClientReview = () => {
   }, []);
 
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
+    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-4 sm:my-10 max-w-screen-2xl mx-auto">
       <div className="w-full flex items-center gap-1">
         <img className="w-7 h-7" src={spark} alt="" />
         <img className="w-4 h-4 opacity-60" src={spark} alt="" />
@@ -214,7 +214,7 @@ const ClientReview = () => {
 
               <span
                 onClick={goToNext}
-                className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] select-none rder-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
+                className="w-[36px] h-[36px] md:w-[40px] md:h-[40px] rounded-full border-[2px] select-none border-[#202020] flex items-center justify-center cursor-pointer hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
               >
                 <MoveRight strokeWidth="1px" />
               </span>

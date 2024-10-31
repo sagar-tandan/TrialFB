@@ -72,7 +72,7 @@ const ValuedClientComp = () => {
   };
 
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-[90px]">
+    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-10 lg:mt-[90px] mb-5">
       <div className="w-full flex flex-col gap-5 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full text-left">
@@ -93,18 +93,18 @@ const ValuedClientComp = () => {
             {clients.map((client, index) => (
               <div key={index} className="px-2">
                 <div className="w-full bg-[#191919] p-[6px] flex rounded-lg ">
-                  <div className="w-full p-6 flex flex-col gap-3 bg-[#141414] rounded-md border-[1px] border-[#242424]">
+                  <div className="w-full p-4 sm:p-6 flex flex-col gap-3 bg-[#141414] rounded-md border-[1px] border-[#242424]">
                     {/* TOP  */}
                     <div className="w-full flex justify-between">
                       <div className="flex flex-col">
-                        <p className="text-[#999999] font-medium">
+                        <p className="text-[#999999] font-medium text-[14px] sm:text-[16px]">
                           Since {client.year}
                         </p>
-                        <h1 className="font-semibold text-[24px]">
+                        <h1 className="font-semibold text-[20px] md:text-[24px]">
                           {client.companyName}
                         </h1>
                       </div>
-                      <span className="px-6 py-1 bg-[#191919] font-medium text-[14px] h-[40px] flex items-center justify-center rounded-md cursor-pointer">
+                      <span className=" px-3 sm:px-6 py-1 bg-[#191919] font-medium text-[14px] h-[40px] flex items-center justify-center rounded-md cursor-pointer">
                         Vist Website
                       </span>
                     </div>
