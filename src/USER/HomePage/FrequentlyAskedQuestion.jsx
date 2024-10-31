@@ -110,7 +110,7 @@ const FrequentlyAskedQuestion = () => {
                     <div className="h-full flex flex-col">
                       <div className="mb-4">
                         <span className="text-sm text-gray-400">
-                          Question {faq.sn}
+                          Question {faq.sn + 1}
                         </span>
                         <h3 className="text-xl font-semibold mt-2 line-clamp-2">
                           {faq.question}

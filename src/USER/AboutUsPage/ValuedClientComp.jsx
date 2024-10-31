@@ -72,7 +72,10 @@ const ValuedClientComp = () => {
   };
 
   return (
-    <div id="OurClients" className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 mx-auto pt-16 lg:pt-[90px] mb-5">
+    <div
+      id="OurClients"
+      className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 mx-auto pt-16 lg:pt-[90px] mb-5"
+    >
       <div className="w-full flex flex-col gap-5 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full text-left">
@@ -104,14 +107,18 @@ const ValuedClientComp = () => {
                           {client.companyName}
                         </h1>
                       </div>
-                      <span className=" px-3 sm:px-6 py-1 bg-[#191919] font-medium text-[14px] h-[40px] flex items-center justify-center rounded-md cursor-pointer">
+                      <span className=" px-3 sm:px-6 py-1 bg-[#191919] font-medium text-[14px] h-[40px] flex items-center justify-center rounded-md cursor-pointer hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20">
                         Vist Website
                       </span>
                     </div>
                     {/* second */}
                     <div className="w-full flex flex-col border-[1px] border-[#242424] font-medium rounded-lg p-3">
-                      <p className="w-full text-[#999999]">What They Said 🤗</p>
-                      <p className="mt-3 font-medium">{client.review}</p>
+                      <p className="w-full text-[#999999] ">
+                        What They Said 🤗
+                      </p>
+                      <p className="mt-3 font-light text-white">
+                        {client.review}
+                      </p>
                     </div>
                   </div>
                 </div>
