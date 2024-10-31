@@ -1,7 +1,7 @@
 import React from "react";
 import { MoveUpRight } from "lucide-react";
 
-import img12 from "../UserAssets/Clients/13.png";
+import img12 from "../UserAssets/Clients/14.png";
 import img11 from "../UserAssets/Clients/12.png";
 import img10 from "../UserAssets/Clients/10.png";
 import img9 from "../UserAssets/Clients/9.png";
@@ -21,10 +21,11 @@ const clientsCollection = [
     link: "https://jcinepal.org.np/",
   },
   {
-    name: "Techno Nepal",
-    image: img2,
-    link: "https://technonepal.com.np/",
+    name: "CAN Info Tech",
+    image: img8,
+    link: "https://can.org.np/",
   },
+  
   {
     name: "GRIT Engineering",
     image: img3,
@@ -34,6 +35,16 @@ const clientsCollection = [
     name: "Voice of Nepal",
     image: img4,
     link: "https://www.facebook.com/TheVoiceofNepal.official/",
+  },
+  {
+    name: "Biratnagar Metropolitian",
+    image: img11,
+    link: "https://biratnagarmun.gov.np/en",
+  },
+  {
+    name: "Dharan Banker Club",
+    image: img12,
+    link: "https://www.facebook.com/dharanbankersclub/",
   },
   {
     name: "Agrobotics Nepal",
@@ -51,9 +62,9 @@ const clientsCollection = [
     link: "https://imelifeinsurance.com/",
   },
   {
-    name: "CAN Info Tech",
-    image: img8,
-    link: "https://can.org.np/",
+    name: "Techno Nepal",
+    image: img2,
+    link: "https://technonepal.com.np/",
   },
   {
     name: "Nepal Life",
@@ -65,16 +76,7 @@ const clientsCollection = [
     image: img10,
     link: "https://www.recentair.com/",
   },
-  {
-    name: "Biratnagar Metropolitian",
-    image: img11,
-    link: "https://biratnagarmun.gov.np/en",
-  },
-  {
-    name: "Dharan Banker Club",
-    image: img12,
-    link: "https://www.facebook.com/dharanbankersclub/",
-  },
+  
 ];
 
 const Clients = () => {
