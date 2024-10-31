@@ -105,7 +105,7 @@ const ProductDetailChild = () => {
     try {
       const response = await emailjs.send(
         import.meta.env.VITE_SERVICE_ID_EMAILJS,
-        import.meta.env.VITE_TEMPLATE_ID_EMAILJS,
+        import.meta.env.VITE_TEMPLATE_ID_PRODUCT_EMAILJS,
         templateParams,
         import.meta.env.VITE_PUBLIC_KEY_EMAILJS
       );
@@ -120,14 +120,10 @@ const ProductDetailChild = () => {
     const templateParams = {
       from_name: `${data.fName} ${data.lName}`,
       from_email: data.email,
-      message:
-        `This message is regarding the product: ${data.topic} ` +
-        `\n\n` +
-        data.message +
-        `\n\n` + // Double line break here
-        `Forwarding the customer contact number <b>${data.phoneNumber}</b> for your follow-up and further assistance.`,
+      from_phone: data.phone,
+      product_name: data.topic,
+      message: data.message,
     };
-   
 
     return await sendEmailWithEmailJS(templateParams);
   };
@@ -155,10 +151,10 @@ const ProductDetailChild = () => {
         setLoading(false);
         // Reset form if the message was sent successfully
         setFormData({
-          firstName: "",
-          lastName: "",
+          fName: "",
+          lName: "",
           email: "",
-          phoneNumber: "",
+          phone: "",
           message: "",
           topic: "",
         });
