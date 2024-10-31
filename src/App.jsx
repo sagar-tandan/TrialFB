@@ -8,6 +8,7 @@ import ContactParent from "./USER/ContactPage/ContactParent.jsx";
 import AboutUsParent from "./USER/AboutUsPage/AboutUsParent.jsx";
 import ParentProduct from "./USER/ProductPage/ParentProduct.jsx";
 import ParentProductDetail from "./USER/ProductDetails/ParentProductDetail.jsx";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [user, setuser] = useState(false);
@@ -30,6 +31,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <Toaster position="top-right" reverseOrder={false} />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/products" element={<ParentProduct />}></Route>
