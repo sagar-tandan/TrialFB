@@ -216,42 +216,51 @@
 
 import React, { useState } from "react";
 import spark from "../UserAssets/spark.png";
-import { Send, Twitter, Mail, Share2, Instagram, Facebook, Globe } from "lucide-react";
+import {
+  Send,
+  Twitter,
+  Mail,
+  Share2,
+  Instagram,
+  Facebook,
+  Globe,
+} from "lucide-react";
+import { link } from "framer-motion/client";
 
 const teams = [
   {
     name: "Dummy Name",
     position: "Founder",
-    facebook: "",
-    twitter: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/",
+    twitter: "https://www.twitter.com/",
+    instagram: "https://www.instagram.com/",
     image:
       "https://th.bing.com/th/id/OIP.iOJ3d7QnoKo7X0GrBQf97gHaHa?rs=1&pid=ImgDetMain",
   },
   {
     name: "Dummy Name",
     position: "Founder",
-    facebook: "",
-    twitter: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/",
+    twitter: "https://www.twitter.com/",
+    instagram: "https://www.instagram.com/",
     image:
       "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
   },
   {
     name: "Dummy Name",
     position: "Founder",
-    facebook: "",
-    twitter: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/",
+    twitter: "https://www.twitter.com/",
+    instagram: "https://www.instagram.com/",
     image:
       "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
   },
   {
     name: "Dummy Name",
     position: "Founder",
-    facebook: "",
-    twitter: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/",
+    twitter: "https://www.twitter.com/",
+    instagram: "https://www.instagram.com/",
     image:
       "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
   },
@@ -262,10 +271,22 @@ const OurTeamComp = () => {
   const [showSocial, setShowSocial] = useState(-1);
 
   const socialIcons = [
-    { icon: Twitter, color: "bg-blue-400" },
-    { icon: Instagram, color: "bg-red-400" },
-    { icon: Facebook, color: "bg-green-400" },
+    { icon: Twitter, color: "bg-blue-400", name: "twitter" },
+    { icon: Instagram, color: "bg-red-400", name: "Instagram" },
+    { icon: Facebook, color: "bg-green-400", name: "Facebook" },
   ];
+
+  const handleSocialLink = (social, team) => {
+    if (social === "twitter") {
+      window.open(team.twitter, "_blank");
+    } else if (social === "Instagram") {
+      window.open(team.instagram, "_blank");
+    } else if (social === "Facebook") {
+      window.open(team.facebook, "_blank");
+    } else {
+      console.log("Something went wrong!!");
+    }
+  };
 
   return (
     <div
@@ -351,6 +372,9 @@ const OurTeamComp = () => {
                   <div className="flex flex-col gap-2">
                     {socialIcons.map((social, idx) => (
                       <button
+                        onClick={() => {
+                          handleSocialLink(social.name, team);
+                        }}
                         key={idx}
                         className={`${social.color} p-2 rounded-full hover:scale-110 transition-transform duration-200 shadow-lg`}
                       >
