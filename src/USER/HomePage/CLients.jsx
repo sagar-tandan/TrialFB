@@ -34,7 +34,7 @@ const Clients = () => {
   };
 
   return (
-    <div className="w-full max-w-screen-2xl mx-auto py-[6px] bg-[#191919]">
+    <div id="client" className="w-full max-w-screen-2xl mx-auto py-[6px] bg-[#191919]">
       <div className="w-full bg-[#141414] border-t-[2px] border-b-[2px] border-[#242424] p-3 sm:p-4">
         {/* Grid container */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">

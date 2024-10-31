@@ -11,7 +11,7 @@ const ContactParent = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
+    <div id="info" className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
       <Header />
       <IntroComp />
       <ContactForm />

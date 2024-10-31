@@ -39,27 +39,32 @@ const FrequentlyAskedQuestion = () => {
   const formatSlideNumber = (number) => number.toString().padStart(2, "0");
 
   const fetchData = useCallback(async () => {
-    if (allFAQs.length > 0) return;
-    setDataLoading(true);
-    try {
-      const faqRef = collection(db, "FAQ");
-      const q = query(faqRef, orderBy("createdAt", "desc"), limit(10));
-      const querySnapshot = await getDocs(q);
+    const FAQData = sessionStorage.getItem("faqData");
+    if (FAQData?.length > 0) {
+      setAllFAQs(JSON.parse(FAQData));
+    } else {
+      try {
+        setDataLoading(true);
+        const faqRef = collection(db, "FAQ");
+        const q = query(faqRef, orderBy("createdAt", "desc"), limit(10));
+        const querySnapshot = await getDocs(q);
 
-      const faqData = querySnapshot.docs.map((doc, index) => ({
-        sn: index,
-        id: doc.id,
-        question: doc.data().question,
-        answer: doc.data().answer,
-        // Convert Firestore Timestamp to Date
-        createdAt: doc.data().createdAt?.toDate(),
-        updatedAt: doc.data().updatedAt?.toDate(),
-      }));
-      setAllFAQs(faqData);
-      setDataLoading(false);
-    } catch (error) {
-      console.error("Error fetching FAQs:", error);
-      setDataLoading(false);
+        const faqData = querySnapshot.docs.map((doc, index) => ({
+          sn: index,
+          id: doc.id,
+          question: doc.data().question,
+          answer: doc.data().answer,
+          // Convert Firestore Timestamp to Date
+          createdAt: doc.data().createdAt?.toDate(),
+          updatedAt: doc.data().updatedAt?.toDate(),
+        }));
+        setAllFAQs(faqData);
+        sessionStorage.setItem("faqData", JSON.stringify(faqData));
+        setDataLoading(false);
+      } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        setDataLoading(false);
+      }
     }
   });
 
@@ -68,7 +73,7 @@ const FrequentlyAskedQuestion = () => {
   }, []);
 
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
+    <div className="w-full py-2 sm:py-0 px-4 md:px-8 lg:px-16 flex flex-col gap-5 mb-20 max-w-screen-2xl mx-auto">
       <div className="w-full flex items-center gap-1">
         <img className="w-7 h-7" src={spark} alt="" />
         <img className="w-4 h-4 opacity-60" src={spark} alt="" />
@@ -105,7 +110,7 @@ const FrequentlyAskedQuestion = () => {
                     <div className="h-full flex flex-col">
                       <div className="mb-4">
                         <span className="text-sm text-gray-400">
-                          Question {faq.sn}
+                          Question {faq.sn + 1}
                         </span>
                         <h3 className="text-xl font-semibold mt-2 line-clamp-2">
                           {faq.question}

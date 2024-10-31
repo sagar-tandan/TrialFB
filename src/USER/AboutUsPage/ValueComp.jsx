@@ -1,16 +1,11 @@
 import React from "react";
 import spark from "../UserAssets/spark.png";
-import {
-  GraduationCap,
-  HeartHandshake,
-  Sparkles,
-  Users,
-} from "lucide-react";
+import { GraduationCap, HeartHandshake, Sparkles, Users } from "lucide-react";
 import PulseIcon from "./PulseIcon";
 
 const ValueComp = () => {
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-[90px]">
+    <div id="values" className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-5 lg:mt-[90px]">
       <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-16 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full lg:w-[35%] text-left">
@@ -31,7 +26,7 @@ const ValueComp = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-full lg:w-[65%] mt-8 lg:mt-0 flex rounded-xl bg-[#191919] p-2">
+        <div className="w-full lg:w-[65%] mt-0 flex rounded-xl bg-[#191919] p-2">
           <div className="w-full bg-[#141414] border-[1px] border-[#242424] flex flex-col rounded-lg p-4 sm:p-12">
             <div className="w-full gap-4 sm:gap-8 flex sm:flex-row flex-col">
               <div className="w-full flex flex-col gap-3 border-[#262626] sm:border-r-[1px]">

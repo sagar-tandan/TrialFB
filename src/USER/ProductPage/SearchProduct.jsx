@@ -35,9 +35,9 @@ const SearchProduct = () => {
             id="Product"
             onChange={handleChange}
           />
-          <span className="w-[17%] flex gap-2 justify-center items-center bg-purple-700 select-none px-4 py-[8px] sm:py-[10px] rounded-md cursor-pointer">
+          <span className="w-[17%] flex gap-2 justify-center items-center bg-purple-700 select-none sm:px-4 py-[8px] sm:py-[10px] rounded-md cursor-pointer">
             <Search className="w-4 h-4" />
-            <h1 className="font-medium text-[14px] hidden sm:flex">
+            <h1 className="font-medium text-[14px] hidden md:flex">
               Find Product
             </h1>
           </span>

@@ -6,10 +6,9 @@ const AllContext = createContext();
 const ContextProvider = ({ children }) => {
   const [activeTab, setActiveTab] = useState("home");
   const [search, setQuery] = useState("");
-  const [allProducts, setAllProducts] = useState();
+  const [allProducts, setAllProducts] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
-
-
+  const [featuredProductData, setFeaturedProductData] = useState([]);
 
   return (
     <AllContext.Provider
@@ -22,6 +21,8 @@ const ContextProvider = ({ children }) => {
         setAllProducts,
         productDetails,
         setProductDetails,
+        featuredProductData,
+        setFeaturedProductData,
       }}
     >
       {children}

@@ -10,7 +10,7 @@ const ParentProduct = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
+    <div id="searchProduct" className="w-full flex flex-col text-white bg-[#141414] font-urbanist">
       <Header />
       <SearchProduct />
       <AllProducts />

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { path } from "framer-motion/client";
+import { div, path } from "framer-motion/client";
 import { AllContext } from "../context";
 
 const Header = () => {
@@ -59,7 +59,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full h-16 bg-[#191919] text-white fixed z-50 transition-colors duration-300">
+    <header className="w-full font-medium text-[17px] h-16 bg-[#191919] text-white fixed z-50  transition-colors duration-300 mb-20">
       <div className="w-full h-full max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-14 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center transform transition-transform duration-300 hover:scale-105">
@@ -68,7 +68,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-8 lg:gap-14">
+        <nav className="hidden md:flex gap-8 lg:gap-14 font-medium">
           {menuItems.map((item) => (
             <span
               key={item.id}
@@ -85,7 +85,7 @@ const Header = () => {
         </nav>
 
         {/* Contact Button */}
-        <div className="hidden md:block">
+        <div className="hidden md:block ">
           <button
             onClick={() => gotoContact()}
             className={`bg-[#141414] px-6 py-2 rounded-md border border-zinc-700 hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 ${

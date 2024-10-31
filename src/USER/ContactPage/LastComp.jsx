@@ -4,7 +4,7 @@ import spark from "../UserAssets/spark.png";
 
 const LastComp = () => {
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 mt-5 mb-10 max-w-screen-2xl mx-auto">
+    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 mt-5 mb-20 max-w-screen-2xl mx-auto">
       <div className="w-full mx-auto text-white border-[2px] border-[#232323] rounded-md flex relative">
         <div className="w-full absolute top-0 bottom-0 left-0 right-0 overflow-hidden">
           <Lines />

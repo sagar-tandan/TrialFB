@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import spark from "../UserAssets/spark.png";
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +11,7 @@ const ContactForm = () => {
     phoneNumber: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,14 +20,65 @@ const ContactForm = () => {
     });
   };
 
+  const sendEmailWithEmailJS = async (templateParams) => {
+    try {
+      const response = await emailjs.send(
+        import.meta.env.VITE_SERVICE_ID_EMAILJS,
+        import.meta.env.VITE_TEMPLATE_ID_CONTACT_EMAILJS,
+        templateParams,
+        import.meta.env.VITE_PUBLIC_KEY_EMAILJS
+      );
+      return { success: true, response };
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      return { success: false, error };
+    }
+  };
+
+  const sendContactForm = async (data) => {
+    const templateParams = {
+      from_name: `${data.firstName} ${data.lastName}`,
+      from_email: data.email,
+      from_phone: data.phoneNumber,
+      message: data.message,
+    };
+
+    return await sendEmailWithEmailJS(templateParams);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    setLoading(true);
+
+    const myPromise = sendContactForm(formData); // Get the promise
+
+    toast
+      .promise(myPromise, {
+        loading: "Sending message...",
+        success: "Message sent successfully!",
+        error: "Failed to send message. Please try again.",
+      })
+      .then(() => {
+        setLoading(false);
+        // Reset form if the message was sent successfully
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phoneNumber: "",
+          message: "",
+        });
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
+    <div
+      id="form"
+      className="w-full px-4 md:px-8 lg:px-16 flex flex-col gap-5 py-20 max-w-screen-2xl mx-auto"
+    >
       <div className="w-full flex items-center gap-1">
         <img className="w-7 h-7" src={spark} alt="" />
         <img className="w-4 h-4 opacity-60" src={spark} alt="" />
@@ -143,10 +197,13 @@ const ContactForm = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-8 py-3 bg-purple-500 hover:bg-purple-600 w-full sm:w-auto 
+            disabled={loading}
+            className={`px-8 py-3 bg-purple-500 hover:bg-purple-600 w-full sm:w-auto 
                    text-white font-medium rounded-lg transition-colors duration-200
                    focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2 
-                   focus:ring-offset-[#191919]"
+                   focus:ring-offset-[#191919] ${
+                     loading ? "cursor-not-allowed" : ""
+                   }`}
           >
             Send Message
           </button>

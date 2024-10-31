@@ -84,31 +84,36 @@ const ClientReview = () => {
   };
 
   const fetchData = useCallback(async () => {
-    if (allReviews.length > 0) return;
-    setDataLoading(true);
-    try {
-      const reviewRef = collection(db, "Testimonials");
-      const q = query(reviewRef, orderBy("createdAt", "desc"), limit(10));
-      const querySnapshot = await getDocs(q);
+    const clientReview = sessionStorage.getItem("cReview");
+    if (clientReview?.length > 0) {
+      setAllReviews(JSON.parse(clientReview));
+    } else {
+      try {
+        setDataLoading(true);
+        const reviewRef = collection(db, "Testimonials");
+        const q = query(reviewRef, orderBy("createdAt", "desc"), limit(10));
+        const querySnapshot = await getDocs(q);
 
-      const ReviewData = querySnapshot.docs.map((doc, index) => ({
-        sn: index,
-        id: doc.id,
-        clientName: doc.data().clientName,
-        clientLoc: doc.data().clientLoc,
-        review: doc.data().review,
-        reviewHeading: doc.data().reviewHeading,
-        clientImg: doc.data().clientImg,
+        const ReviewData = querySnapshot.docs.map((doc, index) => ({
+          sn: index,
+          id: doc.id,
+          clientName: doc.data().clientName,
+          clientLoc: doc.data().clientLoc,
+          review: doc.data().review,
+          reviewHeading: doc.data().reviewHeading,
+          clientImg: doc.data().clientImg,
 
-        // Convert Firestore Timestamp to Date
-        createdAt: doc.data().createdAt?.toDate(),
-        updatedAt: doc.data().updatedAt?.toDate(),
-      }));
-      setAllReviews(ReviewData);
-      setDataLoading(false);
-    } catch (error) {
-      console.error("Error fetching reviews:", error);
-      setDataLoading(false);
+          // Convert Firestore Timestamp to Date
+          createdAt: doc.data().createdAt?.toDate(),
+          updatedAt: doc.data().updatedAt?.toDate(),
+        }));
+        setAllReviews(ReviewData);
+        sessionStorage.setItem("cReview", JSON.stringify(ReviewData));
+        setDataLoading(false);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+        setDataLoading(false);
+      }
     }
   });
 
@@ -117,7 +122,10 @@ const ClientReview = () => {
   }, []);
 
   return (
-    <div className="w-full py-6 px-4 md:px-8 lg:px-16 flex flex-col gap-5 my-10 max-w-screen-2xl mx-auto">
+    <div
+      id="review"
+      className="w-full py-10 px-4 md:px-8 lg:px-16 flex flex-col gap-5 sm:py-20 max-w-screen-2xl mx-auto"
+    >
       <div className="w-full flex items-center gap-1">
         <img className="w-7 h-7" src={spark} alt="" />
         <img className="w-4 h-4 opacity-60" src={spark} alt="" />

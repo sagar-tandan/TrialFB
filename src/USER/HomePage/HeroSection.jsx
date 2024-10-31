@@ -10,11 +10,11 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 pt-6 mx-auto mt-[90px]">
+    <div id="hero" className="w-full max-w-screen-2xl flex flex-col gap-5 px-4 sm:px-6 md:px-8 lg:px-10 mx-auto pt-[100px] lg:pt-[120px]">
       <div className="w-full flex flex-col-reverse lg:flex-row gap-5 justify-center items-center relative">
         {/* Left section */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
-          <p className="font-semibold text-[28px] sm:text-[32px] md:text-[36px] leading-none uppercase mt-10 lg:mt-0">
+          <p className="font-semibold text-[26px] sm:text-[32px] md:text-[36px] leading-none uppercase mt-10 lg:mt-0">
             Welcome To Aara Technology
           </p>
           <p className="font-medium text-[20px] sm:text-[22px] md:text-[25px] mt-1">
@@ -73,7 +73,7 @@ const HeroSection = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-full lg:w-1/2 mt-8 lg:mt-0 relative">
+        <div className="w-full lg:w-1/2 relative">
           <img
             className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover lg:object-fill rounded-md lg:rounded-b-none "
             src={hero}

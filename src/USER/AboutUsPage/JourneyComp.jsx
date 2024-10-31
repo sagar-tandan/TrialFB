@@ -49,7 +49,7 @@ const JourneyComp = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-full lg:w-1/2 mt-8 lg:mt-0 flex relative h-[250px] sm:h-[400px] border-[1px] rounded-lg border-[#202020]">
+        <div className="w-full lg:w-1/2 mt-0 flex relative h-[250px] sm:h-[400px] border-[1px] rounded-lg border-[#202020]">
           <div className="w-full absolute top-0 left-0 right-0 bottom-0 h-full">
             <Lines />
           </div>
