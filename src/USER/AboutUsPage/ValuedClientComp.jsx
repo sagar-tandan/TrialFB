@@ -6,24 +6,97 @@ import Slider from "react-slick";
 const clients = [
   {
     year: "2016",
-    companyName: "ABC Company",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,expedita veritatis. Ex enim debitis neque optio, pariatur temporaipsum! Deleniti deserunt ex illo?",
-    link: "",
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "JCI Nepal",
+    link: "https://jcinepal.org.np/",
   },
   {
     year: "2016",
-    companyName: "ABC Company",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,expedita veritatis. Ex enim debitis neque optio, pariatur temporaipsum! Deleniti deserunt ex illo?",
-    link: "",
+    review: "involved in understanding the specific needs of my project.",
+
+    name: "Techno Nepal",
+    link: "https://technonepal.com.np/",
   },
   {
     year: "2016",
-    companyName: "ABC Company",
     review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,expedita veritatis. Ex enim debitis neque optio, pariatur temporaipsum! Deleniti deserunt ex illo?",
-    link: "",
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "GRIT Engineering",
+    link: "https://gritengineering.com.np/",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "Voice of Nepal",
+    link: "https://www.facebook.com/TheVoiceofNepal.official/",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "Agrobotics Nepal",
+    link: "https://www.linkedin.com/company/agrobotics-nepal/?originalSubdomain=np",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "IOE Pulchowk Campus",
+    link: "https://pcampus.edu.np/",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "Ime Life",
+    link: "https://imelifeinsurance.com/",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "CAN Info Tech",
+    link: "https://can.org.np/",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "Nepal Life",
+    link: "https://nepallife.com.np//",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "Recent Air",
+    link: "https://www.recentair.com/",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "Biratnagar Metropolitian",
+    link: "https://biratnagarmun.gov.np/en",
+  },
+  {
+    year: "2016",
+    review:
+      "I recently case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+
+    name: "Dharan Banker Club",
+    link: "https://www.facebook.com/dharanbankersclub/",
   },
 ];
 
@@ -71,6 +144,10 @@ const ValuedClientComp = () => {
     sliderRef.current?.slickNext();
   };
 
+  const handleClick = (link) => {
+    window.open(link, "_blank");
+  };
+
   return (
     <div
       id="OurClients"
@@ -92,33 +169,35 @@ const ValuedClientComp = () => {
         </div>
 
         <div className="w-full">
-          <Slider ref={sliderRef} {...settings}>
+          <Slider {...settings} ref={sliderRef}>
             {clients.map((client, index) => (
               <div key={index} className="px-2">
-                <div className="w-full bg-[#191919] p-[6px] flex rounded-lg ">
-                  <div className="w-full p-4 sm:p-6 flex flex-col gap-3 bg-[#141414] rounded-md border-[1px] border-[#242424]">
-                    {/* TOP  */}
+                <div className="w-full bg-[#191919] p-[6px] rounded-lg">
+                  <div className="w-full h-[300px] p-4 sm:p-6 flex flex-col gap-3 bg-[#141414] rounded-md border-[1px] border-[#242424]">
+                    {/* TOP */}
                     <div className="w-full flex justify-between">
                       <div className="flex flex-col">
                         <p className="text-[#999999] font-medium text-[14px] sm:text-[16px]">
                           Since {client.year}
                         </p>
-                        <h1 className="font-semibold text-[20px] md:text-[24px]">
-                          {client.companyName}
+                        <h1 className="font-semibold text-[18px] md:text-[22px]">
+                          {client.name}
                         </h1>
                       </div>
-                      <span className=" px-3 sm:px-6 py-1 bg-[#191919] font-medium text-[14px] h-[40px] flex items-center justify-center rounded-md cursor-pointer hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20">
-                        Vist Website
-                      </span>
+                      <button
+                        onClick={() => handleClick(client.link)}
+                        className="px-3 sm:px-6 py-1 bg-[#191919] font-medium text-[14px] h-[40px] flex items-center justify-center rounded-md cursor-pointer hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+                      >
+                        Visit Website
+                      </button>
                     </div>
-                    {/* second */}
-                    <div className="w-full flex flex-col border-[1px] border-[#242424] font-medium rounded-lg p-3">
-                      <p className="w-full text-[#999999] ">
-                        What They Said 🤗
-                      </p>
-                      <p className="mt-3 font-light text-white">
-                        {client.review}
-                      </p>
+
+                    {/* Review Section */}
+                    <div className="flex-1 w-full flex flex-col border-[1px] border-[#242424] font-medium rounded-lg p-3">
+                      <p className="w-full text-[#999999]">What They Said 🤗</p>
+                      <div className="mt-3 flex-1 overflow-y-auto">
+                        <p className="font-light text-white">{client.review}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
