@@ -254,9 +254,8 @@ const AddProducts = () => {
 
   const uploadImage = async (file, path) => {
     try {
-      const compressedFile = await imageCompression(file, options);
       const storageRef = ref(storage, path);
-      await uploadBytes(storageRef, compressedFile);
+      await uploadBytes(storageRef, file);
       return await getDownloadURL(storageRef);
     } catch (error) {
       console.log(error);

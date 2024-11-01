@@ -167,9 +167,9 @@ const AddReviews = () => {
   const uploadImage = async (file) => {
     const storageRef = ref(storage, "Client/" + Date.now() + file.name);
     try {
-      const compressedFile = await imageCompression(file, options);
+      // const compressedFile = await imageCompression(file, options);
 
-      await uploadBytes(storageRef, compressedFile);
+      await uploadBytes(storageRef, file);
       return await getDownloadURL(storageRef);
     } catch (error) {
       console.log(error);
