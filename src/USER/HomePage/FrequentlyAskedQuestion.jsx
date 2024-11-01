@@ -106,7 +106,7 @@ const FrequentlyAskedQuestion = () => {
             <Slider ref={sliderRef} {...settings}>
               {allFAQs.map((faq, index) => (
                 <div key={index} className="px-2">
-                  <div className="h-[280px] p-6 md:p-8 border-2 border-[#202020] rounded-md ">
+                  <div className="h-[320px] p-6 md:p-8 border-2 border-[#202020] rounded-md ">
                     <div className="h-full flex flex-col">
                       <div className="mb-4">
                         <span className="text-sm text-gray-400">
@@ -118,8 +118,8 @@ const FrequentlyAskedQuestion = () => {
                       </div>
 
                       <p className="text-gray-400 line-clamp-4 flex-grow">
-                        {faq?.answer.length > 250
-                          ? faq.answer.slice(0, 250) + "..."
+                        {faq?.answer.length > 350
+                          ? faq.answer.slice(0, 350) + "..."
                           : faq.answer}
                       </p>
                     </div>

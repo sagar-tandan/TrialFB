@@ -1,5 +1,12 @@
-import { Instagram, Mail, MapPin, MoveUpRight, Phone } from "lucide-react";
-import React from "react";
+import {
+  Instagram,
+  Mail,
+  MapPin,
+  MessageCircleMore,
+  MoveUpRight,
+  Phone,
+} from "lucide-react";
+import React, { useState } from "react";
 
 const IntroComp = () => {
   return (
@@ -31,11 +38,13 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                info@aaratech.com
+                ara80fficial@gmail.com
               </h2>
 
               <button
-                //   onClick={() => handleClick(client.link)}
+                onClick={() =>
+                  (window.location.href = "mailto:ara80fficial@gmail.com")
+                }
                 className="absolute top-0 right-0 m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
               >
                 <MoveUpRight
@@ -54,11 +63,11 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                +977- 9865453221
+                +977- 9817396487
               </h2>
 
               <button
-                //   onClick={() => handleClick(client.link)}
+                onClick={() => (window.location.href = "tel:+9779817396487")}
                 className="absolute top-0 right-0 m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
               >
                 <MoveUpRight
@@ -80,11 +89,16 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                Random-8
+                Halgadha, Itahari, Nepal
               </h2>
 
               <button
-                //   onClick={() => handleClick(client.link)}
+                onClick={() =>
+                  window.open(
+                    "https://maps.app.goo.gl/TWF1ba1kfeWMg3cM6",
+                    "_blank"
+                  )
+                }
                 className="absolute top-0 right-0 m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
               >
                 <MoveUpRight
@@ -99,18 +113,20 @@ const IntroComp = () => {
               <div className="relative m-4">
                 <div className="absolute -inset-4 bg-purple-500/20 rounded-full animate-pulse" />
                 <div className="absolute -inset-2 bg-purple-500/30 rounded-full" />
-                <Instagram
+                <MessageCircleMore
                   className="relative text-purple-500"
                   strokeWidth={1.5}
                 />
               </div>
 
               <h2 className="font-medium flex  text-center text-sm sm:text-base  ">
-                Instagram
+                WhatsApp
               </h2>
 
               <button
-                //   onClick={() => handleClick(client.link)}
+                onClick={() =>
+                  window.open("https://wa.me/9779817396487", "_blank")
+                }
                 className="absolute top-0 right-0 m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
               >
                 <MoveUpRight

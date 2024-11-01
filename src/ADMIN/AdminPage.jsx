@@ -5,12 +5,15 @@ import {
   Table,
   Star,
   ShieldQuestion,
+  BoxesIcon,
+  Gift,
 } from "lucide-react";
 import AddProducts from "./Components/AddProducts";
 import DataTable from "./Table";
 import AddReviews from "./Components/AddReviews";
 import AddFAQ from "./Components/AddFAQ";
 import Dashboard from "./Components/Dashboard";
+import AddFeaturedProducts from "./Components/AddFeaturedProducts";
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState(
@@ -33,6 +36,16 @@ const AdminPage = () => {
         >
           <LayoutDashboard className="w-6 h-6 " />
           <span className="font-medium">Dashboard</span>
+        </div>
+
+        <div
+          onClick={() => setActiveFunction("fProducts")}
+          className={`w-full flex py-3 px-6 gap-2 cursor-pointer hover:bg-purple-200 hover:text-purple-800 group transition-all duration-200 ease-in-out ${
+            activeTab == "fProducts" ? "text-purple-800 bg-purple-200" : ""
+          }`}
+        >
+          <Gift className="w-6 h-6 " />
+          <span className="font-medium">Featured Works</span>
         </div>
 
         <div
@@ -73,6 +86,8 @@ const AdminPage = () => {
           <AddReviews />
         ) : activeTab == "faq" ? (
           <AddFAQ />
+        ) : activeTab == "fProducts" ? (
+          <AddFeaturedProducts />
         ) : (
           <Dashboard />
         )}

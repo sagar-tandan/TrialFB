@@ -16,6 +16,7 @@ import AboutUsParent from "./USER/AboutUsPage/AboutUsParent.jsx";
 import ParentProduct from "./USER/ProductPage/ParentProduct.jsx";
 import ParentProductDetail from "./USER/ProductDetails/ParentProductDetail.jsx";
 import Header from "./USER/Header.jsx";
+import FeaturedWork from "./USER/HomePage/FeaturedWork.jsx";
 
 const AppRoutes = ({ user, setUser }) => {
   const location = useLocation();
@@ -31,6 +32,8 @@ const AppRoutes = ({ user, setUser }) => {
         <Route path="/products/:id" element={<ParentProductDetail />} />
         <Route path="/contact" element={<ContactParent />} />
         <Route path="/aboutus" element={<AboutUsParent />} />
+        <Route path="/hello" element={<FeaturedWork />} />
+
         <Route
           path="/api/adminLogin"
           element={

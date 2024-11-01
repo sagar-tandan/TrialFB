@@ -1,6 +1,5 @@
 import { Edit2, Plus, Trash2, X } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
-// import { AllContext } from "../../context";
 import DataTable from "../Table";
 import { db, storage } from "../../Config.jsx";
 import {
@@ -23,7 +22,7 @@ import {
 import { ClipLoader } from "react-spinners";
 import imageCompression from "browser-image-compression";
 
-const AddProducts = () => {
+const AddFeaturedProducts = () => {
   const [edit, setEdit] = useState(false);
   const [add, setAdd] = useState(false);
   const [formData, setFormData] = useState({
@@ -113,12 +112,12 @@ const AddProducts = () => {
   const fetchData = async () => {
     setDataLoading(true);
     try {
-      const productsRef = collection(db, "products");
+      const productsRef = collection(db, "fproducts");
       // const q = query(productsRef, orderBy("CreatedAt", "desc"));
       const q = query(productsRef, orderBy("createdAt", "desc"));
       const querySnapshot = await getDocs(q);
 
-      const productsData = querySnapshot.docs.map((doc, index) => ({
+      const fproductsData = querySnapshot.docs.map((doc, index) => ({
         sn: index,
         id: doc.id,
         name: doc.data().name,
@@ -132,8 +131,8 @@ const AddProducts = () => {
         createdAt: doc.data().createdAt?.toDate(),
         updatedAt: doc.data().updatedAt?.toDate(),
       }));
-      setData(productsData);
-      localStorage.setItem("productData", JSON.stringify(productsData));
+      setData(fproductsData);
+      localStorage.setItem("fproductData", JSON.stringify(fproductsData));
       setDataLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -142,8 +141,8 @@ const AddProducts = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("productData")) {
-      const productData = localStorage.getItem("productData");
+    if (localStorage.getItem("fproductData")) {
+      const productData = localStorage.getItem("fproductData");
       setData(JSON.parse(productData));
     } else {
       fetchData();
@@ -169,7 +168,7 @@ const AddProducts = () => {
     try {
       setDeleteLoading(true);
 
-      const productRef = doc(db, "products", data.id);
+      const productRef = doc(db, "fproducts", data.id);
       await deleteDoc(productRef);
       console.log("Product deleted Successfully!!");
 
@@ -278,7 +277,7 @@ const AddProducts = () => {
         updatedAt: serverTimestamp(),
       };
       // Update product document
-      const productRef = doc(db, "products", id);
+      const productRef = doc(db, "fproducts", id);
       await updateDoc(productRef, productData);
 
       console.log("Data Updated!!!");
@@ -316,7 +315,7 @@ const AddProducts = () => {
         updatedAt: serverTimestamp(),
       };
 
-      const docRef = await addDoc(collection(db, "products"), productData);
+      const docRef = await addDoc(collection(db, "fproducts"), productData);
       console.log("Data added!!!");
 
       resetForm();
@@ -331,7 +330,7 @@ const AddProducts = () => {
 
   const uploadProfileImage = async (profileImg) => {
     if (profileImg && profileImg instanceof File) {
-      const profilePicturePath = `products/${Date.now()}-${profileImg.name}`;
+      const profilePicturePath = `fproducts/${Date.now()}-${profileImg.name}`;
       return await uploadImage(profileImg, profilePicturePath);
     }
     return "";
@@ -343,7 +342,7 @@ const AddProducts = () => {
       for (let index = 0; index < coverImages.length; index++) {
         const file = coverImages[index];
         if (file instanceof File) {
-          const path = `products/${Date.now()}-${index}-${file.name}`;
+          const path = `fproducts/${Date.now()}-${index}-${file.name}`;
           const imageUrl = await uploadImage(file, path);
           coverImageUrls.push(imageUrl);
         }
@@ -607,4 +606,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default AddFeaturedProducts;
