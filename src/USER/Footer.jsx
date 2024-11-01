@@ -1,4 +1,11 @@
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  MessageCircleMore,
+  Twitter,
+  Youtube,
+} from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../ADMIN/assets/logo.svg";
@@ -129,17 +136,43 @@ const Footer = () => {
             </span>
             {/* Social media handles */}
             <div className="flex gap-3">
-              <span className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400">
+              <span
+                onClick={() => {
+                  window.open("https://www.facebook.com/AARATECH3D/", "_blank");
+                }}
+                className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
+              >
                 <Facebook />
               </span>
-              <span className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400">
+              <span
+                onClick={() => {
+                  window.open(
+                    "https://www.instagram.com/aaratech3d/",
+                    "_blank"
+                  );
+                }}
+                className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
+              >
                 <Instagram />
               </span>
-              <span className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400">
-                <Twitter />
+              <span
+                onClick={() => {
+                  window.open("https://wa.me/9779817396487", "_blank");
+                }}
+                className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
+              >
+                <MessageCircleMore />
               </span>
-              <span className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400">
-                <Youtube />
+              <span
+                onClick={() => {
+                  window.open(
+                    "https://www.linkedin.com/company/aaratech3d/",
+                    "_blank"
+                  );
+                }}
+                className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
+              >
+                <Linkedin />
               </span>
             </div>
           </div>

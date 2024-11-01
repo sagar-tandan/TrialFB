@@ -25,7 +25,7 @@ const clientsCollection = [
     image: img8,
     link: "https://can.org.np/",
   },
-  
+
   {
     name: "GRIT Engineering",
     image: img3,
@@ -76,7 +76,6 @@ const clientsCollection = [
     image: img10,
     link: "https://www.recentair.com/",
   },
-  
 ];
 
 const Clients = () => {
@@ -105,7 +104,7 @@ const Clients = () => {
                 alt={client.name}
                 loading="lazy"
               />
-              <span className="sm:group-hover:flex hidden bg-[#999999] font-medium px-3 py-1 rounded-[6px] text-white absolute -bottom-[14px] z-50 select-none">
+              <span className="sm:group-hover:flex hidden bg-[#999999] font-medium px-3 py-1 rounded-[6px] text-white absolute -bottom-[14px] z-50 select-none ">
                 {client.name}
               </span>
             </div>
