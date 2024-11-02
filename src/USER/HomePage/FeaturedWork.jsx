@@ -109,7 +109,7 @@ const FeaturedWork = () => {
       email: formData.email,
       phone: formData.phone,
       message: formData.message,
-      topic: productDetails.name,
+      topic: fproductDetails.name,
     }); // Get the promise
 
     toast

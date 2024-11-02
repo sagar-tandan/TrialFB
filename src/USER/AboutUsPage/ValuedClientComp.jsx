@@ -173,7 +173,7 @@ const ValuedClientComp = () => {
             {clients.map((client, index) => (
               <div key={index} className="px-2">
                 <div className="w-full bg-[#191919] p-[6px] rounded-lg">
-                  <div className="w-full h-[300px] p-4 sm:p-6 flex flex-col gap-3 bg-[#141414] rounded-md border-[1px] border-[#242424]">
+                  <div className="w-full h-fit sm:h-[300px] p-4 sm:p-6 flex flex-col gap-3 bg-[#141414] rounded-md border-[1px] border-[#242424]">
                     {/* TOP */}
                     <div className="w-full flex justify-between">
                       <div className="flex flex-col">
