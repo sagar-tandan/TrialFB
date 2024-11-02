@@ -165,8 +165,8 @@ const FeaturedProducts = () => {
 
                       <span
                         onClick={() => {
-                          navigate(`/products/${product.id}`);
-                          // navigate("/hello");
+                          // navigate(`/products/${product.id}`);
+                          navigate("/hello");
                         }}
                         className="text-[14px] bg-purple-700 px-4 md:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-700 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 text-center w-full sm:w-auto"
                       >
