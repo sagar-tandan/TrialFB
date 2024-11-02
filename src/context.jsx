@@ -9,6 +9,7 @@ const ContextProvider = ({ children }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const [featuredProductData, setFeaturedProductData] = useState([]);
+  const [fproductDetails, setFProductDetails] = useState([]);
 
   return (
     <AllContext.Provider
@@ -23,6 +24,8 @@ const ContextProvider = ({ children }) => {
         setProductDetails,
         featuredProductData,
         setFeaturedProductData,
+        fproductDetails,
+        setFProductDetails,
       }}
     >
       {children}
