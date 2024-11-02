@@ -69,22 +69,18 @@ const FeaturedProducts = () => {
     } else {
       try {
         setDataLoading(true);
-        const productsRef = collection(db, "products");
+        const productsRef = collection(db, "fproducts");
         const q = query(productsRef, orderBy("createdAt", "desc"), limit(10));
         const querySnapshot = await getDocs(q);
+        console.log(querySnapshot.docs);
 
         const productsData = querySnapshot.docs.map((doc, index) => ({
           sn: index,
           id: doc.id,
           name: doc.data().name,
-          price: doc.data().price,
-          allDesc: doc.data().description,
           description: doc.data().description,
           profileImg: doc.data().profileImg,
-          coverImg: doc.data().coverImages,
-          keyFeatures: doc.data().keyFeatures,
-          createdAt: doc.data().createdAt?.toDate(),
-          updatedAt: doc.data().updatedAt?.toDate(),
+          ClientName: doc.data().ClientName,
         }));
         setFeaturedProductData(productsData);
         sessionStorage.setItem("fProductData", JSON.stringify(productsData));
@@ -112,7 +108,7 @@ const FeaturedProducts = () => {
       </div>
 
       <h1 className="w-full text-2xl md:text-[32px] font-semibold leading-none">
-        Featured Products
+        Featured Works
       </h1>
 
       <div className="w-full flex flex-col md:flex-row justify-between gap-4 md:gap-10 items-start md:items-center">
@@ -122,7 +118,7 @@ const FeaturedProducts = () => {
           facere magni odio dicta possimus. Lorem ipsum dolor sit amet
           consectetur adipisicing elit. Aliquid, reiciendis?
         </p>
-        <button
+        {/* <button
           onClick={() => {
             localStorage.setItem("activeTabUser", "products");
             navigate("/products");
@@ -130,7 +126,7 @@ const FeaturedProducts = () => {
           className="border-[2px] border-[#202020] rounded-md py-2 md:py-3 px-4 md:px-6 bg-[#1a1a1a] hover:bg-purple-600 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 whitespace-nowrap"
         >
           View All Products
-        </button>
+        </button> */}
       </div>
 
       {dataLoading ? (
@@ -147,7 +143,7 @@ const FeaturedProducts = () => {
                     <img
                       className="w-full rounded-md h-[250px] sm:h-[250px] object-cover"
                       src={product.profileImg}
-                      alt=""
+                      alt={product.name}
                     />
                     <h1 className="w-full text-base md:text-[18px] font-semibold mt-3">
                       {product.name}
@@ -157,20 +153,19 @@ const FeaturedProducts = () => {
                     </p>
                     <div className="w-full flex flex-col sm:flex-row justify-between mt-4 items-start sm:items-center gap-3">
                       <span className="flex flex-col gap-1">
-                        <h1 className="text-[#737373] text-sm">Price</h1>
+                        <h1 className="text-[#737373] text-sm">Client</h1>
                         <h2 className="font-semibold text-base md:text-[18px]">
-                          Rs. {product.price}
+                          {product.ClientName}
                         </h2>
                       </span>
 
                       <span
                         onClick={() => {
-                          // navigate(`/products/${product.id}`);
-                          navigate("/hello");
+                          navigate(`/work/${product.id}`);
                         }}
                         className="text-[14px] bg-purple-700 px-4 md:px-8 py-2 md:py-3 rounded-md cursor-pointer hover:bg-purple-700 hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 text-center w-full sm:w-auto"
                       >
-                        View Products Details
+                        View Work Details
                       </span>
                     </div>
                   </div>

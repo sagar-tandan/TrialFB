@@ -32,7 +32,7 @@ const AppRoutes = ({ user, setUser }) => {
         <Route path="/products/:id" element={<ParentProductDetail />} />
         <Route path="/contact" element={<ContactParent />} />
         <Route path="/aboutus" element={<AboutUsParent />} />
-        <Route path="/hello" element={<FeaturedWork />} />
+        <Route path="/work/:id" element={<FeaturedWork />} />
 
         <Route
           path="/api/adminLogin"

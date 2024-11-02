@@ -28,14 +28,19 @@ const AddFeaturedProducts = () => {
   const [formData, setFormData] = useState({
     productName: "",
     description: "",
-    price: "",
-    keyFeatures: [""],
+    ClientName: "",
+    challenge: "",
+    challengeImage: "",
+    outcome: "",
+    outcomeImage: "",
     profileImg: "",
     coverImg: [],
   });
 
   // Preview states for images
   const [profilePreview, setProfilePreview] = useState("");
+  const [ChallengePreview, setChallengePreview] = useState("");
+  const [OutcomePreview, setOutcomePreview] = useState("");
   const [coverPreviews, setCoverPreviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [toBeDeleted, setToBeDeleted] = useState();
@@ -44,13 +49,6 @@ const AddFeaturedProducts = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const [data, setData] = useState([]);
-
-  // Compression options
-  const options = {
-    maxSizeMB: 1, // Target maximum size in MB
-    maxWidthOrHeight: 800, // Target max width/height (px)
-    useWebWorker: true, // Optional, for faster compression
-  };
 
   const columns = useMemo(
     () => [
@@ -73,14 +71,28 @@ const AddFeaturedProducts = () => {
         Header: "Description",
         accessor: "description",
         Cell: ({ value }) => (
-          <div className="max-w-[400px] overflow-hidden whitespace-normal break-words">
+          <div className="max-w-[350px] overflow-hidden whitespace-normal break-words">
             {value.slice(0, 150) + "..."}
           </div>
         ),
       },
       {
-        Header: "Price",
-        accessor: "price",
+        Header: "Challenge",
+        accessor: "challenge",
+        Cell: ({ value }) => (
+          <div className="max-w-[350px] overflow-hidden whitespace-normal break-words">
+            {value.slice(0, 150) + "..."}
+          </div>
+        ),
+      },
+      {
+        Header: "Outcome",
+        accessor: "outcome",
+        Cell: ({ value }) => (
+          <div className="max-w-[350px] overflow-hidden whitespace-normal break-words">
+            {value.slice(0, 150) + "..."}
+          </div>
+        ),
       },
       {
         Header: "Actions",
@@ -113,7 +125,6 @@ const AddFeaturedProducts = () => {
     setDataLoading(true);
     try {
       const productsRef = collection(db, "fproducts");
-      // const q = query(productsRef, orderBy("CreatedAt", "desc"));
       const q = query(productsRef, orderBy("createdAt", "desc"));
       const querySnapshot = await getDocs(q);
 
@@ -121,12 +132,15 @@ const AddFeaturedProducts = () => {
         sn: index,
         id: doc.id,
         name: doc.data().name,
-        price: doc.data().price,
+        ClientName: doc.data().ClientName,
         allDesc: doc.data().description,
         description: doc.data().description,
         profileImg: doc.data().profileImg,
         coverImg: doc.data().coverImages,
-        keyFeatures: doc.data().keyFeatures,
+        challenge: doc.data().challenge,
+        outcome: doc.data().outcome,
+        challengeImage: doc.data().challengeImage,
+        outcomeImage: doc.data().outcomeImage,
         // Convert Firestore Timestamp to Date
         createdAt: doc.data().createdAt?.toDate(),
         updatedAt: doc.data().updatedAt?.toDate(),
@@ -155,11 +169,15 @@ const AddFeaturedProducts = () => {
     setFormData({
       id: data.id,
       productName: data.name,
+      ClientName: data.ClientName,
+      productName: data.name,
       description: data.allDesc,
-      price: data.price,
-      keyFeatures: data.keyFeatures,
+      challenge: data.challenge,
+      outcome: data.outcome,
       profileImg: data.profileImg,
       coverImg: data.coverImg,
+      challengeImage: data.challengeImage,
+      outcomeImage: data.outcomeImage,
     });
     setEdit(true);
   };
@@ -194,31 +212,6 @@ const AddFeaturedProducts = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    console.log(formData);
-  };
-
-  const handleKeyFeatureChange = (index, value) => {
-    const newFeatures = [...formData.keyFeatures];
-    newFeatures[index] = value;
-    setFormData((prev) => ({
-      ...prev,
-      keyFeatures: newFeatures,
-    }));
-  };
-
-  const removeKeyFeature = (index) => {
-    const newFeatures = formData.keyFeatures.filter((data, i) => i != index);
-    setFormData((prev) => ({
-      ...prev,
-      keyFeatures: newFeatures,
-    }));
-  };
-
-  const addKeyFeature = () => {
-    setFormData((prev) => ({
-      ...prev,
-      keyFeatures: [...prev.keyFeatures, ""],
-    }));
   };
 
   const handleProfileImage = (e) => {
@@ -229,6 +222,28 @@ const AddFeaturedProducts = () => {
         profileImg: file,
       }));
       setProfilePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleOutcomeImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        outcomeImage: file,
+      }));
+      setOutcomePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleChallengeImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        challengeImage: file,
+      }));
+      setChallengePreview(URL.createObjectURL(file));
     }
   };
 
@@ -268,12 +283,13 @@ const AddFeaturedProducts = () => {
       const productData = {
         name: formData.productName,
         description: formData.description,
-        price: formData.price,
-        keyFeatures: formData.keyFeatures.filter(
-          (feature) => feature.trim() !== ""
-        ),
+        ClientName: formData.ClientName,
+        challenge: formData.challenge,
+        outcome: formData.outcome,
         profileImg: formData.profileImg,
         coverImages: formData.coverImg,
+        challengeImage: formData.challengeImage,
+        outcomeImage: formData.outcomeImage,
         updatedAt: serverTimestamp(),
       };
       // Update product document
@@ -300,16 +316,19 @@ const AddFeaturedProducts = () => {
 
     try {
       let profileImgUrl = await uploadProfileImage(formData.profileImg);
+      let ChallengeImgUrl = await uploadProfileImage(formData.challengeImage);
+      let OutcomeImgUrl = await uploadProfileImage(formData.outcomeImage);
       const coverImageUrls = await uploadCoverImages(formData.coverImg);
 
       const productData = {
         name: formData.productName,
         description: formData.description,
-        price: formData.price,
-        keyFeatures: formData.keyFeatures.filter(
-          (feature) => feature.trim() !== ""
-        ),
+        ClientName: formData.ClientName,
+        challenge: formData.challenge,
+        outcome: formData.outcome,
         profileImg: profileImgUrl,
+        challengeImage: ChallengeImgUrl,
+        outcomeImage: OutcomeImgUrl,
         coverImages: coverImageUrls,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
@@ -355,12 +374,17 @@ const AddFeaturedProducts = () => {
     setFormData({
       productName: "",
       description: "",
-      price: "",
-      keyFeatures: [""],
+      ClientName: "",
+      challenge: "",
+      challengeImage: null,
+      outcome: "",
+      outcomeImage: null,
       profileImg: null,
       coverImg: [],
     });
     setProfilePreview("");
+    setChallengePreview("");
+    setOutcomePreview("");
     setCoverPreviews([]);
   };
 
@@ -373,15 +397,18 @@ const AddFeaturedProducts = () => {
           setFormData({
             productName: "",
             description: "",
-            price: "",
-            keyFeatures: [""],
-            profileImg: "",
+            ClientName: "",
+            challenge: "",
+            challengeImage: null,
+            outcome: "",
+            outcomeImage: null,
+            profileImg: null,
             coverImg: [],
           });
         }}
         className="absolute w-[200px] bg-purple-700 text-white right-5 z-10 top-7 py-2 flex items-center justify-center font-medium rounded-sm cursor-pointer hover:bg-purple-800 transition-all duration-200 active:scale-95"
       >
-        Add Product
+        Add Featured Work
       </div>
 
       <DataTable data={data} columns={columns} loading={dataLoading} />
@@ -426,15 +453,15 @@ const AddFeaturedProducts = () => {
                   />
                 </div>
                 <div className="w-full flex flex-col gap-2">
-                  <label htmlFor="price" className="font-medium">
-                    Price
+                  <label htmlFor="ClientName" className="font-medium">
+                    Client Name
                   </label>
                   <input
                     className="outline-none border-[1px] border-gray-400 p-2 rounded-sm"
-                    id="price"
-                    name="price"
+                    id="ClientName"
+                    name="ClientName"
                     type="text"
-                    value={formData.price}
+                    value={formData.ClientName}
                     onChange={handleChange}
                     required
                   />
@@ -456,35 +483,36 @@ const AddFeaturedProducts = () => {
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label className="font-medium">Key Features</label>
-                {formData.keyFeatures.map((feature, index) => (
-                  <div key={index} className="flex gap-3 w-full">
-                    <input
-                      className="outline-none border-[1px] border-gray-400 p-2 rounded-sm w-full"
-                      value={feature}
-                      onChange={(e) =>
-                        handleKeyFeatureChange(index, e.target.value)
-                      }
-                      placeholder={`Feature ${index + 1}`}
-                    />
-                    {formData.keyFeatures.length > 1 && (
-                      <div
-                        onClick={() => removeKeyFeature(index)}
-                        className="flex justify-center items-center cursor-pointer"
-                      >
-                        <X className="text-red-600 w-5 h-5 flex active:scale-95 " />
-                      </div>
-                    )}
-                  </div>
-                ))}
-                <div
-                  onClick={addKeyFeature}
-                  className="w-full border-[1px] rounded-sm flex items-center justify-center p-2 font-medium cursor-pointer"
-                >
-                  <Plus className="h-4 w-4 mr-2" /> Add Feature
-                </div>
+              <div className="w-full flex flex-col gap-2">
+                <label htmlFor="challenge" className="font-medium">
+                  Challenge Description
+                </label>
+                <textarea
+                  className="outline-none border-[1px] border-gray-400 p-2 rounded-sm"
+                  id="challenge"
+                  name="challenge"
+                  value={formData.challenge}
+                  onChange={handleChange}
+                  rows={4}
+                  required
+                />
               </div>
+
+              <div className="w-full flex flex-col gap-2">
+                <label htmlFor="outcome" className="font-medium">
+                  Outcome Description
+                </label>
+                <textarea
+                  className="outline-none border-[1px] border-gray-400 p-2 rounded-sm"
+                  id="outcome"
+                  name="outcome"
+                  value={formData.outcome}
+                  onChange={handleChange}
+                  rows={4}
+                  required
+                />
+              </div>
+
               {add && (
                 <div className="w-full flex-col gap-2">
                   <div className="w-full flex flex-col gap-2">
@@ -511,6 +539,61 @@ const AddFeaturedProducts = () => {
                   )}
                 </div>
               )}
+
+              {add && (
+                <div className="w-full flex-col gap-2">
+                  <div className="w-full flex flex-col gap-2">
+                    <label htmlFor="challengeImage" className="font-medium">
+                      Image for Challenge
+                    </label>
+                    <input
+                      className="outline-none border-[1px] border-gray-400 p-1 rounded-sm w-full"
+                      id="challengeImage"
+                      type="file"
+                      onChange={handleChallengeImage}
+                      accept="image/*"
+                    />
+                  </div>
+
+                  {ChallengePreview && (
+                    <div className="mt-2">
+                      <img
+                        src={ChallengePreview}
+                        alt="Challenge preview"
+                        className="h-32 w-32 object-cover rounded-md"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {add && (
+                <div className="w-full flex-col gap-2">
+                  <div className="w-full flex flex-col gap-2">
+                    <label htmlFor="outcomeImage" className="font-medium">
+                      Image for Outcome
+                    </label>
+                    <input
+                      className="outline-none border-[1px] border-gray-400 p-1 rounded-sm w-full"
+                      id="outcomeImage"
+                      type="file"
+                      onChange={handleOutcomeImage}
+                      accept="image/*"
+                    />
+                  </div>
+
+                  {OutcomePreview && (
+                    <div className="mt-2">
+                      <img
+                        src={OutcomePreview}
+                        alt="Outcome preview"
+                        className="h-32 w-32 object-cover rounded-md"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
               {add && (
                 <div className="w-full flex-col gap-2">
                   <div className="w-full flex flex-col gap-2">
