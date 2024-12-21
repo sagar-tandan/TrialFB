@@ -63,15 +63,20 @@ const Header = () => {
       <div className="w-full h-full max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-14 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center transform transition-transform duration-300 hover:scale-[102%]">
-          <img
-            onClick={() => {
-              localStorage.setItem("activeTabUser", "home");
-              navigate("/");
-            }}
-            className="cursor-pointer"
-            src={logo}
-            alt="aaratech"
-          />
+          <div className="flex gap-2 relative">
+            <img
+              onClick={() => {
+                localStorage.setItem("activeTabUser", "home");
+                navigate("/");
+              }}
+              className="cursor-pointer"
+              src={logo}
+              alt="polycraft"
+            />
+            <h1 className="absolute left-11 font-semibold mt-1 text-xl text-white">
+              Polycraft
+            </h1>
+          </div>
         </div>
 
         {/* Desktop Navigation */}

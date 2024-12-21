@@ -17,7 +17,7 @@ const IntroComp = () => {
             Get in Touch with AaraTech
           </h1>
           <p className="text-[14px] md:text-[16px] font-medium text-[#737373] max-w-6xl">
-            Welcome to AaraTech’s Contact Us page. We're here to assist you with
+            Welcome to PolyCraft's Contact Us page. We're here to assist you with
             any inquiries, requests, or feedback you may have. Whether you're
             looking to buy a product, or simply want to connect, we're just a
             message away. Reach out to us, and let's start a conversation.
@@ -38,12 +38,12 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                ara80fficial@gmail.com
+                sagarchhetry333@gmail.com
               </h2>
 
               <button
                 onClick={() =>
-                  (window.location.href = "mailto:ara80fficial@gmail.com")
+                  (window.location.href = "mailto:sagarchhetry333@gmail.com")
                 }
                 className="absolute top-0 right-0 m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
               >
@@ -63,11 +63,11 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                +977- 9817396487
+                +977- 9860788076
               </h2>
 
               <button
-                onClick={() => (window.location.href = "tel:+9779817396487")}
+                onClick={() => (window.location.href = "tel:+9779860788076")}
                 className="absolute top-0 right-0 m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
               >
                 <MoveUpRight
@@ -89,13 +89,13 @@ const IntroComp = () => {
               </div>
 
               <h2 className="font-medium text-center text-sm sm:text-base transition-colors duration-300 ">
-                Halgadha, Itahari, Nepal
+                Kathmandu, Nepal
               </h2>
 
               <button
                 onClick={() =>
                   window.open(
-                    "https://maps.app.goo.gl/TWF1ba1kfeWMg3cM6",
+                    "https://maps.app.goo.gl/TxundXo2HrJLa32s7",
                     "_blank"
                   )
                 }
@@ -125,7 +125,7 @@ const IntroComp = () => {
 
               <button
                 onClick={() =>
-                  window.open("https://wa.me/9779817396487", "_blank")
+                  window.open("https://wa.me/9779860788076", "_blank")
                 }
                 className="absolute top-0 right-0 m-3 p-1 rounded-full transition-all duration-300 text-[#3e3e3e] hover:text-purple-400 hover:bg-purple-400/10 group-hover:text-purple-400"
               >

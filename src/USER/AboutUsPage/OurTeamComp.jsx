@@ -229,40 +229,39 @@ import { link } from "framer-motion/client";
 
 const teams = [
   {
-    name: "Dummy Name",
+    name: "Sagar Tandan",
     position: "Founder",
     facebook: "https://www.facebook.com/",
     twitter: "https://www.twitter.com/",
     instagram: "https://www.instagram.com/",
     image:
-      "https://th.bing.com/th/id/OIP.iOJ3d7QnoKo7X0GrBQf97gHaHa?rs=1&pid=ImgDetMain",
+      "https://scontent.fbir7-1.fna.fbcdn.net/v/t39.30808-6/332503012_1406039816806405_356746253779165296_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeGT5m44hdC6GT9N94qIisSNMozHyBUCqncyjMfIFQKqd030LPJGXV1CrATP4jR4UnrcRZf47lKK_yWD3g31xBRn&_nc_ohc=wWlkIC3OsBYQ7kNvgEYWEe6&_nc_zt=23&_nc_ht=scontent.fbir7-1.fna&_nc_gid=A5idL8X8GP_gqEl4cVxmJMu&oh=00_AYBBntVqEk_e2DS3-9_S823ftW3yV7CtNz6GcbzeqzCX3Q&oe=676CA9EA",
   },
   {
-    name: "Dummy Name",
+    name: "Sallu Khan",
     position: "Founder",
     facebook: "https://www.facebook.com/",
     twitter: "https://www.twitter.com/",
     instagram: "https://www.instagram.com/",
     image:
-      "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
+      "https://www.iwmbuzz.com/wp-content/uploads/2022/10/kisi-ka-bhai-kisi-ki-jaan-salman-khan-shares-dashing-picture-fans-cant-keep-calm-2.jpg",
   },
   {
-    name: "Dummy Name",
+    name: "Prabhas Anna",
     position: "Founder",
     facebook: "https://www.facebook.com/",
     twitter: "https://www.twitter.com/",
     instagram: "https://www.instagram.com/",
-    image:
-      "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
+    image: "https://wallpapercave.com/wp/wp8022670.png",
   },
   {
-    name: "Dummy Name",
+    name: "Ranbir Kapoor",
     position: "Founder",
     facebook: "https://www.facebook.com/",
     twitter: "https://www.twitter.com/",
     instagram: "https://www.instagram.com/",
     image:
-      "https://th.bing.com/th/id/R.c3f629e7df9342ced633b56b786ae9fb?rik=1Ap5UA9TkozyQg&pid=ImgRaw&r=0",
+      "https://www.livemint.com/lm-img/img/2023/12/13/1600x900/Animal_RK_2_1702437230035_1702437240825.png",
   },
 ];
 
@@ -303,7 +302,7 @@ const OurTeamComp = () => {
           </div>
 
           <h1 className="w-full text-2xl md:text-[32px] font-semibold">
-            Meet the AaraTech Team{" "}
+            Meet the PolyCraft Team{" "}
           </h1>
           <p className="w-full font-medium text-[14px] sm:text-[15px] md:text-[16px] my-4 text-[#737373] max-w-6xl text-left">
             Our story is one of continuous growth and evolution. We started as a

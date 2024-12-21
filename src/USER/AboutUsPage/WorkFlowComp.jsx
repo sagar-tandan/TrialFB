@@ -14,7 +14,7 @@ const WorkFlowComp = () => {
           </div>
 
           <h1 className="w-full text-2xl md:text-[32px] font-semibold leading-none">
-            Navigating the AaraTech Experience
+            Navigating the PolyCraft Experience
           </h1>
           <p className="w-full font-medium text-[14px] sm:text-[15px] md:text-[16px] text-[#737373] my-4 lg:mx-0 text-left max-w-6xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,

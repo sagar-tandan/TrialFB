@@ -15,10 +15,10 @@ const HeroSection = () => {
         {/* Left section */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <p className="font-semibold text-[26px] sm:text-[32px] md:text-[36px] leading-none uppercase mt-10 lg:mt-0">
-            Welcome To Aara Technology
+            Welcome To PolyCraft
           </p>
           <p className="font-medium text-[20px] sm:text-[22px] md:text-[25px] mt-1">
-            where innovation meets execution{" "}
+            where innovation meets execution
           </p>
           <p className="font-medium text-[14px] sm:text-[15px] md:text-[16px] text-[#737373] my-4 max-w-xl mx-auto lg:mx-0">
             Bring your ideas to life with precision 3D modeling and printing.

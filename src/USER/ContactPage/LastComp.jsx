@@ -15,12 +15,12 @@ const LastComp = () => {
           <div className="w-full grid grid-cols-2 gap-3 sm:gap-5">
             <img
               className="w-full h-[70px] sm:h-[160px] object-cover rounded-md sm:rounded-lg"
-              src="https://images.unsplash.com/photo-1520127877998-122c33e8eb38?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://storage.googleapis.com/enty/14bdfe49-2353-4403-9a80-24a9fbb08655.jpg"
               alt=""
             />
             <img
               className="w-full h-[70px] sm:h-[160px] object-cover rounded-md sm:rounded-lg"
-              src="https://images.unsplash.com/photo-1520127877998-122c33e8eb38?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://th.bing.com/th/id/OIP.iUsyL3n453RjYkrHnrZXgwHaE8?w=3000&h=2000&rs=1&pid=ImgDetMain"
               alt=""
             />
           </div>
@@ -29,18 +29,18 @@ const LastComp = () => {
           <div className="w-full grid grid-cols-2 gap-3 sm:gap-5 mt-3 sm:mt-5 ">
             <img
               className="w-full h-[70px] sm:h-[160px] object-cover rounded-md sm:rounded-lg"
-              src="https://images.unsplash.com/photo-1520127877998-122c33e8eb38?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://img.pikbest.com/origin/10/49/76/24IpIkbEsTAjc.jpg!bw700"
               alt=""
             />
             <div className="w-full grid grid-cols-2 gap-3 sm:gap-5">
               <img
                 className="w-full h-[70px] sm:h-[160px] object-cover rounded-md sm:rounded-lg"
-                src="https://images.unsplash.com/photo-1520127877998-122c33e8eb38?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="https://th.bing.com/th/id/OIP.VJhXPttKTngngQdaY335eAHaE7?w=1000&h=665&rs=1&pid=ImgDetMain"
                 alt=""
               />
               <img
                 className="w-full h-[70px] sm:h-[160px] object-cover rounded-md sm:rounded-lg"
-                src="https://images.unsplash.com/photo-1520127877998-122c33e8eb38?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="https://th.bing.com/th/id/OIP.00iwURy0c7-lW_h1DfJHsgHaDt?w=1200&h=600&rs=1&pid=ImgDetMain"
                 alt=""
               />
             </div>
@@ -56,10 +56,10 @@ const LastComp = () => {
               </div>
 
               <h1 className="w-full text-2xl md:text-[32px] font-semibold">
-                Explore AaraTech's World
+                Explore PolyCraft's World
               </h1>
               <p className=" text-[#737373] font-medium text-sm md:text-[16px]">
-                Step inside the world of AaraTech, where professionalism meets
+                Step inside the world of PolyCraft, where professionalism meets
                 warmth, and expertise meets passion. Our gallery offers a
                 glimpse into our team and workspaces, inviting you to get to
                 know us better.
@@ -68,7 +68,7 @@ const LastComp = () => {
 
             <img
               className="w-full h-[120px] sm:h-[160px] object-cover rounded-md lg:rounded-lg"
-              src="https://images.unsplash.com/photo-1520127877998-122c33e8eb38?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://storage.googleapis.com/enty/14bdfe49-2353-4403-9a80-24a9fbb08655.jpg"
               alt=""
             />
           </div>

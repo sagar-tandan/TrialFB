@@ -22,10 +22,13 @@ const Footer = () => {
         <div className="w-full mx-auto flex justify-between gap-10 lg:gap-20 items-start lg:flex-row flex-col px-4 md:px-8 lg:px-16 max-w-screen-2xl">
           {/* Logo Section */}
           <div className="flex flex-col max-w-sm">
-            <div className="flex gap-2">
+            <div className="flex gap-2 relative">
               <img src={logo} alt="" />
+              <h1 className="absolute left-11 font-semibold mt-1 text-xl text-white">
+                Polycraft
+              </h1>
             </div>
-            <h1 className="mt-3">where innovation meets execution</h1>
+            <h1 className="mt-1">where innovation meets execution</h1>
           </div>
 
           {/* Links Sections */}
@@ -130,15 +133,15 @@ const Footer = () => {
         <div className="w-full bg-[#1a1a1a] py-3 items-center ">
           <div className="flex flex-col-reverse gap-5 sm:gap-0 sm:flex-row sm:justify-between mx-auto items-center max-w-screen-2xl px-4 md:px-8 lg:px-16 ">
             <span className="text-white">
-              &copy; 2023{" "}
-              <span onDoubleClick={() => navigate()}>AaraTech.</span> All Rights
+              &copy; 2024{" "}
+              <span onDoubleClick={() => navigate()}>PolyCraft.</span> All Rights
               Reserved.
             </span>
             {/* Social media handles */}
             <div className="flex gap-3">
               <span
                 onClick={() => {
-                  window.open("https://www.facebook.com/AARATECH3D/", "_blank");
+                  window.open("https://www.facebook.com/", "_blank");
                 }}
                 className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
               >
@@ -146,10 +149,7 @@ const Footer = () => {
               </span>
               <span
                 onClick={() => {
-                  window.open(
-                    "https://www.instagram.com/aaratech3d/",
-                    "_blank"
-                  );
+                  window.open("https://www.instagram.com/", "_blank");
                 }}
                 className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
               >
@@ -157,7 +157,7 @@ const Footer = () => {
               </span>
               <span
                 onClick={() => {
-                  window.open("https://wa.me/9779817396487", "_blank");
+                  window.open("https://wa.me/9860788076", "_blank");
                 }}
                 className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
               >
@@ -165,10 +165,7 @@ const Footer = () => {
               </span>
               <span
                 onClick={() => {
-                  window.open(
-                    "https://www.linkedin.com/company/aaratech3d/",
-                    "_blank"
-                  );
+                  window.open("https://www.linkedin.com/", "_blank");
                 }}
                 className="w-[40px] h-[40px] bg-[#141414] rounded-full flex justify-center text-white items-center cursor-pointer border-[2px] border-[#737373] hover:border-purple-500 transform transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 hover:text-purple-400"
               >
