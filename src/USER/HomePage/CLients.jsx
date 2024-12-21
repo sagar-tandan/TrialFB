@@ -90,7 +90,7 @@ const Clients = () => {
     >
       <div className="w-full bg-[#141414] border-t-[2px] border-b-[2px] border-[#242424] p-3 sm:p-4">
         {/* Grid container */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {clientsCollection.map((client, index) => (
             <div
               onClick={() => {
@@ -109,7 +109,7 @@ const Clients = () => {
               </span>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

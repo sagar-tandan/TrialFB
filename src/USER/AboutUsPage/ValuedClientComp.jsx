@@ -7,96 +7,86 @@ const clients = [
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-    name: "JCI Nepal",
-    link: "https://jcinepal.org.np/",
-  },
-  {
-    year: "2016",
-    review: "involved in understanding the specific needs of my project.",
-
-    name: "Techno Nepal",
-    link: "https://technonepal.com.np/",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Alpha Solutions",
+    link: "https://alphasolutions.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "GRIT Engineering",
-    link: "https://gritengineering.com.np/",
+      "The team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Beta Technologies",
+    link: "https://betatechnologies.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "Voice of Nepal",
-    link: "https://www.facebook.com/TheVoiceofNepal.official/",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Gamma Enterprises",
+    link: "https://gammaenterprises.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "Agrobotics Nepal",
-    link: "https://www.linkedin.com/company/agrobotics-nepal/?originalSubdomain=np",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Delta Innovations",
+    link: "https://deltainnovations.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "IOE Pulchowk Campus",
-    link: "https://pcampus.edu.np/",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Epsilon Robotics",
+    link: "https://epsilonrobotics.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "Ime Life",
-    link: "https://imelifeinsurance.com/",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Zeta Engineering",
+    link: "https://zetaengineering.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "CAN Info Tech",
-    link: "https://can.org.np/",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Eta Industries",
+    link: "https://etaindustries.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "Nepal Life",
-    link: "https://nepallife.com.np//",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Theta Solutions",
+    link: "https://thetasolutions.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "Recent Air",
-    link: "https://www.recentair.com/",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Iota Ventures",
+    link: "https://iotaventures.com",
   },
   {
     year: "2016",
     review:
-      "I recently collaborated with Aaratech 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "Biratnagar Metropolitian",
-    link: "https://biratnagarmun.gov.np/en",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Kappa Systems",
+    link: "https://kappasystems.com",
   },
   {
     year: "2016",
     review:
-      "I recently case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
-
-    name: "Dharan Banker Club",
-    link: "https://www.facebook.com/dharanbankersclub/",
+      "I recently collaborated with XYZ 3D Design to create a custom case for my product and several components for my air quality sensor. From the start, the team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Lambda Corp",
+    link: "https://lambdacorp.com",
+  },
+  {
+    year: "2016",
+    review:
+      "The team was highly professional and deeply involved in understanding the specific needs of my project.",
+    name: "Mu Dynamics",
+    link: "https://mudynamics.com",
   },
 ];
 
